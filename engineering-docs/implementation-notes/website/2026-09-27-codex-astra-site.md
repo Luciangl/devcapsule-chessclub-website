@@ -74,3 +74,7 @@ Owner requested more readable desktop top-band text and other small copy while p
 ### Hosted Refinement Verification
 
 The readability/palette update was deployed to `https://smartgalati-test3.mycodespace.ai` with the existing deployment wrapper. CDN invalidation was scoped to host `smartgalati-test3.mycodespace.ai` on the shared URL map. Public Playwright palette suite passed all six choices, 18 route/palette accessibility audits, viewport widths 320/390/768/1024/1440, native keyboard selection, mobile navigation, stored choices across reloads/routes, cross-tab changes, invalid preference fallback, blocked storage, and early restoration with body JS blocked. Zero violations were reported for these tested pages. Public upstream notices are served at `/licenses/themes.txt`. Screenshots: `/tmp/astra-themes-live/` (ephemeral).
+
+## Direct-Main Integration Authorization (2026-09-27)
+
+The owner authorized merging and pushing main directly, skipping PRs during the prototype/experiment phase. `WORKFLOW-LOCAL.md` records this temporary default and its ending condition. This supersedes the original delivery's PR-access blocker. Complete source/policy reference: `c0d785c`; integration follows the normal fast-forward/direct push procedure. The completed workstream is archived at [its delivery record](../../archive/2026-09-27-codex-astra-site/CURRENT-STATUS.md). Final build and three archive tests pass; prior live browser and palette evidence remains applicable because this integration changes workflow/records only.
