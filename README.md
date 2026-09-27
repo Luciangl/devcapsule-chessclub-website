@@ -11,7 +11,8 @@ Modern, fast static website for **ACS Smart Galați** ([smartgalati.ro](https://
 
 ## Project Contracts & Status
 
-- Active work order: [`engineering-docs/work-orders/2026-09-26-chessclub-website.md`](engineering-docs/work-orders/2026-09-26-chessclub-website.md)
+- Next candidate work order: [`smartgalati-test4`](engineering-docs/work-orders/2026-09-27-smartgalati-test4-prototype.md)
+- Original product work order: [`engineering-docs/work-orders/2026-09-26-chessclub-website.md`](engineering-docs/work-orders/2026-09-26-chessclub-website.md)
 - Requirements register: [`REQUIREMENTS.md`](REQUIREMENTS.md)
 - Documentation index: [`index.md`](index.md)
 - Live status & next resumable task: [`CURRENT-STATUS.md`](CURRENT-STATUS.md)

@@ -23,6 +23,7 @@
 - `engineering-docs/archive/` — concluded multiple-stream workstream state
 - `engineering-docs/session-records/` — explicitly requested session records
 - `engineering-docs/work-orders/` — bounded task contracts and work orders
+  - [Work Order: smartgalati-test4 independent prototype](engineering-docs/work-orders/2026-09-27-smartgalati-test4-prototype.md)
   - [Work Order: Chess Club Static Website (ACS Smart Galați)](engineering-docs/work-orders/2026-09-26-chessclub-website.md)
 
 ## Other Existing Documentation
