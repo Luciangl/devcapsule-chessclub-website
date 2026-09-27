@@ -1,0 +1,76 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import AntiSpamContact from '../components/AntiSpamContact.astro';
+
+const coaches = await getCollection('coaches');
+const sortedCoaches = coaches.sort((a, b) => a.data.order - b.data.order);
+
+// Render content for each coach
+const coachesWithContent = await Promise.all(
+  sortedCoaches.map(async (coach) => {
+    const { Content } = await render(coach);
+    return { ...coach, Content };
+  })
+);
+---
+
+<Layout title="Antrenori & Conducere - ACS Smart Galați" description="Echipa tehnică și conducerea Asociației Clubul Sportiv Smart Galați.">
+  <div class="py-12 bg-slate-900/50 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Echipa Noastră</span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-100 tracking-tight mt-2">Antrenori &amp; Conducere</h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
+        Specialiști pasionați, arbitri naționali și instructori certificați dedicați evoluției fiecărui sportiv.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {coachesWithContent.map(({ data, Content }) => (
+        <div class="bg-slate-900/80 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition-all p-6 flex flex-col justify-between shadow-xl">
+          <div>
+            <div class="aspect-square w-full rounded-xl overflow-hidden bg-slate-950 mb-6 border border-slate-800">
+              <img 
+                src={data.photo || '/images/coaches/lucian-gilea.svg'} 
+                alt={data.name} 
+                class="w-full h-full object-cover" 
+              />
+            </div>
+
+            <div class="mb-4">
+              <h2 class="text-2xl font-black text-slate-100">{data.name}</h2>
+              <p class="text-amber-400 font-semibold text-sm mt-0.5">{data.role}</p>
+              {data.title_fide && (
+                <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-800 text-xs text-slate-300 border border-slate-700">
+                  <span>🎖️ {data.title_fide}</span>
+                  {data.fide_id && <span class="text-slate-400">(FIDE: {data.fide_id})</span>}
+                </div>
+              )}
+            </div>
+
+            <div class="text-sm text-slate-300 leading-relaxed space-y-3 pt-3 border-t border-slate-800/80">
+              <Content />
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-800/80 space-y-2">
+            {data.phone && (
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400">Telefon:</span>
+                <AntiSpamContact type="phone" value={data.phone} />
+              </div>
+            )}
+            {data.email && (
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-400">Email:</span>
+                <AntiSpamContact type="email" value={data.email} />
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="600" height="350">
+  <defs>
+    <linearGradient id="jucGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="350" fill="url(#jucGrad)"/>
+  
+  <g opacity="0.08">
+    <pattern id="pat2" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="30" height="30" fill="#ffffff" />
+      <rect x="30" y="30" width="30" height="30" fill="#ffffff" />
+    </pattern>
+    <rect width="600" height="350" fill="url(#pat2)"/>
+  </g>
+  
+  <!-- Group of young chess players (pawns & knights rising) -->
+  <g transform="translate(180, 80)">
+    <!-- Central Trophy -->
+    <path d="M120 40 L160 40 L155 100 Q140 120 120 100 Z" fill="#f59e0b"/>
+    <path d="M110 50 Q90 60 115 80" stroke="#f59e0b" stroke-width="4" fill="none"/>
+    <path d="M170 50 Q190 60 165 80" stroke="#f59e0b" stroke-width="4" fill="none"/>
+    <rect x="130" y="105" width="20" height="25" fill="#d97706"/>
+    <rect x="110" y="130" width="60" height="15" rx="3" fill="#b45309"/>
+
+    <!-- Small Pawns on left and right -->
+    <circle cx="60" cy="90" r="15" fill="#f8fafc"/>
+    <path d="M50 105 Q60 130 45 145 L75 145 Q60 130 70 105 Z" fill="#f8fafc"/>
+    <rect x="40" y="145" width="40" height="8" rx="2" fill="#d97706"/>
+
+    <circle cx="220" cy="90" r="15" fill="#f8fafc"/>
+    <path d="M210 105 Q220 130 205 145 L235 145 Q220 130 230 105 Z" fill="#f8fafc"/>
+    <rect x="200" y="145" width="40" height="8" rx="2" fill="#d97706"/>
+  </g>
+
+  <rect x="40" y="295" width="520" height="35" rx="8" fill="#0f172a" stroke="#d97706"/>
+  <text x="300" y="318" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="14" fill="#f8fafc" text-anchor="middle" letter-spacing="2">JUNIIORI • PERFORMANȚĂ &amp; TALENT • ACS SMART GALAȚI</text>
+</svg>

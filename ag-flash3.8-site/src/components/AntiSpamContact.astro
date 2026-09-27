@@ -1,0 +1,68 @@
+---
+interface Props {
+  type: 'email' | 'phone';
+  value: string;
+  label?: string;
+  className?: string;
+}
+
+const { type, value, label, className = '' } = Astro.props;
+
+// Reverse string for CSS reversal technique
+const reversedValue = value.split('').reverse().join('');
+---
+
+<div class={`inline-flex items-center gap-2 ${className}`}>
+  {label && <span class="font-semibold text-slate-300">{label}:</span>}
+  
+  <span class="antispam-container relative group cursor-pointer inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-slate-800/80 border border-slate-700/60 hover:border-amber-500/50 transition-colors text-slate-200"
+        data-contact-type={type}
+        data-rev={reversedValue}
+        title="Apasă pentru a afișa și copia">
+    <span class="icon text-amber-500">
+      {type === 'email' ? '✉️' : '📞'}
+    </span>
+    <!-- CSS reversed text confuses naive text-scraping bots -->
+    <span class="antispam-text select-all" style="unicode-bidi: bidi-override; direction: rtl;">
+      {reversedValue}
+    </span>
+    <span class="reveal-btn text-xs text-amber-400 group-hover:text-amber-300 font-mono ml-1">
+      [Afișează]
+    </span>
+  </span>
+</div>
+
+<script>
+  // Client-side un-obfuscator for real human visitors
+  document.querySelectorAll('.antispam-container').forEach(el => {
+    el.addEventListener('click', () => {
+      const type = el.getAttribute('data-contact-type');
+      const rev = el.getAttribute('data-rev');
+      if (!rev) return;
+      const original = rev.split('').reverse().join('');
+      
+      const textSpan = el.querySelector('.antispam-text') as HTMLElement;
+      const btnSpan = el.querySelector('.reveal-btn') as HTMLElement;
+      
+      if (textSpan) {
+        textSpan.style.direction = 'ltr';
+        textSpan.style.unicodeBidi = 'normal';
+        textSpan.textContent = original;
+      }
+      
+      if (btnSpan) {
+        btnSpan.textContent = '✓ Copiat';
+        navigator.clipboard?.writeText(original);
+        setTimeout(() => {
+          btnSpan.textContent = type === 'email' ? 'Deschide' : 'Apelează';
+        }, 1500);
+      }
+
+      if (type === 'email') {
+        window.location.href = `mailto:${original}`;
+      } else if (type === 'phone') {
+        window.location.href = `tel:${original.replace(/\s+/g, '')}`;
+      }
+    });
+  });
+</script>

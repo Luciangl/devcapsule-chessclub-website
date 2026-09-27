@@ -1,0 +1,42 @@
+---
+import { getEntry, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const page = await getEntry('pages', 'echipe');
+if (!page) {
+  throw new Error('Pagina echipe nu a fost găsită în colecție.');
+}
+const { Content } = await render(page);
+---
+
+<Layout title={page.data.title} description={page.data.description}>
+  <div class="py-12 bg-slate-900/50 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Competiție &amp; Spirit de Echipă</span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-100 tracking-tight mt-2">{page.data.title}</h1>
+      {page.data.subtitle && (
+        <p class="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">{page.data.subtitle}</p>
+      )}
+    </div>
+  </div>
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="prose prose-invert prose-amber max-w-none space-y-6 text-slate-300 leading-relaxed text-base sm:text-lg">
+      <Content />
+    </div>
+
+    <!-- Call to action card -->
+    <div class="mt-16 bg-slate-900 p-8 rounded-2xl border border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+      <div>
+        <h3 class="text-xl font-bold text-slate-100 mb-1">Vrei să joci pentru ACS Smart Galați?</h3>
+        <p class="text-sm text-slate-400">Participă la selecțiile de club și antrenează-te alături de lotul oficial.</p>
+      </div>
+      <a
+        href="/contact"
+        class="px-6 py-3 rounded-xl font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-all text-sm whitespace-nowrap shadow"
+      >
+        Contactează Antrenorii →
+      </a>
+    </div>
+  </article>
+</Layout>

@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import NewsCard from '../../components/NewsCard.astro';
+
+const allNews = await getCollection('news');
+
+// Two-year threshold
+const twoYearsAgo = new Date();
+twoYearsAgo.setFullYear(twoYearsAgo.getFullYear() - 2);
+
+// Filter archived articles (> 2 years old)
+const archivedArticles = allNews
+  .filter(item => new Date(item.data.date) < twoYearsAgo)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Group by year
+const articlesByYear: Record<number, typeof archivedArticles> = {};
+archivedArticles.forEach(item => {
+  const year = new Date(item.data.date).getFullYear();
+  if (!articlesByYear[year]) {
+    articlesByYear[year] = [];
+  }
+  articlesByYear[year].push(item);
+});
+
+const sortedYears = Object.keys(articlesByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
+---
+
+<Layout title="Arhiva Clubului (> 2 ani) - ACS Smart Galați" description="Arhiva articolelor, turneelor și evenimentelor istorice ale clubului ACS Smart Galați.">
+  <div class="py-12 bg-slate-900/50 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-semibold mb-2">
+        <span>📦 Păstrăm Istoria Clubului</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-100 tracking-tight">Arhiva Istorică a Clubului</h1>
+      <p class="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">
+        Evenimente, gale de premiere și rapoarte de turnee din sezoanele trecute (vechime mai mare de 2 ani).
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10 flex items-center justify-between">
+      <div class="text-xs text-slate-400 font-mono">
+        Total articole arhivate: {archivedArticles.length}
+      </div>
+      <a href="/noutati" class="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1">
+        ← Vezi Noutățile Recente
+      </a>
+    </div>
+
+    {sortedYears.length > 0 ? (
+      <div class="space-y-16">
+        {sortedYears.map(year => (
+          <div>
+            <div class="flex items-center gap-4 mb-6 pb-2 border-b border-slate-800">
+              <h2 class="text-2xl font-black text-amber-400 font-mono">Anul {year}</h2>
+              <span class="text-xs text-slate-500 font-semibold">({articlesByYear[year].length} articole)</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {articlesByYear[year].map(article => (
+                <NewsCard
+                  title={article.data.title}
+                  date={article.data.date}
+                  summary={article.data.summary}
+                  slug={article.id}
+                  coverImage={article.data.cover_image}
+                  tags={article.data.tags}
+                  photosAlbumUrl={article.data.photos_album_url}
+                  photosCount={article.data.photos_count}
+                  hasLichess={Boolean(article.data.lichess_study_url)}
+                  isArchived={true}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-16 text-slate-400">
+        Nu există momentan articole mai vechi de 2 ani în arhivă.
+      </div>
+    )}
+  </div>
+</Layout>

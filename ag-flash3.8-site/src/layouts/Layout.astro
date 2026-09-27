@@ -1,0 +1,328 @@
+---
+import AntiSpamContact from '../components/AntiSpamContact.astro';
+import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import '../styles/themes.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { 
+  title, 
+  description = "Clubul de Șah ACS Smart Galați - Cursuri de șah pentru copii de la 5 ani, inițiere și performanță în Galați.",
+  currentPath = Astro.url.pathname 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ro" class="scroll-smooth bg-slate-950 text-slate-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | ACS Smart Galați</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={`${title} | ACS Smart Galați`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/images/hero-chess.svg" />
+    <meta property="og:type" content="website" />
+    <!-- Instant theme restoration before first render (Zero Flash of Unstyled Content) -->
+    <script is:inline>
+      (function() {
+        try {
+          const saved = localStorage.getItem('chess_theme') || 'classic-dark';
+          document.documentElement.setAttribute('data-theme', saved);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-slate-950">
+    <!-- Top Announcement Ribbon -->
+    <div class="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 text-slate-950 text-xs font-bold py-2 px-4 text-center tracking-wide flex items-center justify-center gap-2 shadow-sm">
+      <span class="inline-block animate-pulse">⭐</span>
+      <span>Înscrieri deschise pentru copii (5-14 ani)! Prima ședință de evaluare este <strong>GRATUITĂ</strong>.</span>
+      <a href="/cursuri" class="underline hover:text-white transition-colors ml-1 font-extrabold">Află detalii &amp; orar →</a>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo & Brand -->
+          <a href="/" class="flex items-center gap-3 group">
+            <img src="/images/logo.svg" alt="ACS Smart Galați" class="h-11 w-auto transition-transform group-hover:scale-105" />
+          </a>
+
+          <!-- Streamlined Desktop Navigation -->
+          <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+            <!-- Cursuri & Înscrieri (Prominent) -->
+            <a
+              href="/cursuri"
+              class={`px-3.5 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-1.5 ${
+                currentPath.startsWith('/cursuri')
+                  ? 'text-amber-400 bg-amber-500/10 border border-amber-500/40 shadow-sm'
+                  : 'text-amber-300 hover:text-amber-200 hover:bg-slate-900 border border-transparent hover:border-amber-500/20'
+              }`}
+            >
+              <span>🎓</span> Cursuri &amp; Înscrieri
+            </a>
+
+            <!-- Clubul Nostru Dropdown -->
+            <div class="relative group">
+              <button
+                type="button"
+                class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 group-hover:text-white group-hover:bg-slate-900/60 inline-flex items-center gap-1 transition-all"
+              >
+                <span>Clubul Nostru</span>
+                <svg class="w-4 h-4 text-slate-400 group-hover:text-amber-400 transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div class="absolute left-0 mt-1 w-56 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl p-2 hidden group-hover:block animate-in fade-in zoom-in-95 duration-150 z-50">
+                <a href="/despre-noi" class="block px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 transition-colors">
+                  🏛️ Despre Noi &amp; Misiune
+                </a>
+                <a href="/antrenori" class="block px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 transition-colors">
+                  👨‍🏫 Antrenori &amp; Conducere
+                </a>
+                <a href="/echipe" class="block px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 transition-colors">
+                  🛡️ Echipele Diviziei Naționale
+                </a>
+                <a href="/performante" class="block px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-amber-400 hover:bg-slate-800 transition-colors">
+                  🏆 Palmares &amp; Medalii
+                </a>
+              </div>
+            </div>
+
+            <!-- Turnee & Noutăți -->
+            <a
+              href="/noutati"
+              class={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                currentPath.startsWith('/noutati') || currentPath.startsWith('/arhiva')
+                  ? 'text-amber-400 bg-slate-900 border border-amber-500/30'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-900/60'
+              }`}
+            >
+              Turnee &amp; Noutăți
+            </a>
+
+            <!-- Lichess Live -->
+            <a
+              href="/lichess"
+              class={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                currentPath.startsWith('/lichess')
+                  ? 'text-amber-400 bg-slate-900 border border-amber-500/30'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-900/60'
+              }`}
+            >
+              ♟️ Lichess Live
+            </a>
+
+            <!-- Contact -->
+            <a
+              href="/contact"
+              class={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                currentPath.startsWith('/contact')
+                  ? 'text-amber-400 bg-slate-900 border border-amber-500/30'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-900/60'
+              }`}
+            >
+              Contact &amp; Orar
+            </a>
+          </nav>
+
+          <!-- Right Action Area (Decluttered & High-Impact) -->
+          <div class="hidden lg:flex items-center gap-2 xl:gap-3">
+            <!-- 5-Color Theme Switcher Dropdown -->
+            <ThemeSwitcher id="desktop-theme-switcher" />
+
+            <a
+              href="/sustine"
+              class="text-xs font-semibold text-slate-300 hover:text-amber-400 px-2.5 py-1.5 rounded-lg hover:bg-slate-900 transition-colors"
+            >
+              Susține 3.5%
+            </a>
+
+            <a
+              href="https://forms.gle/smartgalati-inscriere"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center px-4 py-2 text-xs font-black rounded-xl text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 transition-all shadow-md hover:shadow-amber-500/25 hover:-translate-y-0.5 whitespace-nowrap"
+            >
+              Înscrie-te la Cursuri →
+            </a>
+          </div>
+
+          <!-- Mobile Hamburger Button -->
+          <div class="flex lg:hidden">
+            <button
+              id="mobile-menu-btn"
+              type="button"
+              class="text-slate-300 hover:text-white p-2 rounded-xl bg-slate-900 border border-slate-800"
+              aria-label="Deschide meniul de navigare"
+            >
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-800 bg-slate-950 px-4 pt-3 pb-6 space-y-2">
+        <a href="/cursuri" class="block px-3 py-2.5 rounded-xl text-base font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20">
+          🎓 Cursuri de Șah &amp; Înscrieri
+        </a>
+
+        <div class="py-2 border-y border-slate-800/80 my-2 space-y-1">
+          <span class="px-3 text-[11px] font-bold uppercase tracking-wider text-slate-500 block">Clubul Nostru</span>
+          <a href="/despre-noi" class="block px-3 py-1.5 rounded-lg text-sm text-slate-200 hover:text-amber-400">
+            🏛️ Despre Noi &amp; Misiune
+          </a>
+          <a href="/antrenori" class="block px-3 py-1.5 rounded-lg text-sm text-slate-200 hover:text-amber-400">
+            👨‍🏫 Antrenori &amp; Conducere
+          </a>
+          <a href="/echipe" class="block px-3 py-1.5 rounded-lg text-sm text-slate-200 hover:text-amber-400">
+            🛡️ Echipele Clubului
+          </a>
+          <a href="/performante" class="block px-3 py-1.5 rounded-lg text-sm text-slate-200 hover:text-amber-400">
+            🏆 Palmares &amp; Medalii
+          </a>
+        </div>
+
+        <a href="/noutati" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400">
+          📰 Turnee &amp; Noutăți
+        </a>
+        <a href="/lichess" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400">
+          ♟️ Lichess Live &amp; Resurse
+        </a>
+        <a href="/contact" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:text-amber-400">
+          📞 Contact &amp; Orar
+        </a>
+        <a href="/sustine" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-amber-400">
+          🤝 Susține 3.5% (Formular 230)
+        </a>
+
+        <div class="pt-3 pb-1 border-t border-slate-800 flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-400">Temă culori (5):</span>
+          <ThemeSwitcher id="mobile-theme-switcher" />
+        </div>
+
+        <div class="pt-2">
+          <a
+            href="https://forms.gle/smartgalati-inscriere"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full py-3.5 px-4 rounded-xl text-center font-black text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 shadow"
+          >
+            Formular Înscriere Cursuri ↗
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Slot -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Clean, Informative Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 text-slate-400 mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <!-- Col 1: Brand -->
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <img src="/images/logo.svg" alt="ACS Smart Galați" class="h-10 w-auto" />
+            </div>
+            <p class="text-sm leading-relaxed mb-4 text-slate-300">
+              Club de șah afiliat la Federația Română de Șah (FRȘah) și FIDE. Din 2014 formăm viitorii campioni ai Galațiului.
+            </p>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-amber-400 font-semibold">
+              <span>🏛️ Fondat 2014 • Galați, România</span>
+            </div>
+          </div>
+
+          <!-- Col 2: Cursuri & Înscrieri Rapide -->
+          <div>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-4 flex items-center gap-2">
+              <span class="text-amber-500">🎓</span> Cursuri &amp; Niveluri
+            </h4>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="/cursuri#programe" class="hover:text-amber-400 transition-colors">Grupa Inițiere (5–8 ani)</a></li>
+              <li><a href="/cursuri#programe" class="hover:text-amber-400 transition-colors">Grupa Intermediari (8–14 ani)</a></li>
+              <li><a href="/cursuri#programe" class="hover:text-amber-400 transition-colors">Lotul Competițional (Echipe)</a></li>
+              <li><a href="/cursuri" class="text-amber-400 hover:text-amber-300 font-bold transition-colors">Program &amp; Orar Săptămânal →</a></li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Contact Direct Anti-Spam -->
+          <div>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-4 flex items-center gap-2">
+              <span class="text-amber-500">📞</span> Contact Antrenori
+            </h4>
+            <ul class="space-y-3 text-sm">
+              <li>
+                <div class="text-xs text-slate-400 mb-0.5">Telefon direct:</div>
+                <AntiSpamContact type="phone" value="0758 775 206" />
+              </li>
+              <li>
+                <div class="text-xs text-slate-400 mb-0.5">Email oficial:</div>
+                <AntiSpamContact type="email" value="smartsah@yahoo.com" />
+              </li>
+              <li class="pt-1">
+                <span class="text-xs text-slate-400">Locație:</span>
+                <span class="text-slate-300 block font-medium">Galați, jud. Galați</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 4: Comunitate & Susținere -->
+          <div>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-200 mb-4 flex items-center gap-2">
+              <span class="text-amber-500">🤝</span> Comunitate &amp; Resurse
+            </h4>
+            <ul class="space-y-2 text-sm mb-4">
+              <li><a href="/noutati" class="hover:text-amber-400 transition-colors">Ultimele Noutăți &amp; Turnee</a></li>
+              <li><a href="/arhiva" class="hover:text-amber-400 transition-colors">Arhivă Evenimente (> 2 ani)</a></li>
+              <li><a href="/lichess" class="hover:text-amber-400 transition-colors">♟️ Partide Live &amp; Studii Lichess</a></li>
+              <li><a href="/sustine" class="text-amber-400 hover:text-amber-300 font-bold transition-colors">Redirecționează 3.5% (Formular 230) →</a></li>
+            </ul>
+            <a
+              href="https://forms.gle/smartgalati-inscriere"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block w-full py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-xs font-black text-slate-950 text-center transition-all shadow"
+            >
+              Înscriere Online Rapidă ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-900 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+          <p>© {new Date().getFullYear()} ACS Smart Galați (Asociația Clubul Sportiv Smart Galați). Toate drepturile rezervate.</p>
+          <div class="flex items-center gap-4">
+            <span class="text-amber-500/80">Previzualizare: smartgalati-test.mycodespace.ai</span>
+            <span>•</span>
+            <span>Astro 5 &amp; Tailwind CSS</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    </script>
+  </body>
+</html>

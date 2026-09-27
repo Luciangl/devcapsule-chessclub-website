@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="600" height="350">
+  <defs>
+    <linearGradient id="blitzGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="lightning" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="350" fill="url(#blitzGrad)"/>
+  
+  <!-- Chessboard pattern overlay -->
+  <g opacity="0.08">
+    <pattern id="pat1" width="60" height="60" patternUnits="userSpaceOnUse">
+      <rect width="30" height="30" fill="#ffffff" />
+      <rect x="30" y="30" width="30" height="30" fill="#ffffff" />
+    </pattern>
+    <rect width="600" height="350" fill="url(#pat1)"/>
+  </g>
+  
+  <!-- Lightning Bolt (Blitz) -->
+  <path d="M310 50 L250 170 L300 170 L270 270 L360 150 L310 150 Z" fill="url(#lightning)" filter="drop-shadow(0 0 12px rgba(245, 158, 11, 0.6))"/>
+  
+  <!-- Clock silhouette -->
+  <circle cx="150" cy="180" r="45" fill="#334155" stroke="#f59e0b" stroke-width="3"/>
+  <line x1="150" y1="180" x2="150" y2="150" stroke="#f8fafc" stroke-width="4" stroke-linecap="round"/>
+  <line x1="150" y1="180" x2="175" y2="180" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+  
+  <!-- Chess Knight -->
+  <g transform="translate(430, 130) scale(0.9)">
+    <path d="M45 10 C40 8 32 12 30 18 C25 15 18 18 16 24 C12 30 11 40 16 48 C18 52 21 55 18 60 C14 65 10 75 10 85 L70 85 C70 75 68 65 70 55 C72 42 72 25 65 15 C60 11 55 10 45 10 Z" fill="#f8fafc" opacity="0.9"/>
+    <rect x="5" y="85" width="70" height="15" rx="3" fill="#d97706"/>
+  </g>
+
+  <rect x="40" y="295" width="520" height="35" rx="8" fill="#1e293b" stroke="#334155"/>
+  <text x="300" y="318" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="14" fill="#fbbf24" text-anchor="middle" letter-spacing="2">TURNEU BLITZ • EDIȚIA A 2-A • ACS SMART GALAȚI</text>
+</svg>

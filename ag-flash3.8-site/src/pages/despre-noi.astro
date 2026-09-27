@@ -1,0 +1,47 @@
+---
+import { getEntry, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const page = await getEntry('pages', 'despre-noi');
+if (!page) {
+  throw new Error('Pagina despre-noi nu a fost găsită în colecție.');
+}
+const { Content } = await render(page);
+---
+
+<Layout title={page.data.title} description={page.data.description}>
+  <div class="py-12 bg-slate-900/50 border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Clubul Nostru</span>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-100 tracking-tight mt-2">{page.data.title}</h1>
+      {page.data.subtitle && (
+        <p class="mt-4 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">{page.data.subtitle}</p>
+      )}
+    </div>
+  </div>
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="prose prose-invert prose-amber max-w-none space-y-6 text-slate-300 leading-relaxed text-base sm:text-lg">
+      <Content />
+    </div>
+
+    <!-- Club Highlights Cards -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-slate-800">
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+        <div class="text-2xl mb-2">🎯</div>
+        <h4 class="font-bold text-slate-100 mb-1">Misiune</h4>
+        <p class="text-xs text-slate-400">Promovarea educației prin șah și îndrumarea copiilor spre performanță sportivă.</p>
+      </div>
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+        <div class="text-2xl mb-2">🤝</div>
+        <h4 class="font-bold text-slate-100 mb-1">Comunitate</h4>
+        <p class="text-xs text-slate-400">Un mediu sigur, primitor și colegial pentru toți iubitorii de șah din Galați.</p>
+      </div>
+      <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800">
+        <div class="text-2xl mb-2">🏅</div>
+        <h4 class="font-bold text-slate-100 mb-1">Rezultate</h4>
+        <p class="text-xs text-slate-400">Zeci de titluri și medalii la campionatele naționale de juniori și seniori.</p>
+      </div>
+    </div>
+  </article>
+</Layout>
