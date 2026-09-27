@@ -8,7 +8,7 @@ State: active; permanent maintenance
 
 Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@05687aa6136c
 
-Branch association: `ws-maintenance/flaky-dropdown-menu`
+Branch association: `ws-maintenance/`; no branch yet
 
 ## Goal
 
@@ -24,15 +24,18 @@ neither `closed` nor `retired`. See *Bug Intake* in `WORKFLOW.md`.
 
 ## Current State
 
-Bug `engineering-docs/bugs/website/2026-09-27-flaky-dropdown-menu.md` resolved and verified:
-- Added seamless hover bridge between trigger button and menu panel, eliminating cursor transit dropouts.
-- Implemented click-to-pin persistent mode on "Clubul Nostru" with outside click and Escape key dismissal.
-- Added active subpage highlight styling for child routes.
-- Verified cleanly with `npm run build` (19 pages, 0 errors, 0 warnings).
+Bugs resolved, verified, and integrated into `main`:
+1. `engineering-docs/bugs/website/2026-09-27-missing-photo-gallery.md`:
+   - Restored `/galerie-foto` with 51 photos across 3 albums and bundled local assets.
+2. `engineering-docs/bugs/website/2026-09-27-flaky-dropdown-menu.md`:
+   - Eliminated cursor transit gap with invisible hover bridge.
+   - Added click-to-pin persistent open mode with outside click and Escape key dismissal.
+   - Verified cleanly with `npm run build` (19 pages, 0 errors, 0 warnings).
+- Currently 0 open bugs in queue.
 
 ## Planned Next Step
 
-Integrate `ws-maintenance/flaky-dropdown-menu` into `main`, release claim `dropdown-usability`, publish status, and await next task.
+Triage any bug whose `severity` is `untriaged`, then take the highest-severity open bug on the current release line.
 
 ## Open Threads
 
