@@ -1,83 +1,130 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Script 04: Setup Google Cloud HTTPS Load Balancer with Google-Managed SSL
+# Script 04: Setup New Google Cloud HTTPS Load Balancer with SSL & Cloud CDN
 #
-# WHY THIS SCRIPT IS NEEDED:
-# 1. Bucket Name vs Domain Name:
-#    Direct CNAME (c.storage.googleapis.com) strictly requires the bucket name
-#    to match the domain name exactly (e.g. gs://smartgalati-test.mycodespace.ai).
-#    Since your bucket is named gs://test1-chessclubwebsite-mycodespace, direct
-#    CNAME routing will fail with 404 / NoSuchBucket.
-#
-# 2. HTTPS / SSL:
-#    Direct GCS CNAME hosting is HTTP-only. An External Application Load Balancer
-#    provides Google-managed SSL certificates and free HTTPS.
-#
-# 3. Cloud CDN:
-#    The Backend Bucket can have Cloud CDN enabled for ultra-fast worldwide edge caching.
+# Lessons Learned Incorporated:
+# 1. API enablement: automatically enables compute.googleapis.com non-interactively.
+# 2. Project parameterization: pass --project explicitly for all compute resources
+#    (defaults to LB_PROJECT_ID=mycodespace3p).
+# 3. DNS Project awareness: outputs the exact DNS configuration pointing to
+#    DNS_PROJECT_ID (central-trees-497510-h7) and offers automated DNS setup.
+# 4. Mode awareness: supports delegating to 04b-add-to-existing-loadbalancer.sh
+#    if adding to an existing load balancer is requested.
 # ==============================================================================
 
 set -euo pipefail
 
-BUCKET_NAME="${1:-test1-chessclubwebsite-mycodespace}"
-DOMAIN="${2:-smartgalati-test.mycodespace.ai}"
-NAME_PREFIX="chessclub-site"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=scripts/gcs/common.sh
+source "${SCRIPT_DIR}/common.sh"
 
-echo "==> Setting up HTTPS Load Balancer for ${DOMAIN} pointing to gs://${BUCKET_NAME}..."
+check_gcloud
 
-# 1. Reserve a Global Static IPv4 Address
-echo "1. Reserving global external IP address..."
-gcloud compute addresses create "${NAME_PREFIX}-ip" \
-    --network-tier=PREMIUM \
-    --ip-version=IPV4 \
-    --global || true
+# If user specified existing mode or passed --existing flag, delegate to 04b
+if [[ "${1:-}" == "--existing" ]] || [[ "${LB_MODE:-}" == "existing" ]]; then
+  shift || true
+  exec "${SCRIPT_DIR}/04b-add-to-existing-loadbalancer.sh" "$@"
+fi
 
-LB_IP=$(gcloud compute addresses describe "${NAME_PREFIX}-ip" --global --format="value(address)")
-echo "   >> Reserved IP: ${LB_IP}"
+BUCKET_NAME="${1:-${BUCKET_NAME:-test2}}"
+DOMAIN="${2:-${DOMAIN:-smartgalati-test2.mycodespace.ai}}"
+LB_PROJECT_ID="${3:-${LB_PROJECT_ID:-mycodespace3p}}"
+NAME_PREFIX="${4:-${LB_NAME_PREFIX:-chessclub-test2}}"
+DNS_PROJECT_ID="${DNS_PROJECT_ID:-central-trees-497510-h7}"
+DNS_ZONE="${DNS_ZONE:-mycodespace}"
 
-# 2. Create a Google-Managed SSL Certificate
-echo "2. Creating Google-managed SSL certificate for ${DOMAIN}..."
-gcloud compute ssl-certificates create "${NAME_PREFIX}-cert" \
-    --domains="${DOMAIN}" \
-    --global || true
+log_info "Setting up NEW HTTPS Load Balancer:"
+echo "    - Domain:             ${DOMAIN}"
+echo "    - Backend GCS Bucket: gs://${BUCKET_NAME}"
+echo "    - LB Project:         ${LB_PROJECT_ID}"
+echo "    - Resource Prefix:    ${NAME_PREFIX}"
+echo "    - DNS Target Project: ${DNS_PROJECT_ID} (Zone: ${DNS_ZONE})"
 
-# 3. Create Backend Bucket pointing to GCS
-echo "3. Creating Backend Bucket..."
-gcloud compute backend-buckets create "${NAME_PREFIX}-backend" \
-    --gcs-bucket-name="${BUCKET_NAME}" \
-    --enable-cdn || true
+# 1. Enable compute API in load balancer project
+ensure_api_enabled "${LB_PROJECT_ID}" "compute.googleapis.com"
 
-# 4. Create URL Map
-echo "4. Creating URL Map..."
-gcloud compute url-maps create "${NAME_PREFIX}-url-map" \
-    --default-backend-bucket="${NAME_PREFIX}-backend" || true
+# 2. Reserve a Global Static IPv4 Address
+log_info "1. Reserving global external IPv4 address (${NAME_PREFIX}-ip)..."
+if ! gcloud compute addresses describe "${NAME_PREFIX}-ip" --project="${LB_PROJECT_ID}" --global &>/dev/null; then
+  gcloud compute addresses create "${NAME_PREFIX}-ip" \
+      --project="${LB_PROJECT_ID}" \
+      --network-tier=PREMIUM \
+      --ip-version=IPV4 \
+      --global
+fi
 
-# 5. Create Target HTTPS Proxy
-echo "5. Creating Target HTTPS Proxy..."
-gcloud compute target-https-proxies create "${NAME_PREFIX}-https-proxy" \
-    --ssl-certificates="${NAME_PREFIX}-cert" \
-    --url-map="${NAME_PREFIX}-url-map" || true
+LB_IP=$(gcloud compute addresses describe "${NAME_PREFIX}-ip" --project="${LB_PROJECT_ID}" --global --format="value(address)")
+log_success "Reserved IP: ${LB_IP}"
 
-# 6. Create Global Forwarding Rule for HTTPS (Port 443)
-echo "6. Creating Global Forwarding Rule for HTTPS..."
-gcloud compute forwarding-rules create "${NAME_PREFIX}-https-rule" \
-    --load-balancing-scheme=EXTERNAL_MANAGED \
-    --network-tier=PREMIUM \
-    --address="${NAME_PREFIX}-ip" \
-    --global \
-    --target-https-proxy="${NAME_PREFIX}-https-proxy" \
-    --ports=443 || true
+# 3. Create a Google-Managed SSL Certificate
+log_info "2. Creating Google-managed SSL certificate for ${DOMAIN}..."
+if ! gcloud compute ssl-certificates describe "${NAME_PREFIX}-cert" --project="${LB_PROJECT_ID}" --global &>/dev/null; then
+  gcloud compute ssl-certificates create "${NAME_PREFIX}-cert" \
+      --project="${LB_PROJECT_ID}" \
+      --domains="${DOMAIN}" \
+      --global
+else
+  log_success "Certificate ${NAME_PREFIX}-cert already exists in [${LB_PROJECT_ID}]."
+fi
 
+# 4. Create Backend Bucket pointing to GCS
+log_info "3. Creating Backend Bucket pointing to gs://${BUCKET_NAME} with Cloud CDN..."
+if ! gcloud compute backend-buckets describe "${NAME_PREFIX}-backend" --project="${LB_PROJECT_ID}" &>/dev/null; then
+  gcloud compute backend-buckets create "${NAME_PREFIX}-backend" \
+      --project="${LB_PROJECT_ID}" \
+      --gcs-bucket-name="${BUCKET_NAME}" \
+      --enable-cdn
+else
+  log_success "Backend bucket ${NAME_PREFIX}-backend already exists in [${LB_PROJECT_ID}]."
+fi
+
+# 5. Create URL Map
+log_info "4. Creating URL Map..."
+if ! gcloud compute url-maps describe "${NAME_PREFIX}-url-map" --project="${LB_PROJECT_ID}" --global &>/dev/null; then
+  gcloud compute url-maps create "${NAME_PREFIX}-url-map" \
+      --project="${LB_PROJECT_ID}" \
+      --default-backend-bucket="${NAME_PREFIX}-backend" \
+      --global
+else
+  log_success "URL Map ${NAME_PREFIX}-url-map already exists in [${LB_PROJECT_ID}]."
+fi
+
+# 6. Create Target HTTPS Proxy
+log_info "5. Creating Target HTTPS Proxy..."
+if ! gcloud compute target-https-proxies describe "${NAME_PREFIX}-https-proxy" --project="${LB_PROJECT_ID}" --global &>/dev/null; then
+  gcloud compute target-https-proxies create "${NAME_PREFIX}-https-proxy" \
+      --project="${LB_PROJECT_ID}" \
+      --ssl-certificates="${NAME_PREFIX}-cert" \
+      --url-map="${NAME_PREFIX}-url-map" \
+      --global
+else
+  log_success "Target HTTPS Proxy ${NAME_PREFIX}-https-proxy already exists in [${LB_PROJECT_ID}]."
+fi
+
+# 7. Create Global Forwarding Rule for HTTPS (Port 443)
+log_info "6. Creating Global Forwarding Rule for HTTPS on Port 443..."
+if ! gcloud compute forwarding-rules describe "${NAME_PREFIX}-https-rule" --project="${LB_PROJECT_ID}" --global &>/dev/null; then
+  gcloud compute forwarding-rules create "${NAME_PREFIX}-https-rule" \
+      --project="${LB_PROJECT_ID}" \
+      --load-balancing-scheme=EXTERNAL_MANAGED \
+      --network-tier=PREMIUM \
+      --address="${NAME_PREFIX}-ip" \
+      --global \
+      --target-https-proxy="${NAME_PREFIX}-https-proxy" \
+      --ports=443
+else
+  log_success "Forwarding rule ${NAME_PREFIX}-https-rule already exists in [${LB_PROJECT_ID}]."
+fi
+
+echo ""
 echo "=============================================================================="
-echo "==> Load Balancer setup complete!"
+log_success "Load Balancer setup complete!"
 echo "    Assigned Global Static IP: ${LB_IP}"
-echo ""
-echo "DNS CONFIGURATION REQUIRED:"
-echo "In your DNS provider for 'mycodespace.ai', create an 'A' record:"
-echo "    Type:  A"
-echo "    Host:  smartgalati-test"
-echo "    Value: ${LB_IP}"
-echo ""
-echo "Note: Google-managed SSL certificates take 15-30 minutes to provision"
-echo "once the DNS 'A' record is detected by Google."
+echo "    Domain:                    ${DOMAIN}"
 echo "=============================================================================="
+echo ""
+echo "==> Next step: Automatically configure DNS A record in project [${DNS_PROJECT_ID}]:"
+echo "    ./scripts/gcs/05-configure-dns.sh ${DOMAIN} ${DNS_PROJECT_ID} ${DNS_ZONE} ${LB_IP}"
+echo ""
+echo "Or manual command in project [${DNS_PROJECT_ID}]:"
+echo "    gcloud dns record-sets create \"${DOMAIN}.\" --project=\"${DNS_PROJECT_ID}\" --zone=\"${DNS_ZONE}\" --type=A --ttl=300 --rrdatas=\"${LB_IP}\""
