@@ -1,0 +1,69 @@
+name: Astra site
+on:
+  push:
+    paths: ['codex-astra-site/**', 'scripts/gcs/**', '.github/workflows/codex-astra-site.yml']
+  pull_request:
+    paths: ['codex-astra-site/**', 'scripts/gcs/**', '.github/workflows/codex-astra-site.yml']
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Publish the selected revision to test3
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: astra-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: codex-astra-site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: codex-astra-site/package-lock.json
+      - run: npm ci
+      - run: npm test && npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Browser smoke and accessibility checks
+        run: |
+          npm run preview -- --port 4323 > /tmp/astra-preview.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:4323/ > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:browser
+      - uses: actions/upload-artifact@v4
+        with:
+          name: astra-static-site
+          path: codex-astra-site/dist
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: astra-test3-deploy
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: codex-astra-site/package-lock.json
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - run: npm ci --prefix codex-astra-site
+      - run: npm run deploy --prefix codex-astra-site

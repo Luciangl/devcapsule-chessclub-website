@@ -7,6 +7,8 @@ Branch association: `ws-codex-astra-site/implementation`
 Target branch: `main`
 Delivery: reviewable branch; ordinary integration with deliverable.
 
+Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@05687aa6136c
+
 ## Goal
 Build an independent design in `codex-astra-site/` under the existing work order, and deploy it at `https://smartgalati-test3.mycodespace.ai` through `scripts/gcs`, sharing the test2 load balancer. User authorized implementation and deployment on 2026-09-27. Preserve the enrollment URL `https://forms.gle/smartgalati-inscriere` despite its known non-working state; these are alternative candidates for owner review.
 
@@ -22,7 +24,7 @@ Requirements: R-SITE-001 through R-SITE-007.
 Done means: complete content routes, accessible responsive UI, archive routing, authoring docs, successful build/browser checks and test3 HTTPS with test2 still operating.
 
 ## Planned Next Step
-Scaffold site and migrate existing content with an independent layout; configure isolated test3 resource parameters.
+Finish browser/accessibility validation, deploy final revisions, verify managed HTTPS and existing-site continuity.
 
 ## Open Threads
 - Existing registration form URL intentionally unchanged and not a blocker.
@@ -32,3 +34,11 @@ Scaffold site and migrate existing content with an independent layout; configure
 ## Document Index
 - `intake/`: read at session start; pending coordination items.
 - `intake-dispositions.md`: consult for intake decisions; none yet.
+
+## Implementation Checkpoint
+- Independent Astro 5 site implemented: 20 routes, 6 coach profiles, 7 news articles, 3 performance records, 3 albums/51 photos, course/about/team/contact/support pages, chess demo, and 404.
+- Build passes with 0 errors/warnings/hints; three archive boundary tests pass; dev server returns HTTP 200 on port 4323. Browser checks in progress against production preview on port 4324.
+- Dedicated bucket and backend created using unchanged shared GCS scripts; hostname routed on shared `chessclub-test2`; new certificate attached while original certificate/default backend preserved. DNS A resolves to `8.232.113.26`; certificate currently provisioning.
+- Enrollment link unchanged by explicit user direction. Removed unrelated fake album/study links from this candidate only. Preserved historical source dates.
+- CMS remains optional per work-order overview: IDE/GitHub Markdown editing delivered. No new cloud credentials or CI identity created; workflow supports existing Workload Identity variables if configured.
+- Mainline remains unchanged; source work is on this workstream branch.

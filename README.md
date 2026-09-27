@@ -15,3 +15,8 @@ Modern, fast static website for **ACS Smart Galați** ([smartgalati.ro](https://
 - Requirements register: [`REQUIREMENTS.md`](REQUIREMENTS.md)
 - Documentation index: [`index.md`](index.md)
 - Live status & next resumable task: [`CURRENT-STATUS.md`](CURRENT-STATUS.md)
+
+## Independent Design Candidates
+
+- [`ag-flash3.8-site/`](ag-flash3.8-site/README.md): existing candidate.
+- [`codex-astra-site/`](codex-astra-site/README.md): independent ivory/forest-green design, Markdown content, local development on port 4323, and GCS preview at `smartgalati-test3.mycodespace.ai` using the test2 load balancer.

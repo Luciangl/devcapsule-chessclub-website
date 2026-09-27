@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Photo from './Photo.astro';
+import { articleUrl } from '../lib/archive.mjs';
+import { dateLabel } from '../lib/site';
+const { entry } = Astro.props as { entry: CollectionEntry<'news'> };
+---
+
+<article class="news-card">
+  <a href={articleUrl(entry)} class="news-image" tabindex="-1" aria-hidden="true">
+    <Photo file={entry.data.cover_image} alt="" sizes="(max-width: 700px) 100vw, 33vw" />
+  </a>
+  <div class="news-meta">
+    <span>{entry.data.tags[0] || 'Din club'}</span>
+    <time datetime={entry.data.date.toISOString()}>{dateLabel(entry.data.date)}</time>
+  </div>
+  <h3>
+    <a href={articleUrl(entry)}>
+      {entry.data.title} <span aria-hidden="true">↗</span>
+    </a>
+  </h3>
+  <p>{entry.data.summary}</p>
+</article>

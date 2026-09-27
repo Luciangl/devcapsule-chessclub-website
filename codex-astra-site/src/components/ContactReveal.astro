@@ -1,0 +1,28 @@
+<div class="contact-reveal">
+  <button class="button secondary" data-contact="phone" data-value="MDc1OCA3NzUgMjA2">
+    Arată telefonul <span aria-hidden="true">↗</span>
+  </button>
+  <button class="button secondary" data-contact="email" data-value="c21hcnRzYWhAeWFob28uY29t">
+    Arată adresa de email <span aria-hidden="true">↗</span>
+  </button>
+  <span class="sr-only" aria-live="polite" data-contact-status></span>
+  <noscript>
+    Activează JavaScript pentru datele de contact sau folosește formularul de înscriere.
+  </noscript>
+</div>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-contact]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const value = atob(button.dataset.value!);
+      const link = document.createElement('a');
+      link.className = button.className;
+      link.textContent = value;
+      link.href =
+        button.dataset.contact === 'phone'
+          ? `tel:+4${value.replaceAll(' ', '')}`
+          : `mailto:${value}`;
+      button.replaceWith(link);
+      link.focus();
+    });
+  });
+</script>

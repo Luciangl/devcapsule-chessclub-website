@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+const coaches = await Promise.all(
+  (await getCollection('coaches'))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(async (entry) => ({ entry, ...(await render(entry)) })),
+);
+---
+
+<Layout title="Antrenorii noștri">
+  <PageHead
+    title="Oameni care inspiră. Antrenori care îndrumă."
+    description="Experiență la tabla de joc. Răbdare la fiecare lecție. Cunoaște oamenii care ne ajută să creștem."
+    eyebrow="ECHIPA DIN SPATELE ECHIPEI"
+  />
+  <section class="container page-body roster-grid">
+    {coaches.map(({ entry, Content }) => (
+      <article class="coach-card">
+        <div class="coach-heading">
+          <span class="monogram" aria-hidden="true">
+            {entry.data.name
+              .split(' ')
+              .map((s: string) => s[0])
+              .slice(0, 2)
+              .join('')}
+          </span>
+          <div>
+            <h2>{entry.data.name}</h2>
+            <p class="role">{entry.data.role}</p>
+            {entry.data.title_fide && <p class="role">{entry.data.title_fide}</p>}
+          </div>
+        </div>
+        <div class="prose">
+          <Content />
+        </div>
+      </article>
+    ))}
+  </section>
+</Layout>
