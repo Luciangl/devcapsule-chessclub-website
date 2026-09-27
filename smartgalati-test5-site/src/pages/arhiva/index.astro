@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const news = await getCollection('news');
+const currentYear = new Date().getFullYear();
+const archived = news.filter(n => n.data.date.getFullYear() < currentYear - 2);
+
+archived.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Group by year
+const groupedByYear = archived.reduce((acc, item) => {
+    const year = item.data.date.getFullYear();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(item);
+    return acc;
+}, {} as Record<number, typeof archived>);
+
+const years = Object.keys(groupedByYear).map(Number).sort((a, b) => b - a);
+---
+
+<Layout title="Arhivă Noutăți" description="Arhiva articolelor mai vechi de 2 ani">
+    <div class="max-w-4xl mx-auto py-8">
+        <div class="flex flex-wrap justify-between items-end mb-8 border-b border-border-base pb-4">
+            <h1 class="text-4xl font-bold text-primary">Arhivă Noutăți</h1>
+            <a href="/noutati" class="text-primary hover:underline font-medium">Vezi noutățile recente</a>
+        </div>
+        
+        {years.map(year => (
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold text-text-base mb-6 pb-2 border-b-2 border-primary/20 inline-block">{year}</h2>
+                <ul class="space-y-4">
+                    {groupedByYear[year].map(n => (
+                        <li class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 group">
+                            <time class="text-sm text-text-muted font-mono w-24 flex-shrink-0" datetime={n.data.date.toISOString()}>
+                                {n.data.date.toLocaleDateString('ro-RO', { day: '2-digit', month: '2-digit' })}
+                            </time>
+                            <a href={`/arhiva/${year}/${n.id}`} class="text-lg text-primary group-hover:text-primary-hover group-hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded">
+                                {n.data.title}
+                            </a>
+                            <span class="text-sm text-text-muted hidden md:inline-block truncate">
+                                {n.data.summary}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        ))}
+    </div>
+</Layout>

@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const coaches = await getCollection('coaches');
+coaches.sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout title="Antrenori" description="Echipa de antrenori ACS Smart Galați">
+    <div class="max-w-6xl mx-auto py-8">
+        <h1 class="text-4xl font-bold text-primary mb-8">Echipa Noastră de Antrenori</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {coaches.map(async (coach) => {
+                const { Content } = await (await import('astro:content')).render(coach);
+                return (
+                    <div class="bg-bg-subtle rounded-xl p-6 border border-border-base flex flex-col sm:flex-row gap-6 items-start">
+                        {coach.data.photo ? (
+                            <img src={coach.data.photo} alt={coach.data.name} class="w-32 h-32 rounded-full object-cover shadow-sm border-2 border-border-base flex-shrink-0" />
+                        ) : (
+                            <div class="w-32 h-32 rounded-full bg-bg-accent flex items-center justify-center flex-shrink-0 text-text-muted text-4xl">
+                                ♟️
+                            </div>
+                        )}
+                        <div class="flex-grow">
+                            <h2 class="text-2xl font-bold text-text-base">{coach.data.name}</h2>
+                            <p class="text-primary font-medium">{coach.data.role}</p>
+                            {coach.data.title && <p class="text-sm text-text-muted mt-1">{coach.data.title}</p>}
+                            {coach.data.rating && <p class="text-sm text-text-muted">ELO: {coach.data.rating}</p>}
+                            
+                            <div class="prose prose-sm dark:prose-invert mt-4">
+                                <Content />
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    </div>
+</Layout>

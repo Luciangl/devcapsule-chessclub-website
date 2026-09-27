@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map(page => ({
+    params: { slug: page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Layout title={page.data.title} description={page.data.description}>
+    <div class="max-w-4xl mx-auto py-8">
+        <h1 class="text-4xl font-bold text-primary mb-4">{page.data.title}</h1>
+        {page.data.subtitle && <p class="text-xl text-text-muted mb-8">{page.data.subtitle}</p>}
+        
+        <div class="prose prose-lg dark:prose-invert max-w-none prose-a:text-focus prose-headings:text-primary prose-img:rounded-xl">
+            <Content />
+        </div>
+        
+        {page.data.source_url && (
+            <div class="mt-12 text-sm text-text-muted pt-4 border-t border-border-base">
+                Sursa originală: <a href={page.data.source_url} target="_blank" rel="noopener noreferrer" class="hover:text-primary underline">{page.data.source_url}</a>
+            </div>
+        )}
+    </div>
+</Layout>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const performances = await getCollection('performances');
+performances.sort((a, b) => b.data.year - a.data.year || a.data.order - b.data.order);
+---
+
+<Layout title="Performanțe" description="Rezultate și performanțe ACS Smart Galați">
+    <div class="max-w-4xl mx-auto py-8">
+        <h1 class="text-4xl font-bold text-primary mb-8">Performanțe</h1>
+        
+        <div class="space-y-6">
+            {performances.map(async (perf) => {
+                const { Content } = await (await import('astro:content')).render(perf);
+                return (
+                    <div class={`p-6 rounded-xl border ${perf.data.featured ? 'bg-bg-subtle border-primary/30' : 'bg-bg-base border-border-base'}`}>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                            <h2 class="text-2xl font-bold text-text-base">{perf.data.title}</h2>
+                            <span class="bg-primary text-text-inverse px-3 py-1 rounded-full text-sm font-bold w-fit mt-2 sm:mt-0">{perf.data.year}</span>
+                        </div>
+                        <p class="text-primary font-medium mb-4">{perf.data.category} - <span class="font-bold">{perf.data.result}</span></p>
+                        
+                        <div class="prose prose-sm dark:prose-invert">
+                            <Content />
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    </div>
+</Layout>
