@@ -32,3 +32,5 @@
 - [ag-flash3.8-site Solution Overview](ag-flash3.8-site/README.md)
 - [ag-flash3.8-site Content Authoring Guide (Romanian)](ag-flash3.8-site/content/README.md)
 - [Google Cloud Storage Deployment Scripts & Guide](scripts/gcs/README.md)
+
+- [Codex Astra site workstream](engineering-docs/wip/2026-09-27-codex-astra-site/CURRENT-STATUS.md)

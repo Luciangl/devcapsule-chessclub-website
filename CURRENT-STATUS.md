@@ -11,3 +11,4 @@ registered workstream status file.
 |---|---|---|---|---|---|
 | `project-management` | 2026-09-27 | Maintain project-wide priorities, sequencing, dependencies, and lifecycle coordination | active; permanent coordination | `ws-project-management/coordination` | [workstream status](engineering-docs/wip/2026-09-27-project-management/CURRENT-STATUS.md) |
 | `maintenance` | 2026-09-27 | Own the defects no open workstream covers, on `main` and on maintained release lines, and drive maintenance releases | active; permanent maintenance | `ws-maintenance/`; no branch yet | [workstream status](engineering-docs/wip/2026-09-27-maintenance/CURRENT-STATUS.md) |
+| `codex-astra-site` | 2026-09-27 | Independent website design and test3 GCS deployment | active | `ws-codex-astra-site/implementation` | [workstream status](engineering-docs/wip/2026-09-27-codex-astra-site/CURRENT-STATUS.md) |
