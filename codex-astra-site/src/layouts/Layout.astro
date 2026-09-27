@@ -1,7 +1,10 @@
 ---
 import '@fontsource-variable/dm-sans';
 import '@fontsource-variable/manrope';
+import '../styles/themes.css';
 import '../styles/global.css';
+import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import { themes, themeStorageKey } from '../lib/themes';
 import Mark from '../components/Mark.astro';
 import { site } from '../lib/site';
 interface Props {
@@ -20,12 +23,20 @@ const nav = [
 ---
 
 <!doctype html>
-<html lang="ro">
+<html lang="ro" data-theme="astra">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#193e31" />
+    <meta name="theme-color" content="#183e30" />
+    <script is:inline define:vars={{ themeIds: themes.map((theme) => theme.id), themeStorageKey }}>
+      try {
+        const saved = localStorage.getItem(themeStorageKey);
+        if (themeIds.includes(saved)) document.documentElement.dataset.theme = saved;
+      } catch {
+        /* The original palette remains available without storage. */
+      }
+    </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={new URL(current, Astro.site)} />
     <meta
@@ -50,6 +61,7 @@ const nav = [
         <a href="/sustine/">
           Fă o mutare bună. Susține clubul <span aria-hidden="true">↗</span>
         </a>
+        <ThemeSwitcher id="desktop-palette" class="theme-desktop" />
       </div>
     </div>
     <header class="site-header">
@@ -72,6 +84,7 @@ const nav = [
               {label}
             </a>
           ))}
+          <ThemeSwitcher id="mobile-palette" class="theme-mobile" />
           <a class="button nav-cta" href={site.enrollmentUrl}>
             Hai la șah <span aria-hidden="true">↗</span>
           </a>

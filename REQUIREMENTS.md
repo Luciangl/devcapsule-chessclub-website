@@ -130,3 +130,7 @@ For this candidate R-SITE-007 is narrowed to the existing `scripts/gcs` deployme
 The enrollment link remains `https://forms.gle/smartgalati-inscriere` by explicit owner instruction despite its known non-working state. Its external availability is not an acceptance gate for this experiment. Production cutover is outside scope.
 
 Implementation and validation: [candidate guide](codex-astra-site/README.md), [authoring guide](codex-astra-site/content/README.md), and [delivery evidence](engineering-docs/implementation-notes/website/2026-09-27-codex-astra-site.md).
+
+### Astra design refinement: readability and selectable palettes (2026-09-27)
+
+Owner requested larger/heavier desktop top-band text and similarly small labels while preserving the established airy layout. Provide six dropdown choices: original Astra plus five adapted open-source light schemes, remembering each visitor's selection. Shared color and typography tokens govern the whole candidate. Validation includes responsive layout, contrast scans across all palettes, keyboard/native controls, persistence and storage-denied fallback. Applies to the Astra candidate only.

@@ -39,6 +39,7 @@ jobs:
             sleep 1
           done
           npm run test:browser
+          SITE_URL=http://localhost:4323 npm run test:themes
       - uses: actions/upload-artifact@v4
         with:
           name: astra-static-site

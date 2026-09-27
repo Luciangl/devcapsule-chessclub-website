@@ -72,3 +72,22 @@ Warm ivory, forest green, restrained terracotta, generous type, and real club ph
 The browser audit reports site-owned accessibility findings separately from the external Lichess iframe, whose player labels/move list currently have upstream contrast issues. The iframe has a descriptive title and a direct-link alternative.
 
 The archive cutoff is computed during builds. Rebuild regularly to advance it. Archive boundary behavior is covered by tests; a static hosting service cannot recalculate it between deployments.
+
+## Color themes and readable small text
+
+The **Paletă** dropdown is in the desktop top strip and inside the mobile navigation menu. It remembers the visitor's selection on this domain, applies it before the page paints, and synchronizes other open tabs. If browser storage is unavailable it still changes the current page; a fresh visit returns to Astra.
+
+| Choice | Palette source | Adaptation |
+|---|---|---|
+| Astra · original | Original site design | Ivory and forest green; default |
+| Solarized Light | [Ethan Schoonover / Solarized](https://ethanschoonover.com/solarized/) | Warm paper and deep teal |
+| Nord Snow | [Nord](https://www.nordtheme.com/docs/colors-and-palettes/) | Cool white and slate |
+| Catppuccin Latte | [Catppuccin](https://github.com/catppuccin/catppuccin) | Pale lavender and plum |
+| Gruvbox Light | [morhetz / Gruvbox](https://github.com/morhetz/gruvbox) | Warm parchment and charcoal |
+| Rosé Pine Dawn | [Rosé Pine](https://github.com/rose-pine/rose-pine-theme) | Soft rose, cream and aubergine |
+
+These are website adaptations of open-source palettes, with stronger foreground colors where needed for text contrast. Attribution and upstream license notices are bundled in `public/licenses/themes.txt`.
+
+All color roles are centralized in `src/styles/themes.css`, with stable choice IDs in `src/lib/themes.ts`. Shared small-text sizes (`--text-label`, `--text-small`, `--text-ui`) and label weight are at the top of `src/styles/global.css`. Desktop top-strip text is 14px/600 at default browser settings; formerly tiny metadata and captions now use at least the 12px label token. Headlines, major spacing and page structure are preserved.
+
+`npm run test:themes` tests all palettes on a production preview at port 4324 (or `SITE_URL`), including accessibility, mobile selection, persistence, disabled storage, early restoration and synchronization between tabs.

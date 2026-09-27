@@ -59,3 +59,14 @@ CI builds/tests site changes and supports manually triggered deployment with exi
 - Existing test2 certificate and default backend verified preserved; test2 HTTPS 200.
 - Source branch `ws-codex-astra-site/implementation` pushed to origin. Draft PR creation through GitHub connector returned HTTP 404 (repository unavailable to connector), despite successful Git SSH publication. No mainline merge was performed.
 - Local dev server remains available on port 4323. Product owner may compare designs; production cutover remains outside scope.
+
+## Readability and Palette Refinement (2026-09-27)
+
+Owner requested more readable desktop top-band text and other small copy while preserving the airy design, plus selectable open-source palettes.
+
+- Desktop top band increased from 10px regular to 14px semibold. Shared rem-based label/UI tokens raise smaller dates, captions, course labels, footer and utility text. Major headings and section spacing preserved.
+- Centralized all component colors into semantic tokens in `src/styles/themes.css`. Original Astra remains default; five adaptations: Solarized Light, Nord Snow, Catppuccin Latte, Gruvbox Light and Rosé Pine Dawn. Upstream attributions and license notices bundled in `public/licenses/themes.txt`; sources linked from the site README.
+- Native labeled dropdown in desktop band and mobile navigation; localStorage preference restored by a head script before rendering, synchronized between controls/tabs. Invalid values fall back to original; storage-denied mode still supports switching on the current page.
+- Solarized secondary text darkened after rendered-page audit found 4.39:1 contrast on a tinted panel. Final palette token checks exceed 4.5:1 for normal foreground/background pairings.
+- Build: 20 pages, zero errors/warnings/hints. Existing 19-route browser regression passes. New palette browser suite passes six schemes × three representative pages with zero WCAG A/AA findings, responsive widths 320/390/768/1024/1440, persistence, cross-tab synchronization, invalid-value fallback, blocked storage, early restoration and mobile selection.
+- Local comparison screenshots: `/tmp/astra-themes/`. This is automated accessibility evidence, not a complete certification.
