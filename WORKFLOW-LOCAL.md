@@ -42,5 +42,20 @@ the justification for each.
 
 ## Exceptions
 
-Every recorded departure from `WORKFLOW.md`, each with its reason and, where
-one exists, the condition that ends it. Empty means none.
+### Prototype-phase direct integration
+
+Authorized by the project owner on 2026-09-27. While this project is a
+prototype/design experiment, `direct-main` is the default delivery method.
+Agents may integrate completed work into `main` and push `main` directly,
+without a pull request or another per-change merge confirmation. This also
+applies to the completed `codex-astra-site` workstream.
+
+Reason: prioritize quick design experiments while retaining the workflow
+scaffolding for later engineering practice. Keep validation proportional to
+the change and retain concise requirements, evidence and resumable state.
+Use the direct-main procedure in `WORKFLOW.md`: synchronize first, integrate
+by fast-forward and push normally; never force-push `main`.
+
+This exception ends when the owner declares the prototype phase over or
+explicitly restores pull-request delivery. It does not authorize production
+domain cutover, which remains a separate owner decision.
