@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://smartgalati-test4.mycodespace.ai/sitemap.xml
