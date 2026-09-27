@@ -6,7 +6,7 @@ Start date: `2026-09-27`
 
 State: active; permanent coordination
 
-Definition read: stamped by `devcapsule workflow publish`
+Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@05687aa6136c
 
 Branch association: `ws-project-management/coordination`
 
