@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../../layouts/Layout.astro';
+import { newsCover } from '../../../lib/images';
 
 export async function getStaticPaths() {
   const news = await getCollection('news');
@@ -32,8 +34,8 @@ const { Content } = await render(newsItem);
                 </time>
                 <span class="px-3 py-1 bg-bg-subtle border border-border-base rounded-full text-sm font-medium">{newsItem.data.category}</span>
             </div>
-            {newsItem.data.cover_image && (
-                <img src={newsItem.data.cover_image} alt="" class="w-full h-64 md:h-96 object-cover rounded-xl mt-6 opacity-90" />
+            {newsItem.data.cover_image && newsCover(newsItem.data.cover_image) && (
+                <Image src={newsCover(newsItem.data.cover_image)!} alt="" class="w-full h-64 md:h-96 object-cover rounded-xl mt-6 opacity-90" />
             )}
         </header>
         

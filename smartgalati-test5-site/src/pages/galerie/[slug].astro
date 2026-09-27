@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import { photo } from '../../lib/images';
 
 export async function getStaticPaths() {
   const galleries = await getCollection('galleries');
@@ -31,16 +33,20 @@ const { Content } = await render(gallery);
 
         {gallery.data.photos && gallery.data.photos.length > 0 && (
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {gallery.data.photos.map(photo => (
-                    <a href={photo.file} target="_blank" class="group block overflow-hidden rounded-lg bg-bg-accent aspect-square focus:outline-none focus-visible:ring-4 focus-visible:ring-focus">
-                        <img 
-                            src={photo.file} 
-                            alt={photo.alt} 
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                            loading="lazy"
-                        />
-                    </a>
-                ))}
+                {gallery.data.photos.map(p => {
+                    const img = photo(p.file);
+                    if (!img) return null;
+                    return (
+                        <a href={img.src} target="_blank" class="group block overflow-hidden rounded-lg bg-bg-accent aspect-square focus:outline-none focus-visible:ring-4 focus-visible:ring-focus">
+                            <Image 
+                                src={img} 
+                                alt={p.alt} 
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                loading="lazy"
+                            />
+                        </a>
+                    );
+                })}
             </div>
         )}
 

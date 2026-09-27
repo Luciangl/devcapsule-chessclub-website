@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import { coachPhoto } from '../lib/images';
 
 const coaches = await getCollection('coaches');
 coaches.sort((a, b) => a.data.order - b.data.order);
@@ -16,7 +18,7 @@ coaches.sort((a, b) => a.data.order - b.data.order);
                 return (
                     <div class="bg-bg-subtle rounded-xl p-6 border border-border-base flex flex-col sm:flex-row gap-6 items-start">
                         {coach.data.photo ? (
-                            <img src={coach.data.photo} alt={coach.data.name} class="w-32 h-32 rounded-full object-cover shadow-sm border-2 border-border-base flex-shrink-0" />
+                            <Image src={coachPhoto(coach.data.photo)!} alt={coach.data.name} class="w-32 h-32 rounded-full object-cover shadow-sm border-2 border-border-base flex-shrink-0" />
                         ) : (
                             <div class="w-32 h-32 rounded-full bg-bg-accent flex items-center justify-center flex-shrink-0 text-text-muted text-4xl">
                                 ♟️
