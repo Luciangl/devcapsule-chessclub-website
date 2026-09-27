@@ -38,7 +38,7 @@ Independent website in `codex-astra-site/`, preserving previous candidates, and 
 - Added backend `chessclub-test2-test3-smartgalati-mycodespace-backend`, host matcher `smartgalati-test3-mycodespace-ai-matcher`, certificate `chessclub-test2-smartgalati-test3-mycodespace-ai-cert`.
 - DNS A `smartgalati-test3.mycodespace.ai` → `8.232.113.26`, zone `mycodespace`, project `central-trees-497510-h7`, TTL 300.
 - Existing `scripts/gcs` scripts used unchanged. Candidate wrapper supplies explicit environment parameters; test2 configuration unchanged.
-- Initial deployment served root and `/contact/` HTTP 200 through the new host rule. Managed certificate initially provisioning; final HTTPS verification recorded below when complete.
+- Managed certificate became ACTIVE and verified HTTPS served HTTP 200 on 2026-09-27 at 17:10 UTC. Root and all 19 content routes passed the public-domain browser suite. Test2 still returns verified HTTPS 200. Missing routes return the custom HTML with HTTP 404; `/contact` redirects with HTTP 301 to `/contact/`.
 
 ## Automation and Remaining Review
 
@@ -49,3 +49,13 @@ CI builds/tests site changes and supports manually triggered deployment with exi
 - [Astro content collections](https://docs.astro.build/en/reference/modules/astro-content/)
 - [Lichess official embed interface](https://lichess.org/developers)
 - [ANAF current Form 230 information](https://static.anaf.ro/static/10/Anaf/Declaratii_R/230.html) linked from the support page; no fabricated prefilled form or tax deadline.
+
+## Final Hosted Checkpoint
+
+- Preview: https://smartgalati-test3.mycodespace.ai
+- Final upload completed with original GCS scripts; all build diagnostics remain zero.
+- Public-domain Playwright suite passed: 19 routes, 19 internal targets, desktop/mobile screenshots, interactions and zero site-owned accessibility violations. Live screenshots: `/tmp/astra-live-browser/`.
+- Local Lighthouse mobile simulation: performance 99, accessibility 100, best practices 100, SEO 100; FCP 1.7s, LCP 2.0s, total blocking time 0ms, CLS 0.003. These are lab results, not a guarantee of sub-second loading on arbitrary connections. Additional accessible-name advisory was corrected.
+- Existing test2 certificate and default backend verified preserved; test2 HTTPS 200.
+- Source branch `ws-codex-astra-site/implementation` pushed to origin. Draft PR creation through GitHub connector returned HTTP 404 (repository unavailable to connector), despite successful Git SSH publication. No mainline merge was performed.
+- Local dev server remains available on port 4323. Product owner may compare designs; production cutover remains outside scope.
