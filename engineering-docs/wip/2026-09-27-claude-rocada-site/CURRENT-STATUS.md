@@ -28,15 +28,22 @@ chosen as a descriptive name in the same spirit as the earlier candidates.
 
 ## Current Task
 
-Scaffold `claude-rocada-site/` (Astro 5 static, custom CSS tokens, content
-collections), convert factual content from the original `smartgalati.ro` pages
-and its 134 public news posts, build pages, components, palettes and tests.
+Site built, validated locally and provisioned (bucket, upload, host rule on
+`chessclub-test2`, DNS `8.232.113.26`); managed certificate
+`chessclub-test2-smartgalati-test4-mycodespace-ai-cert` is PROVISIONING.
+Waiting for ACTIVE, then run the public browser/palette suites against
+`https://smartgalati-test4.mycodespace.ai`, verify nested/missing routes and
+test2/test3 continuity, complete the evidence note.
 
 ## Next Resumable Task
 
-Validate locally (build, tests, browser/accessibility checks), provision the
-test4 bucket/backend/certificate/DNS with the shared scripts, verify live HTTPS
-plus test2/test3 continuity, write evidence, then finish and integrate.
+If interrupted: check `npm run deploy -- status` in `claude-rocada-site/`; once
+HTTPS serves the Rocada site, run `SITE_URL=https://smartgalati-test4.mycodespace.ai
+npm run test:browser` and `npm run test:themes`, fill the "Cloud Resources and Live
+Verification" section of
+`engineering-docs/implementation-notes/website/2026-09-27-claude-rocada-site.md`,
+then finish (archive this directory, remove the root row) and integrate by
+rebase + fast-forward + push under the prototype policy.
 
 ## Open Threads
 
