@@ -18,6 +18,7 @@
 - `engineering-docs/implementation-notes/` — implementation plans and evidence
 - `engineering-docs/bugs/` — reproducible defects and close criteria
   - [Bug: Missing Photo Gallery (/galerie-foto)](engineering-docs/bugs/website/2026-09-27-missing-photo-gallery.md)
+  - [Bug: Flaky Desktop Dropdown Menu ("Clubul Nostru")](engineering-docs/bugs/website/2026-09-27-flaky-dropdown-menu.md)
 - `engineering-docs/wip/` — active multiple-stream workstream state
 - `engineering-docs/archive/` — concluded multiple-stream workstream state
 - `engineering-docs/session-records/` — explicitly requested session records

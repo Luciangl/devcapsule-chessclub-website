@@ -8,7 +8,7 @@ State: active; permanent maintenance
 
 Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@05687aa6136c
 
-Branch association: `ws-maintenance/`; no branch yet
+Branch association: `ws-maintenance/flaky-dropdown-menu`
 
 ## Goal
 
@@ -24,17 +24,15 @@ neither `closed` nor `retired`. See *Bug Intake* in `WORKFLOW.md`.
 
 ## Current State
 
-Bug `engineering-docs/bugs/website/2026-09-27-missing-photo-gallery.md` was resolved, verified, and integrated into `main`:
-- Restored `/galerie-foto` with 51 cataloged photos across 3 albums (Bran 2024, FISCA Cap Aurora 2022, Juniori 2016).
-- Bundled all image assets locally under `ag-flash3.8-site/public/images/galerie/`.
-- Built Lightbox modal viewer with keyboard navigation and album filters.
-- Added navigation links in desktop dropdown, mobile drawer, and footer.
-- Build verified with `npm run build` (19 pages, 0 errors, 0 warnings).
-- Currently 0 open bugs in queue.
+Bug `engineering-docs/bugs/website/2026-09-27-flaky-dropdown-menu.md` resolved and verified:
+- Added seamless hover bridge between trigger button and menu panel, eliminating cursor transit dropouts.
+- Implemented click-to-pin persistent mode on "Clubul Nostru" with outside click and Escape key dismissal.
+- Added active subpage highlight styling for child routes.
+- Verified cleanly with `npm run build` (19 pages, 0 errors, 0 warnings).
 
 ## Planned Next Step
 
-Triage any bug whose `severity` is `untriaged`, then take the highest-severity open bug on the current release line.
+Integrate `ws-maintenance/flaky-dropdown-menu` into `main`, release claim `dropdown-usability`, publish status, and await next task.
 
 ## Open Threads
 
