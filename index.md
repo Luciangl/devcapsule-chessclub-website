@@ -35,6 +35,12 @@
 - [ag-flash3.8-site Content Authoring Guide (Romanian)](ag-flash3.8-site/content/README.md)
 - [Google Cloud Storage Deployment Scripts & Guide](scripts/gcs/README.md)
 
+## Test5 Candidate (smartgalati-test5)
+
+- [Site development, palette and deployment guide](smartgalati-test5-site/README.md)
+- `smartgalati-test5-site/src/content/` — structured site content migrated from test4
+- [Test5 workstream state](engineering-docs/wip/2026-09-27-smartgalati-test5/CURRENT-STATUS.md)
+
 ## Claude Rocada Candidate (smartgalati-test4)
 
 - [Site development, palette and deployment guide](claude-rocada-site/README.md)
