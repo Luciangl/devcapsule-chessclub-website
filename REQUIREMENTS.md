@@ -134,3 +134,11 @@ Implementation and validation: [candidate guide](codex-astra-site/README.md), [a
 ### Astra design refinement: readability and selectable palettes (2026-09-27)
 
 Owner requested larger/heavier desktop top-band text and similarly small labels while preserving the established airy layout. Provide six dropdown choices: original Astra plus five adapted open-source light schemes, remembering each visitor's selection. Shared color and typography tokens govern the whole candidate. Validation includes responsive layout, contrast scans across all palettes, keyboard/native controls, persistence and storage-denied fallback. Applies to the Astra candidate only.
+
+## Independent Rocada Candidate (2026-09-27, smartgalati-test4)
+
+The [test4 work order](engineering-docs/work-orders/2026-09-27-smartgalati-test4-prototype.md) commissioned a third independent implementation of R-SITE-001 through R-SITE-007 in `claude-rocada-site/`, under the test3 conditions (readability tokens, 5–6 selectable palettes, fixed enrollment URL, GCS-only hosting on the shared `chessclub-test2` load balancer). For this candidate R-SITE-007 is narrowed to bucket `test4-smartgalati-mycodespace` and domain `smartgalati-test4.mycodespace.ai`; test2 and test3 routing must remain functional.
+
+Content fidelity clarification: this candidate uses only material confirmed on the club's original website (pages, coach bios, team rosters, performances and all 134 published articles, each carrying its `source_url`). Records present in earlier candidates but not found on the original site (a 2022 Cupa României medal, 2023 junior festival medal counts, a 2024 Divizia B silver, a weekly schedule, several 2022–2024 stories) are not reproduced. Items still requiring owner confirmation are listed in the [candidate content guide](claude-rocada-site/content/README.md#de-verificat-cu-clubul).
+
+Implementation and validation: [candidate guide](claude-rocada-site/README.md), [authoring guide](claude-rocada-site/content/README.md), and [delivery evidence](engineering-docs/implementation-notes/website/2026-09-27-claude-rocada-site.md).

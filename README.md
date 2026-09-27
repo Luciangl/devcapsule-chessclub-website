@@ -11,7 +11,7 @@ Modern, fast static website for **ACS Smart Galați** ([smartgalati.ro](https://
 
 ## Project Contracts & Status
 
-- Next candidate work order: [`smartgalati-test4`](engineering-docs/work-orders/2026-09-27-smartgalati-test4-prototype.md)
+- Test4 candidate work order: [`smartgalati-test4`](engineering-docs/work-orders/2026-09-27-smartgalati-test4-prototype.md) — delivered by `claude-rocada-site/`
 - Original product work order: [`engineering-docs/work-orders/2026-09-26-chessclub-website.md`](engineering-docs/work-orders/2026-09-26-chessclub-website.md)
 - Requirements register: [`REQUIREMENTS.md`](REQUIREMENTS.md)
 - Documentation index: [`index.md`](index.md)
@@ -21,3 +21,4 @@ Modern, fast static website for **ACS Smart Galați** ([smartgalati.ro](https://
 
 - [`ag-flash3.8-site/`](ag-flash3.8-site/README.md): existing candidate.
 - [`codex-astra-site/`](codex-astra-site/README.md): independent ivory/forest-green design, Markdown content, local development on port 4323, and GCS preview at `smartgalati-test3.mycodespace.ai` using the test2 load balancer.
+- [`claude-rocada-site/`](claude-rocada-site/README.md): independent "Rocada" design (navy/amber on warm paper, six palettes including dark ones), content taken only from the club's original site including all 134 historical articles, local development on port 4325, and GCS preview at `smartgalati-test4.mycodespace.ai` using the test2 load balancer.

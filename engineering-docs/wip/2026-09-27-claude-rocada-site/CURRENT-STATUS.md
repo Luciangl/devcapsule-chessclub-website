@@ -6,6 +6,8 @@ Start date: `2026-09-27`
 
 State: active; implementation in progress
 
+Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@f38ceada0768
+
 Branch association: `ws-claude-rocada-site/implementation`
 
 Target branch: `main`

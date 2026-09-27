@@ -34,6 +34,14 @@
 - [ag-flash3.8-site Content Authoring Guide (Romanian)](ag-flash3.8-site/content/README.md)
 - [Google Cloud Storage Deployment Scripts & Guide](scripts/gcs/README.md)
 
+## Claude Rocada Candidate (smartgalati-test4)
+
+- [Site development, palette and deployment guide](claude-rocada-site/README.md)
+- [Content authoring guide (Romanian)](claude-rocada-site/content/README.md)
+- `claude-rocada-site/content/` — home, pages, coaches, performances, galleries and 134 news articles (templates `_template.md` in each directory)
+- [Rocada implementation and deployment evidence](engineering-docs/implementation-notes/website/2026-09-27-claude-rocada-site.md)
+- [Rocada delivery archive](engineering-docs/archive/2026-09-27-claude-rocada-site/CURRENT-STATUS.md)
+
 - [Codex Astra delivery archive](engineering-docs/archive/2026-09-27-codex-astra-site/CURRENT-STATUS.md)
 
 ## Codex Astra Candidate
