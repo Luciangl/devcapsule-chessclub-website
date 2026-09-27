@@ -9,6 +9,8 @@ Designated integration branch: `ws-codex-astra-site/implementation`
 Delivery method: pull-request (repository default); source branch pushed to origin.
 Synchronization policy: merge main into published branch when needed; no force pushes. Main matched origin/main at final fetch.
 
+Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@05687aa6136c
+
 ## Goal
 
 Independent website in `codex-astra-site/` under R-SITE-001 through R-SITE-007, deployed with existing `scripts/gcs` at `smartgalati-test3.mycodespace.ai`, sharing the test2 load balancer. Implementation and deployment authorized by user on 2026-09-27. Enrollment URL explicitly retained despite known non-working state. This is an alternative candidate for owner comparison, not production cutover.
