@@ -120,3 +120,13 @@ Implementation:
 Validation:
 
 - Working preview verified at `smartgalati-test.mycodespace.ai`.
+
+## Independent Astra Candidate (2026-09-27)
+
+The owner authorized a second independent implementation of R-SITE-001 through R-SITE-007 in `codex-astra-site/`, with its own visual design and Markdown content. This is a comparison candidate, not a replacement for `ag-flash3.8-site/`.
+
+For this candidate R-SITE-007 is narrowed to the existing `scripts/gcs` deployment tooling, dedicated bucket `test3-smartgalati-mycodespace`, domain `smartgalati-test3.mycodespace.ai`, and the same `chessclub-test2` load balancer used by test2. Existing test2 routing must remain functional.
+
+The enrollment link remains `https://forms.gle/smartgalati-inscriere` by explicit owner instruction despite its known non-working state. Its external availability is not an acceptance gate for this experiment. Production cutover is outside scope.
+
+Implementation and validation: [candidate guide](codex-astra-site/README.md), [authoring guide](codex-astra-site/content/README.md), and [delivery evidence](engineering-docs/implementation-notes/website/2026-09-27-codex-astra-site.md).

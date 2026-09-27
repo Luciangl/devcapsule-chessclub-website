@@ -2,7 +2,7 @@
 title: "Memorialul de Șah Galați – Ediția a V-a"
 date: 2024-03-20
 summary: "O ediție aniversară dedicată marilor personalități ale șahului gălățean."
-cover_image: "photo_65.jpg"
+cover_image: "photo_32.jpg"
 tags: ["arhiva", "memorial", "turnee"]
 featured: false
 ---

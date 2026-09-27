@@ -69,3 +69,5 @@
 - [performances/2023-juniori-blitz.md](codex-astra-site/content/performances/2023-juniori-blitz.md)
 - [performances/2024-campionat-echipe.md](codex-astra-site/content/performances/2024-campionat-echipe.md)
 - [performances/_template.md](codex-astra-site/content/performances/_template.md)
+
+- [Astra implementation and deployment evidence](engineering-docs/implementation-notes/website/2026-09-27-codex-astra-site.md)

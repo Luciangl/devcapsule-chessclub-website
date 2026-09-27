@@ -2,7 +2,7 @@
 title: "Concursul de Blitz de Anul Nou – Un eveniment de excepție!"
 date: 2025-01-12
 summary: "Peste 40 de pasionați ai șahului au deschis noul an competițional cu un regal de șah blitz găzduit la Galați."
-cover_image: "photo_56.jpg"
+cover_image: "photo_35.jpg"
 tags: ["blitz", "evenimente", "comunitate"]
 featured: false
 ---

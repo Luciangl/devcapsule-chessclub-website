@@ -26,7 +26,7 @@ if (!photo) throw new Error(`Unknown photo: ${file}`);
   src={photo}
   alt={alt}
   class={className}
-  widths={[360, 640, 1080]}
+  widths={[...new Set([360, 640, 1080].filter((width) => width < photo.width).concat(photo.width))]}
   sizes={sizes}
   format="webp"
   loading={eager ? 'eager' : 'lazy'}

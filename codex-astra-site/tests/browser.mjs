@@ -6,13 +6,24 @@ const base = process.env.SITE_URL || 'http://localhost:4323';
 const artifacts = process.env.ARTIFACT_DIR || '/tmp/astra-browser';
 await mkdir(artifacts, { recursive: true });
 const browser = await chromium.launch({ args: ['--no-sandbox'] });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
+const page = await context.newPage();
 const errors = [];
 page.on('pageerror', (e) => errors.push(e.message));
 async function visit(path) {
   const response = await page.goto(base + path);
   assert.equal(response.status(), 200, path);
-  await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    await Promise.all(
+      [...document.querySelectorAll('img:not(#full-photo)')].map(async (image) => {
+        image.loading = 'eager';
+        try {
+          await image.decode();
+        } catch {}
+      }),
+    );
+  });
 }
 const files = await readdir(new URL('../dist/', import.meta.url), { recursive: true });
 const routes = files
@@ -21,7 +32,7 @@ const routes = files
 const links = new Set();
 for (const route of routes) {
   await visit(route);
-  assert.equal(await page.locator('h1').count(), 1, route + ' has one h1');
+  assert.equal(await page.locator('main h1').count(), 1, route + ' has one h1');
   assert.equal(await page.locator('html').getAttribute('lang'), 'ro');
   for (const href of await page
     .locator('a[href^="/"]')

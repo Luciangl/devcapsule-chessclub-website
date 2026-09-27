@@ -2,7 +2,7 @@
 title: "Pregătire intensivă și rezultate promițătoare pentru juniorii clubului"
 date: 2025-01-25
 summary: "Sportivii noștri își continuă ascensiunea prin antrenamente metodice și pregătire tactică de nivel înalt."
-cover_image: "photo_60.jpg"
+cover_image: "photo_34.jpg"
 tags: ["juniori", "antrenamente", "performanta"]
 featured: false
 ---

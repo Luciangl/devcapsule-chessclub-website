@@ -2,7 +2,7 @@
 title: "Cupa Toamnei la Șah pentru Copii și Juniori"
 date: 2024-11-15
 summary: "O nouă generație de campioni a confirmat la Cupa Toamnei organizată de ACS Smart Galați."
-cover_image: "photo_35.jpg"
+cover_image: "photo_39.jpg"
 tags: ["juniori", "turnee", "cupa"]
 featured: false
 ---

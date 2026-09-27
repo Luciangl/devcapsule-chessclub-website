@@ -314,8 +314,9 @@ nav > a[aria-current='page']:after {
 }
 .hero-badge strong {
   font-family: var(--serif);
-  font-size: 27px;
+  font-size: 20px;
   font-weight: 400;
+  white-space: nowrap;
   letter-spacing: -0.05em;
 }
 .move-card {
@@ -1442,5 +1443,14 @@ dialog .dialog-controls {
   *:after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .chess-strip > .text-link {
+    flex-basis: 100%;
+  }
+  .chess-strip > div {
+    min-width: 200px;
   }
 }

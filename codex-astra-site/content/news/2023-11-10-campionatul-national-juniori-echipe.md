@@ -2,7 +2,7 @@
 title: "Rezultate remarcabile la Campionatul Național pe Echipe 2023"
 date: 2023-11-10
 summary: "Juniorii ACS Smart Galați au urcat pe podiumul național la proba de șah clasic pe echipe."
-cover_image: "photo_60.jpg"
+cover_image: "photo_34.jpg"
 tags: ["arhiva", "juniori", "campionat"]
 featured: false
 ---

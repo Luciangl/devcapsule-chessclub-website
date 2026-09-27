@@ -2,7 +2,7 @@
 title: "Festivitatea de premiere a sezonului de șah 2022"
 date: 2022-10-05
 summary: "Clubul nostru a premiat cei mai conștiincioși și performanți elevi ai anului competițional 2022."
-cover_image: "photo_56.jpg"
+cover_image: "photo_26.jpg"
 tags: ["arhiva", "festivitate", "premii"]
 featured: false
 ---
