@@ -70,3 +70,7 @@ Owner requested more readable desktop top-band text and other small copy while p
 - Solarized secondary text darkened after rendered-page audit found 4.39:1 contrast on a tinted panel. Final palette token checks exceed 4.5:1 for normal foreground/background pairings.
 - Build: 20 pages, zero errors/warnings/hints. Existing 19-route browser regression passes. New palette browser suite passes six schemes × three representative pages with zero WCAG A/AA findings, responsive widths 320/390/768/1024/1440, persistence, cross-tab synchronization, invalid-value fallback, blocked storage, early restoration and mobile selection.
 - Local comparison screenshots: `/tmp/astra-themes/`. This is automated accessibility evidence, not a complete certification.
+
+### Hosted Refinement Verification
+
+The readability/palette update was deployed to `https://smartgalati-test3.mycodespace.ai` with the existing deployment wrapper. CDN invalidation was scoped to host `smartgalati-test3.mycodespace.ai` on the shared URL map. Public Playwright palette suite passed all six choices, 18 route/palette accessibility audits, viewport widths 320/390/768/1024/1440, native keyboard selection, mobile navigation, stored choices across reloads/routes, cross-tab changes, invalid preference fallback, blocked storage, and early restoration with body JS blocked. Zero violations were reported for these tested pages. Public upstream notices are served at `/licenses/themes.txt`. Screenshots: `/tmp/astra-themes-live/` (ephemeral).
