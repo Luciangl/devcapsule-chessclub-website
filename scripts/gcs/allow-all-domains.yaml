@@ -1,5 +1,5 @@
-name: projects/central-trees-497510-h7/policies/iam.allowedPolicyMemberDomains                                               
-spec:                                                                                                                        
+name: projects/mycodespace3p/policies/iam.allowedPolicyMemberDomains
+spec:
   inheritFromParent: false
   rules:
     - allowAll: true
