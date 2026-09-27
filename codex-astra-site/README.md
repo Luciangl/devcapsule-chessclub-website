@@ -69,4 +69,6 @@ HTML cache lifetime is five minutes; hashed Astro assets are immutable for one y
 
 Warm ivory, forest green, restrained terracotta, generous type, and real club photographs. All pages are static and usable without client rendering. JavaScript is limited to mobile navigation, news/gallery filtering, the accessible gallery dialog, and click-to-reveal contact details. Native links and buttons remain the primary controls.
 
+The browser audit reports site-owned accessibility findings separately from the external Lichess iframe, whose player labels/move list currently have upstream contrast issues. The iframe has a descriptive title and a direct-link alternative.
+
 The archive cutoff is computed during builds. Rebuild regularly to advance it. Archive boundary behavior is covered by tests; a static hosting service cannot recalculate it between deployments.

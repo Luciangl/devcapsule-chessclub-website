@@ -56,6 +56,20 @@ const galleries = defineCollection({
 });
 const home = defineCollection({
   loader: loader('home'),
-  schema: z.object({ title: z.string(), lead: z.string(), eyebrow: z.string() }),
+  schema: z.object({
+    title: z.string(),
+    lead: z.string(),
+    eyebrow: z.string(),
+    programs: z.array(
+      z.object({
+        piece: z.string(),
+        level: z.string(),
+        title: z.string(),
+        text: z.string(),
+        link: z.string(),
+        anchor: z.string(),
+      }),
+    ),
+  }),
 });
 export const collections = { pages, news, coaches, performances, galleries, home };

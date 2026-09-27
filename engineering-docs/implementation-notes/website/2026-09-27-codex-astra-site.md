@@ -26,7 +26,7 @@ Independent website in `codex-astra-site/`, preserving previous candidates, and 
 - Production preview browser checks: all 19 content routes and 19 internal link targets; image loading, one main heading, Romanian language attribute.
 - Viewports: 1440, 768, 390 and 320 pixels; no horizontal overflow on home; eight representative routes checked on mobile.
 - Interactive checks: mobile menu open/Escape/navigation, contact reveal, news tag filtering, gallery album filtering, next-photo keyboard navigation, Escape and focus restoration.
-- axe WCAG 2 A/AA + 2.1 AA scan: zero violations on home, courses, coaches, contact, gallery, news, archive and chess pages. This is automated evidence, not a claim of complete accessibility certification.
+- axe WCAG 2 A/AA + 2.1 AA scan: zero site-owned violations on home, courses, coaches, contact, gallery, news, archive and chess pages. A later pass after the third-party Lichess frame loaded identified contrast violations within its player labels/move list in both light and dark themes. These cross-origin styles cannot be repaired by the parent site; tests report third-party findings separately and retain the direct Lichess alternative link. This is automated evidence, not a claim of complete accessibility certification.
 - Lichess iframe HTTP 200, board rendered in browser; blocked-iframe fallback checked.
 - Custom 404 displays a recovery link. Screenshots available locally in `/tmp/astra-browser/`.
 

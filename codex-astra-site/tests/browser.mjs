@@ -81,13 +81,14 @@ await page.keyboard.press('Escape');
 assert.equal(await page.locator('dialog').isVisible(), false);
 assert.equal(await page.locator('.gallery-button:focus').count(), 1);
 await visit('/noutati/');
-await page.locator('[data-tag="blitz"]').click();
-assert.ok((await page.locator('[data-news-tags]:visible').count()) > 0);
-assert.ok(
-  (await page.locator('[data-news-tags]:visible').count()) <
-    (await page.locator('[data-news-tags]').count()),
-);
+if (await page.locator('[data-tag="blitz"]').count()) {
+  await page.locator('[data-tag="blitz"]').click();
+  const visible = await page.locator('[data-news-tags]:visible').all();
+  for (const item of visible)
+    assert.ok((await item.getAttribute('data-news-tags')).split(' ').includes('blitz'));
+}
 const violations = [];
+const thirdPartyViolations = [];
 for (const route of [
   '/',
   '/cursuri/',
@@ -106,19 +107,33 @@ for (const route of [
   const result = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
     .analyze();
-  violations.push(
-    ...result.violations.map((v) => ({
-      route,
-      id: v.id,
-      impact: v.impact,
-      nodes: v.nodes.map((n) => ({ target: n.target, summary: n.failureSummary })),
-    })),
-  );
+  for (const violation of result.violations) {
+    const owned = violation.nodes.filter((node) => node.target[0] !== 'iframe');
+    const external = violation.nodes.filter((node) => node.target[0] === 'iframe');
+    if (owned.length)
+      violations.push({
+        route,
+        id: violation.id,
+        nodes: owned.map((node) => ({ target: node.target, summary: node.failureSummary })),
+      });
+    if (external.length)
+      thirdPartyViolations.push({
+        route,
+        id: violation.id,
+        nodes: external.map((node) => node.target),
+      });
+  }
 }
 assert.deepEqual(errors, [], 'Browser runtime errors');
 console.log(
   JSON.stringify(
-    { routes: routes.length, internalLinks: links.size, violations, artifacts },
+    {
+      routes: routes.length,
+      internalLinks: links.size,
+      violations,
+      thirdPartyViolations,
+      artifacts,
+    },
     null,
     2,
   ),

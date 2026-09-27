@@ -16,7 +16,7 @@ Nu copia liniile opționale cu linkuri demonstrative ca și cum ar fi linkuri re
 
 | Director | Conținut |
 |---|---|
-| `home/` | Titlul, introducerea și povestea de pe prima pagină |
+| `home/` | Titlul, introducerea, cardurile de cursuri și povestea de pe prima pagină |
 | `pages/` | Despre noi, cursuri, echipe, contact, susținere |
 | `coaches/` | Un fișier pentru fiecare antrenor; `order` stabilește ordinea |
 | `performances/` | Rezultate, categorie, an, medalii |
