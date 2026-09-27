@@ -1,0 +1,85 @@
+---
+import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+interface Props {
+	title: string;
+    description?: string;
+}
+
+const { title, description = "ACS Smart Galați - Club de șah pentru copii și performanță" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ro">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | ACS Smart Galați</title>
+        <script is:inline>
+            // Apply theme early to avoid flash
+            const theme = (() => {
+                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                    return localStorage.getItem('theme');
+                }
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    return 'dark';
+                }
+                return 'default';
+            })();
+            if (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+        </script>
+	</head>
+	<body class="min-h-screen flex flex-col">
+        <!-- Skip to content for accessibility -->
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-text-inverse px-4 py-2 z-50 rounded">
+            Sari la conținut
+        </a>
+
+        <header class="bg-bg-subtle border-b border-border-base py-4">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-between items-center gap-4">
+                <a href="/" class="flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-focus rounded">
+                    <span class="text-2xl font-bold text-primary group-hover:text-primary-hover transition-colors">ACS Smart Galați</span>
+                </a>
+                
+                <nav aria-label="Navigare principală">
+                    <ul class="flex flex-wrap gap-4 items-center">
+                        <li><a href="/" class="text-text-base hover:text-primary font-medium py-2">Acasă</a></li>
+                        <li><a href="/despre-noi" class="text-text-base hover:text-primary font-medium py-2">Despre Noi</a></li>
+                        <li><a href="/antrenori" class="text-text-base hover:text-primary font-medium py-2">Antrenori</a></li>
+                        <li><a href="/contact" class="text-text-base hover:text-primary font-medium py-2">Contact</a></li>
+                        <li><a href="https://forms.gle/smartgalati-inscriere" class="bg-primary hover:bg-primary-hover text-text-inverse px-4 py-2 rounded font-medium transition-colors">Înscriere</a></li>
+                        <li>
+                            <ThemeToggle />
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+		<main id="main-content" class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<slot />
+		</main>
+
+        <footer class="bg-bg-subtle border-t border-border-base py-8 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-8">
+                <div>
+                    <p class="font-bold text-lg mb-2">ACS Smart Galați</p>
+                    <p class="text-text-muted text-sm max-w-sm">
+                        Club de șah dedicat copiilor, tinerilor și performanței la nivel național.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-2 text-sm text-text-muted">
+                    <a href="/arhiva" class="hover:text-primary">Arhivă Noutăți</a>
+                    <a href="/sustine" class="hover:text-primary">Susține Clubul (3.5%)</a>
+                    <p class="mt-4">© {new Date().getFullYear()} ACS Smart Galați</p>
+                </div>
+            </div>
+        </footer>
+	</body>
+</html>
