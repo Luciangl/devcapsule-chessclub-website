@@ -90,3 +90,5 @@
 - [Astra implementation and deployment evidence](engineering-docs/implementation-notes/website/2026-09-27-codex-astra-site.md)
 
 - [Hosting research delivery record](engineering-docs/archive/2026-09-30-hosting-research/CURRENT-STATUS.md)
+
+- [Firebase Spark deployment workstream](engineering-docs/wip/2026-09-30-firebase-spark/CURRENT-STATUS.md)
