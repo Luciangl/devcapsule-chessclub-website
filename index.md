@@ -87,3 +87,5 @@
 - [performances/_template.md](codex-astra-site/content/performances/_template.md)
 
 - [Astra implementation and deployment evidence](engineering-docs/implementation-notes/website/2026-09-27-codex-astra-site.md)
+
+- [Hosting research workstream](engineering-docs/wip/2026-09-30-hosting-research/CURRENT-STATUS.md)
