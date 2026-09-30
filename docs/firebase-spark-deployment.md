@@ -1,7 +1,7 @@
 # Deploy Rocada/test4 to Firebase Spark
 
 The scripts in `scripts/firebase/` publish `claude-rocada-site` to classic
-**Firebase Hosting on Spark**, using `https://PROJECT_ID.web.app`. They build
+**Firebase Hosting on Spark**, using `https://PROJECT_ID.web.app` by default or a configured custom domain. They build
 Astro locally and upload static files. No Firebase SDK is needed in the site.
 
 ## One-time setup
@@ -95,8 +95,49 @@ retention or delete old releases if necessary. See the
 The default `web.app` address needs no purchased domain. Existing GCS hosting
 continues to incur its own charges until separately retired. These scripts do
 not change GCS resources or DNS. A custom domain is a separate migration and
-requires updating the deployment's canonical URL; the scripts currently use
-`web.app` throughout.
+uses the public URL setting described below.
+
+## Custom domain: mycodespace.ai test address
+
+Set `FIREBASE_SITE_URL` in the shell used for both deployment and status checks:
+
+```bash
+export FIREBASE_PROJECT_ID=your-unique-rocada-project
+export FIREBASE_SITE_URL=https://smartgalati-firebase.mycodespace.ai
+scripts/firebase/02-deploy.sh "$FIREBASE_PROJECT_ID"
+```
+
+This sets Astro's build URL (canonical and Open Graph URLs), the reported public
+address, and the HTTP verification target. The Firebase project/site ID and
+billing checks still use `FIREBASE_PROJECT_ID`. Supply an HTTPS domain with no
+port, path, credentials, query, or fragment; an optional final slash is removed.
+Invalid values fail before building or contacting the cloud. Leave the variable
+unset to retain the default `PROJECT_ID.web.app`; an explicitly empty value is
+an error. Export the same setting again in any later terminal or CI job.
+
+After the first deployment, open Firebase Console → Hosting → Add custom domain,
+enter `smartgalati-firebase.mycodespace.ai`, and add the ownership TXT and routing
+records supplied by the wizard to the authoritative `mycodespace.ai` DNS zone.
+Keep the ownership TXT record for verification and certificate renewal. Use the
+exact record names and values shown for this site. Only replace conflicting
+records for the chosen hostname; other test sites and domain records stay intact.
+Firebase provisions and renews HTTPS automatically; initial provisioning can take
+up to 24 hours. Once the console reports Connected, run:
+
+```bash
+scripts/firebase/03-check-status.sh "$FIREBASE_PROJECT_ID"
+```
+
+The scripts configure the build and verification URL; they do not register the
+custom domain or edit DNS. Deploying can succeed before DNS/HTTPS is ready, but
+the status check will fail until the address works. The `web.app` address remains
+available and serves the same release, whose canonical URL is now the custom
+address; setting the canonical URL does not create an HTTP redirect.
+
+Custom domains and managed SSL are included on Spark; existing domain/DNS costs
+remain separate. See [Firebase pricing](https://firebase.google.com/pricing) and
+[custom-domain setup](https://firebase.google.com/docs/hosting/custom-domain).
+This address routes directly to Firebase Hosting and needs no GCS load balancer.
 
 ## Local validation without a cloud project
 
@@ -122,8 +163,9 @@ cd "$ARTIFACT_DIR"
   "node '$REPO_DIR/scripts/firebase/tests/check-emulator.mjs'"
 ```
 
-The emulator check uses local port 5000 and the `demo-rocada-spark` canonical
-hostname. It verifies routes, redirects, canonical URL, and cache headers.
+The emulator check uses local port 5000 and defaults to the `demo-rocada-spark`
+canonical hostname. When testing a custom-domain build, export the same
+`FIREBASE_SITE_URL` used by `--prepare-only`. It verifies routes, redirects, canonical URL, and cache headers.
 Automated command tests use mocked CLIs; neither those nor the emulator prove
 that a particular account has cloud provisioning permissions. Live project
 creation and publication still need an authenticated operator.

@@ -3,6 +3,7 @@ set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 if [[ "${1:-}" == --help ]]; then
   echo 'Usage: 02-deploy.sh [--prepare-only] PROJECT_ID [SITE_DIR]'
+  echo 'Optional FIREBASE_SITE_URL=https://your.domain sets the public URL (default: PROJECT_ID.web.app).'
   echo 'Default SITE_DIR: claude-rocada-site. --prepare-only builds locally without cloud calls.'
   exit 0
 fi
@@ -10,6 +11,7 @@ PREPARE_ONLY=false
 if [[ "${1:-}" == --prepare-only ]]; then PREPARE_ONLY=true; shift; fi
 [[ $# -le 2 ]] || fail 'Usage: 02-deploy.sh [--prepare-only] PROJECT_ID [SITE_DIR]'
 set_project "${1:-}"
+set_site_url
 require_node
 SITE_DIR="${2:-claude-rocada-site}"
 # Only a source directory inside this checkout is accepted.

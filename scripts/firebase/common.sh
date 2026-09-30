@@ -13,7 +13,10 @@ require_node() {
 set_project() {
   PROJECT_ID="${1:-${FIREBASE_PROJECT_ID:-}}"
   [[ "$PROJECT_ID" =~ ^[a-z][a-z0-9-]{4,28}[a-z0-9]$ ]] || fail 'Supply a Google project ID (6–30 lowercase letters/digits/hyphens), not an alias.'
-  SITE_URL="https://${PROJECT_ID}.web.app"
+}
+set_site_url() {
+  require_node
+  SITE_URL="$(node "${FIREBASE_SCRIPT_DIR}/hosting.mjs" origin "${FIREBASE_SITE_URL-https://${PROJECT_ID}.web.app}")" || fail 'Invalid public site URL; no deployment performed.'
 }
 require_tools() {
   require_node

@@ -4,7 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, cpSync, rmSync, sy
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { assertUnbilled, prepare } from '../hosting.mjs';
+import { assertUnbilled, prepare, publicOrigin } from '../hosting.mjs';
 
 const project = 'demo-rocada-spark';
 const good = { projectId: project, billingEnabled: false, billingAccountName: '' };
@@ -49,9 +49,10 @@ function shellFixture(t, mode) {
   const { root } = fixture(t);
   const scripts = join(root, 'scripts/firebase');
   mkdirSync(join(scripts, 'node_modules/.bin'), { recursive: true });
-  for (const file of ['common.sh', '01-create-project.sh', '02-deploy.sh', 'hosting.mjs']) {
+  for (const file of ['common.sh', '01-create-project.sh', '02-deploy.sh', '03-check-status.sh', 'hosting.mjs']) {
     cpSync(new URL(`../${file}`, import.meta.url), join(scripts, file));
   }
+  writeFileSync(join(scripts, 'check-http.mjs'), `import fs from 'node:fs'; fs.appendFileSync(process.env.TEST_LOG, JSON.stringify({command:'http-check',args:process.argv.slice(2)})+'\\n');`);
   const bin = join(root, 'bin'); mkdirSync(bin);
   const log = join(root, 'calls'); writeFileSync(log, '');
   const stub = `#!${process.execPath}
@@ -73,8 +74,8 @@ else if(args[0]==='deploy') {
 `;
   for (const name of ['gcloud', 'npm']) writeFileSync(join(bin, name), stub, { mode: 0o755 });
   writeFileSync(join(scripts, 'node_modules/.bin/firebase'), stub, { mode: 0o755 });
-  const run = (script = '02-deploy.sh', options = []) => spawnSync('bash', [join(scripts, script), ...options, project], {
-    cwd: root, encoding: 'utf8', env: { ...process.env, PATH: `${bin}:${process.env.PATH}`, TEST_LOG: log, TEST_MODE: mode },
+  const run = (script = '02-deploy.sh', options = [], extraEnv = {}) => spawnSync('bash', [join(scripts, script), ...options, project], {
+    cwd: root, encoding: 'utf8', env: { ...Object.fromEntries(Object.entries(process.env).filter(([key]) => key !== 'FIREBASE_SITE_URL')), ...extraEnv, PATH: `${bin}:${process.env.PATH}`, TEST_LOG: log, TEST_MODE: mode },
   });
   const calls = () => readFileSync(log, 'utf8').trim().split('\n').filter(Boolean).map(JSON.parse);
   return { run, calls, root };
@@ -112,4 +113,30 @@ test('project creation checks billing before adding Firebase', t => {
   const f = shellFixture(t, 'billed'); const result = f.run('01-create-project.sh');
   assert.notEqual(result.status, 0);
   assert.equal(f.calls().some(c => c.command === 'firebase'), false);
+});
+
+test('public URL normalizes HTTPS origins and rejects invalid configuration', () => {
+  assert.equal(publicOrigin('https://Smartgalati-Firebase.mycodespace.ai/'), 'https://smartgalati-firebase.mycodespace.ai');
+  for (const value of ['', 'http://example.com', 'https://example.com/path', 'https://example.com?x=1',
+    'https://example.com#x', 'https://user@example.com', 'https://example.com:443',
+    'https://bad_name.example.com', 'https://-bad.example.com', 'https://localhost']) {
+    assert.throws(() => publicOrigin(value));
+  }
+});
+for (const custom of [false, true]) test(`build and status use ${custom ? 'custom' : 'default'} public URL`, t => {
+  const f = shellFixture(t, 'spark');
+  const origin = custom ? 'https://smartgalati-firebase.mycodespace.ai' : `https://${project}.web.app`;
+  const env = custom ? { FIREBASE_SITE_URL: origin + '/' } : {};
+  const result = f.run('02-deploy.sh', [], env);
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.deepEqual(f.calls().find(c => c.command === 'npm').args, ['run', 'build', '--', '--site', origin]);
+  assert.equal(f.calls().find(c => c.args[0] === 'deploy').args[4], project);
+  const status = f.run('03-check-status.sh', [], env);
+  assert.equal(status.status, 0, status.stdout + status.stderr);
+  assert.deepEqual(f.calls().find(c => c.command === 'http-check').args, [origin]);
+});
+test('invalid custom URL stops before build or cloud calls', t => {
+  const f = shellFixture(t, 'spark');
+  assert.notEqual(f.run('02-deploy.sh', [], { FIREBASE_SITE_URL: 'http://example.com' }).status, 0);
+  assert.deepEqual(f.calls(), []);
 });

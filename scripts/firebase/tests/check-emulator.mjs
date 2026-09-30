@@ -1,7 +1,8 @@
 // Run inside firebase emulators:exec after preparing demo-rocada-spark.
 import assert from 'node:assert/strict';
+import { publicOrigin } from '../hosting.mjs';
 process.argv[2] = 'http://127.0.0.1:5000';
-process.argv[3] = 'https://demo-rocada-spark.web.app';
+process.argv[3] = publicOrigin(process.env.FIREBASE_SITE_URL ?? 'https://demo-rocada-spark.web.app');
 await import('../check-http.mjs');
 const origin = process.argv[2];
 const home = await fetch(origin);

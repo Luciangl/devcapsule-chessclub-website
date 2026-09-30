@@ -2,6 +2,19 @@ import { readFileSync, writeFileSync, readdirSync, lstatSync, copyFileSync, mkdi
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+export function publicOrigin(value) {
+  // Hosting custom domains are HTTPS origins, not URLs with paths or credentials.
+  if (!/^https:\/\/[a-z0-9.-]+\/?$/i.test(value)) {
+    throw new Error('FIREBASE_SITE_URL must be an HTTPS domain with no port, path, credentials, query, or fragment.');
+  }
+  const url = new URL(value);
+  if (!url.hostname.includes('.') || url.hostname.length > 253 ||
+      !url.hostname.split('.').every(label => /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/i.test(label))) {
+    throw new Error('FIREBASE_SITE_URL must contain a valid domain name.');
+  }
+  return url.origin;
+}
+
 export function assertUnbilled(info, project) {
   if (!info || info.projectId !== project || info.billingEnabled !== false ||
       (info.billingAccountName !== undefined && info.billingAccountName !== '')) {
@@ -49,7 +62,7 @@ export function prepare(project, source, destination) {
     },
   };
   writeFileSync(join(destination, 'firebase.json'), JSON.stringify(config, null, 2) + '\n');
-  console.log(`Prepared ${files.length} static files for ${project}.web.app`);
+  console.log(`Prepared ${files.length} static files for Hosting site ${project}`);
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -58,7 +71,8 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     if (command === 'billing') {
       assertUnbilled(JSON.parse(readFileSync(0, 'utf8')), project);
       console.log(`Verified unbilled project: ${project}`);
-    } else if (command === 'prepare') prepare(project, source, destination);
-    else throw new Error('Expected billing or prepare');
+    } else if (command === 'origin') console.log(publicOrigin(project));
+    else if (command === 'prepare') prepare(project, source, destination);
+    else throw new Error('Expected billing, origin, or prepare');
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }
