@@ -156,3 +156,9 @@ Identity variables), local authenticated deployment is the supported path.
 - Article photos beyond the 2024–2025 covers are not copied locally; each article links to the original post (`source_url`) where its photos remain.
 - The Lichess iframe is third-party content; its internal contrast/labels cannot be fixed here.
 - Facts to confirm with the club before production are listed in the [content guide](content/README.md#de-verificat-cu-clubul).
+
+## Optional Firebase Spark deployment
+
+Use the [Spark deployment guide](../docs/firebase-spark-deployment.md) to publish
+this candidate at `PROJECT_ID.web.app` with billing checks. The Firebase build
+overrides the canonical site URL; the default GCS build URL remains unchanged.

@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 
-// Static output only: the site is served from a Google Cloud Storage bucket.
+// Static output only. Firebase deployment overrides site with astro build --site.
 export default defineConfig({
   site: 'https://smartgalati-test4.mycodespace.ai',
   output: 'static',

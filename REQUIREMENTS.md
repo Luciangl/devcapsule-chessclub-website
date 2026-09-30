@@ -142,3 +142,14 @@ The [test4 work order](engineering-docs/work-orders/2026-09-27-smartgalati-test4
 Content fidelity clarification: this candidate uses only material confirmed on the club's original website (pages, coach bios, team rosters, performances and all 134 published articles, each carrying its `source_url`). Records present in earlier candidates but not found on the original site (a 2022 Cupa României medal, 2023 junior festival medal counts, a 2024 Divizia B silver, a weekly schedule, several 2022–2024 stories) are not reproduced. Items still requiring owner confirmation are listed in the [candidate content guide](claude-rocada-site/content/README.md#de-verificat-cu-clubul).
 
 Implementation and validation: [candidate guide](claude-rocada-site/README.md), [authoring guide](claude-rocada-site/content/README.md), and [delivery evidence](engineering-docs/implementation-notes/website/2026-09-27-claude-rocada-site.md).
+
+### R-SITE-007 amendment: optional Firebase Spark preview (2026-09-30)
+
+The owner requested scripts to deploy `claude-rocada-site` (test4) to the $0
+Firebase Hosting Spark plan. This authorizes an additional hosting path beyond
+the original GCS-only test4 acceptance scope, without retiring or changing its
+GCS route. Use a separate project with no billing account linked; fail closed
+when the target is billed or its billing state cannot be verified. Publish only
+static assets, accept quota-driven downtime, and document setup and verification
+in the [deployment guide](docs/firebase-spark-deployment.md). Delivering scripts
+and local evidence does not require live cloud provisioning or a domain cutover.

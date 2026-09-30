@@ -16,7 +16,7 @@ interface Props {
 const { title, description, image } = Astro.props;
 const s = t();
 const fullTitle = title === site.name ? title : `${title} · ${site.name}`;
-const canonical = new URL(Astro.url.pathname, site.url).href;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 const paletteConfig = JSON.stringify({ key: STORAGE_KEY, ids: paletteIds, def: defaultPalette });
 ---
 

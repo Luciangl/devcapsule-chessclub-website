@@ -24,3 +24,9 @@ Modern, fast static website for **ACS Smart Galați** ([smartgalati.ro](https://
 - [`codex-astra-site/`](codex-astra-site/README.md): independent ivory/forest-green design, Markdown content, local development on port 4323, and GCS preview at `smartgalati-test3.mycodespace.ai` using the test2 load balancer.
 - [`claude-rocada-site/`](claude-rocada-site/README.md): independent "Rocada" design (navy/amber on warm paper, six palettes including dark ones), content taken only from the club's original site including all 134 historical articles, local development on port 4325, and GCS preview at `smartgalati-test4.mycodespace.ai` using the test2 load balancer.
 - [`smartgalati-test5-site/`](smartgalati-test5-site/README.md): independent design featuring a choice of 5 color themes (default, dark, solarized-light, nord, sepia), full markdown integration based on `test4`, interactive galleries and Lichess embed, local development on port 4327. Deployment currently blocked on GCP `BACKEND_BUCKETS` quota limit.
+
+## Firebase Spark Preview
+
+Deploy the Rocada/test4 static site to a separate unbilled Firebase project using
+[the Spark deployment guide](docs/firebase-spark-deployment.md). Scripts include
+project setup, billing checks, static deployment, and verification.

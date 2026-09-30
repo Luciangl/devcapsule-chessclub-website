@@ -9,6 +9,10 @@
 - [Current status and status file](CURRENT-STATUS.md)
 - [Requirements register](REQUIREMENTS.md)
 
+## Deployment Guides
+
+- [Firebase Spark static deployment](docs/firebase-spark-deployment.md)
+
 ## Engineering Records
 
 - `engineering-docs/requirements/` — accepted detailed requirements
