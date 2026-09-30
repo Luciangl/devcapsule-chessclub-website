@@ -96,3 +96,5 @@
 - [Hosting research delivery record](engineering-docs/archive/2026-09-30-hosting-research/CURRENT-STATUS.md)
 
 - [Firebase Spark deployment delivery record](engineering-docs/archive/2026-09-30-firebase-spark/CURRENT-STATUS.md)
+
+- [Firebase custom domain workstream](engineering-docs/wip/2026-09-30-firebase-domain/CURRENT-STATUS.md)
