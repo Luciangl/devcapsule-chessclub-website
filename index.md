@@ -105,4 +105,4 @@
 - [MyCodeSpace site and deployment guide](mycodespace-site/README.md)
 - [MyCodeSpace requirements](engineering-docs/requirements/2026-11-01-mycodespace-site.md)
 
-- [MyCodeSpace hosting status](engineering-docs/wip/2026-11-01-mycodespace-hosting/CURRENT-STATUS.md)
+- [MyCodeSpace hosting delivery](engineering-docs/archive/2026-11-01-mycodespace-hosting/CURRENT-STATUS.md)
