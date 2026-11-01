@@ -168,3 +168,7 @@ Detailed contract: [MyCodeSpace requirements](engineering-docs/requirements/2026
 Hosting authorization (2026-11-01): owner accepted the page and requested live
 deployment for apex and www, with an apex A record, www CNAME, and valid HTTPS
 for both. Existing club sites and DevCapsule DNS must remain functional.
+
+Copy refinement (2026-11-01): owner approved a broader personal google3-like
+codespace message for students, hobbyists and professionals. Lead with "Your
+code. Your projects. Your own space."; preservation is a supporting benefit.

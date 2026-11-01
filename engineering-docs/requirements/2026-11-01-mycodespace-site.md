@@ -8,9 +8,11 @@ Accepted: 2026-11-01, by owner instruction in chat.
 - Target domain: https://mycodespace.ai.
 - Clearly identify https://devcapsule.mycodespace.ai as the first product,
   with more to follow; make that link the primary action.
-- Briefly introduce the longer ambition using https://lnkd.in/p/dJNtaetF:
-  preserving source alone is not enough; keep working environments and project
-  knowledge so people can return to their work after a long time.
+- Owner refined the focus on 2026-11-01: a personal google3-like codespace
+  for students, hobbyists and professionals. Use the approved headline "Your
+  code. Your projects. Your own space." and explain a home for projects, tools,
+  and knowledge. Returning to old code is one benefit, not the main pitch.
+  DevCapsule is the first step. No broad security or Google affiliation claims.
 - Keep copy concise and conversational. Do not promise future products,
   release dates, or permanent compatibility with all historical programs.
 - Follow the existing Astro static build and shared GCS deployment approach.

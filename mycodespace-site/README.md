@@ -1,12 +1,15 @@
 # MyCodeSpace
 
 Small English landing page for https://mycodespace.ai. DevCapsule is the first
-product; the broader aim is to keep code, its working environment, and project
-knowledge available when you come back years later.
+product; the broader aim is a personal home for code, projects, tools, and
+project knowledge, for students, hobbyists and professionals.
 
 Copy draws on [Costin's LinkedIn post](https://lnkd.in/p/dJNtaetF) and the
 [DevCapsule website](https://devcapsule.mycodespace.ai/). It describes the broader
-aim as an ambition, not a guarantee that DevCapsule runs arbitrary old software.
+aim as an ambition. The owner approved the personal google3 analogy on
+2026-11-01. Google’s shared-codebase background is documented in
+[Google’s repository paper](https://research.google/pubs/why-google-stores-billions-of-lines-of-code-in-a-single-repository/).
+This is not a claim of Google affiliation or a security guarantee.
 
 ## Local development
 
