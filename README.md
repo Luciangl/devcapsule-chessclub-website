@@ -30,3 +30,9 @@ Modern, fast static website for **ACS Smart Galați** ([smartgalati.ro](https://
 Deploy the Rocada/test4 static site to a separate unbilled Firebase project using
 [the Spark deployment guide](docs/firebase-spark-deployment.md). Scripts include
 project setup, billing checks, static deployment, and verification.
+
+## MyCodeSpace
+
+[`mycodespace-site/`](mycodespace-site/README.md) is the small English landing page for
+mycodespace.ai, introducing DevCapsule as its first product. Local port: 4329.
+Deployment tooling reuses the shared GCS suite with explicit cloud targets.

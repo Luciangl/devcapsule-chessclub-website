@@ -153,3 +153,14 @@ when the target is billed or its billing state cannot be verified. Publish only
 static assets, accept quota-driven downtime, and document setup and verification
 in the [deployment guide](docs/firebase-spark-deployment.md). Delivering scripts
 and local evidence does not require live cloud provisioning or a domain cutover.
+
+## R-MYCODESPACE-001: MyCodeSpace landing page (2026-11-01)
+
+Status: accepted. Priority: gating for this standalone site.
+
+Owner requested a simpler English website in `mycodespace-site/`, introducing
+DevCapsule as the first product with more to follow. Briefly explain the larger
+ambition from the supplied LinkedIn post, using plain, human English. Reuse the
+static-site structure and deployment approach from the chess candidates.
+
+Detailed contract: [MyCodeSpace requirements](engineering-docs/requirements/2026-11-01-mycodespace-site.md).
