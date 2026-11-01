@@ -106,3 +106,5 @@
 - [MyCodeSpace requirements](engineering-docs/requirements/2026-11-01-mycodespace-site.md)
 
 - [MyCodeSpace hosting delivery](engineering-docs/archive/2026-11-01-mycodespace-hosting/CURRENT-STATUS.md)
+
+- [MyCodeSpace copy update](engineering-docs/wip/2026-11-01-mycodespace-copy/CURRENT-STATUS.md)
