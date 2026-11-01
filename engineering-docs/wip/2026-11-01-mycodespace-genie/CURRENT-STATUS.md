@@ -6,6 +6,8 @@ State: paused; fresh preview ready for owner review
 Branch association: `ws-mycodespace-genie/fresh-start`
 Target: main; direct-main default; local preview only, no deployment authorized.
 
+Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@f38ceada0768
+
 ## Goal and Current State
 
 Implemented the [work order](../../work-orders/2026-11-01-mycodespace-genie-overlay.md) from zero at owner request. Previous implementation is preserved on ws-mycodespace-genie/overlay. Fresh branch starts from deployed main 19ced60, carrying only registration/work order from 0914d4b; no old overlay code reused.
