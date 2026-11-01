@@ -108,3 +108,5 @@
 - [MyCodeSpace hosting delivery](engineering-docs/archive/2026-11-01-mycodespace-hosting/CURRENT-STATUS.md)
 
 - [MyCodeSpace copy update](engineering-docs/archive/2026-11-01-mycodespace-copy/CURRENT-STATUS.md)
+
+- [MyCodeSpace contact update](engineering-docs/wip/2026-11-01-mycodespace-contact/CURRENT-STATUS.md)
