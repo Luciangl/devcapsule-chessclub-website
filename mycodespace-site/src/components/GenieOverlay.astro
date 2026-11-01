@@ -247,7 +247,11 @@
   }
   if (replay) { replay.hidden = false; replay.setAttribute('aria-expanded', 'false'); }
   layout();
-  window.addEventListener('resize', () => { stop(); layout(); });
+  window.addEventListener('resize', () => {
+    // Initial mobile viewport settling must not cancel queued autoplay.
+    if (overlay && !overlay.hidden) stop();
+    layout();
+  });
   reduced.addEventListener('change', stop);
   replay?.addEventListener('click', play);
   dismiss?.addEventListener('click', stop);

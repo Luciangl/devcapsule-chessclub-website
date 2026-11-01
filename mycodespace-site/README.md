@@ -98,9 +98,9 @@ The owner-supplied chess photo lives at `src/assets/costin-cozianu-chess.jpg`
 foreground chessboard; an asymmetric egg-shaped CSS mask frames the scene. The chess partner on the right is excluded
 from the generated images. The original source remains in src/assets for editing.
 
-## Genie overlay: fresh local preview
+## Genie overlay
 
-On `ws-mycodespace-genie/fresh-start`, an original inline SVG cameo plays once
+An original inline SVG cameo plays once
 per tab session. It rises from the bottom left, grows, lifts an eyebrow, winks,
 says “Because myspace.com flopped”, rubs a lamp, and reveals
 “!!! We now have MyCodeSpace.AI !!!” in a smoke burst. All artwork and bubble
@@ -127,5 +127,4 @@ Reduced motion disables autoplay and folding. Activating the lamp explicitly
 shows a stationary genie and joke, until dismissed. The lamp is still usable.
 
 Run `npm run dev` and open http://localhost:4329/?genie=1. The previous attempt
-is preserved on `ws-mycodespace-genie/overlay`. This fresh implementation is
-for local review only; production deployment requires separate authorization.
+is preserved on `ws-mycodespace-genie/overlay`. The owner approved this implementation and its live deployment on 2026-11-01.

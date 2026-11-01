@@ -113,4 +113,4 @@
 
 - [MyCodeSpace genie and replay-lamp work order](engineering-docs/work-orders/2026-11-01-mycodespace-genie-overlay.md)
 
-- [MyCodeSpace genie overlay](engineering-docs/wip/2026-11-01-mycodespace-genie/CURRENT-STATUS.md)
+- [MyCodeSpace genie overlay](engineering-docs/archive/2026-11-01-mycodespace-genie/CURRENT-STATUS.md)

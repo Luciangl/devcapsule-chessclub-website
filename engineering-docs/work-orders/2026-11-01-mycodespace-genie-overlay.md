@@ -1,9 +1,9 @@
 # Work Order: MyCodeSpace Genie Joke and Replay Lamp
 
 Date: 2026-11-01
-Status: mobile/replay-lamp amendment implemented locally; awaiting owner review
+Status: accepted, deployed and verified on 2026-11-01
 Requested by: Costin Cozianu
-Scope: `mycodespace-site/`; local preview first; no production deployment authorized
+Scope: `mycodespace-site/`; local preview accepted; owner authorized live deployment on 2026-11-01
 
 ## Outcome
 
@@ -98,5 +98,4 @@ routing for the actual implementation.
 The contact refinements currently have their own
 [delivery record](../archive/2026-11-01-mycodespace-contact/CURRENT-STATUS.md).
 Use the [site guide](../../mycodespace-site/README.md) for local commands
-(port 4329) and hosting context. Production deployment remains a separate owner
-authorization. The mobile/lamp amendment authorizes implementation and local preview only.
+(port 4329) and hosting context. Owner separately authorized production deployment after accepting the mobile/lamp preview; deployed and verified on 2026-11-01.

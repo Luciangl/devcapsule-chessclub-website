@@ -90,3 +90,7 @@ genie folds into a persistent, touch/keyboard-accessible lamp replay button.
 Preserve desktop composition and accepted localized 4px/56% softening. Keep
 reduced-motion autoplay disabled; explicit lamp activation shows a static joke.
 The amended work order remains local-preview-only; no deployment authorized.
+
+Genie publication approval (2026-11-01): owner accepted the mobile joke and
+folding replay lamp and explicitly requested deployment. This supersedes the
+preview-only restriction for the completed genie implementation.
