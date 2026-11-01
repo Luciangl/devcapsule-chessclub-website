@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import { Image } from "astro:assets";
+import costinChess from "../assets/costin-cozianu-chess.jpg";
 const description =
   "A personal home for your code, projects, tools, and the knowledge behind them. For students, hobbyists, and professionals. DevCapsule is our first step.";
 ---
@@ -69,6 +71,16 @@ const description =
             </p>
           </div>
           <section class="contact" aria-labelledby="contact-title">
+            <Image
+              class="contact-photo"
+              src={costinChess}
+              alt="A friendly game of chess, with several players gathered around the boards."
+              widths={[320, 640]}
+              sizes="(min-width: 951px) 269px, (max-width: 700px) calc(100vw - 89px), 640px"
+              width={640}
+              height={360}
+              format="webp"
+            />
             <p class="contact-invitation">
               Curious? Want to find out more? Want to contribute?
             </p>

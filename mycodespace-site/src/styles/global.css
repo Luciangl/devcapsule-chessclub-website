@@ -127,6 +127,13 @@ h1 em {
   border-left: 3px solid var(--blue);
   background: #eaf0f7;
 }
+.contact-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
 .contact-invitation {
   margin: 0 0 16px;
   font-size: 16px;

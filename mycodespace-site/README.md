@@ -90,3 +90,7 @@ text, with a spoken-form alt description for accessibility and no mailto link.
 This reduces trivial address scraping; it does not prevent OCR. To change the
 address, regenerate the outlines and update the alt description together.
 The 2026-11-01 contact update is prepared for local review only.
+
+The owner-supplied chess photo lives at `src/assets/costin-cozianu-chess.jpg`
+(originally `maxresdefault.jpg`). Astro generates responsive WebP variants;
+the full scene is preserved without cropping.
