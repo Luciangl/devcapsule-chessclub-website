@@ -51,3 +51,7 @@ with the headline's top, retaining body placement and stacked mobile order.
 Portrait refinement (2026-11-01): owner identifies himself as the player on the
 left. Crop around him in an oval, preserving sharpness and excluding the partner
 on the right from generated public images. This supersedes the full-scene crop.
+
+Portrait positioning refinement (2026-11-01): retain the owner's left-side
+position within the card's photo area, using an asymmetric egg-shaped oval
+rather than centering the portrait. Keep partner excluded.
