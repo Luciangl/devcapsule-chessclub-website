@@ -55,3 +55,8 @@ on the right from generated public images. This supersedes the full-scene crop.
 Portrait positioning refinement (2026-11-01): retain the owner's left-side
 position within the card's photo area, using an asymmetric egg-shaped oval
 rather than centering the portrait. Keep partner excluded.
+
+Scene framing correction (2026-11-01): use the original full-resolution source
+from Git and retain both the player on the left and foreground chessboard in
+a wider asymmetric egg. Exclude the partner on the right. Supersedes the
+narrow headshot framing; preserve the source unchanged.

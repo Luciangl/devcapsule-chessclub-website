@@ -112,11 +112,11 @@ h1 em {
 }
 .contact-photo {
   display: block;
-  width: 160px;
+  width: 100%;
   max-width: 100%;
   height: auto;
-  aspect-ratio: 2 / 3;
-  border-radius: 46% 54% 49% 51% / 40% 43% 57% 60%;
+  aspect-ratio: 5 / 4;
+  border-radius: 43% 57% 35% 65% / 29% 60% 40% 71%;
   margin: 0 0 20px;
 }
 .contact-invitation {
