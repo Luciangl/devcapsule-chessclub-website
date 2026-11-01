@@ -2,6 +2,7 @@
 <div class="genie-overlay" hidden role="region" aria-label="A little MyCodeSpace magic">
   <button class="genie-dismiss" type="button" aria-label="Dismiss genie animation">Skip magic <span aria-hidden="true">×</span></button>
   <div class="genie-flight">
+    <div class="genie-spotlight" aria-hidden="true"></div>
     <svg class="genie-scene" viewBox="0 0 900 650" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="genie-scene-title">
       <title id="genie-scene-title">A mischievous lamp genie winks, rubs his lamp, and conjures MyCodeSpace.AI.</title>
       <defs>
@@ -71,7 +72,23 @@
   .genie-overlay[hidden], .genie-replay[hidden] { display: none !important; }
   .genie-overlay { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
   .genie-flight { position: absolute; left: 50%; top: 50%; width: min(900px, 92vw); transform: translate(-50%, -50%); }
-  .genie-scene { display: block; width: 100%; height: auto; overflow: visible; }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(main) { transition: filter .25s ease, opacity .25s ease; }
+  }
+  :global(html.genie-performing main) {
+    filter: blur(5px);
+    opacity: .38;
+  }
+  .genie-spotlight {
+    position: absolute;
+    inset: -3%;
+    background: rgb(245 243 237 / 86%);
+    backdrop-filter: blur(14px) saturate(.35);
+    -webkit-backdrop-filter: blur(14px) saturate(.35);
+    mask-image: radial-gradient(ellipse 53% 55% at 54% 51%, #000 54%, rgb(0 0 0 / 95%) 67%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 53% 55% at 54% 51%, #000 54%, rgb(0 0 0 / 95%) 67%, transparent 100%);
+  }
+  .genie-scene { position: relative; display: block; width: 100%; height: auto; overflow: visible; }
   .genie-drawing { filter: drop-shadow(1px 0 0 var(--paper)) drop-shadow(-1px 0 0 var(--paper)) drop-shadow(0 1px 0 var(--paper)) drop-shadow(0 -1px 0 var(--paper)); }
   .genie-bubble-text { fill: var(--blue); stroke: var(--paper); stroke-width: 6px; paint-order: stroke fill; font: 25px Arial, sans-serif; letter-spacing: -.5px; }
   .genie-final-lead { font-size: 31px; }
@@ -81,6 +98,7 @@
   .genie-dismiss span { font-size: 18px; margin-left: 12px; }
   .genie-replay { display: block; margin: 0 0 24px auto; background: none; border: 0; padding: 8px 0; color: var(--muted); font: 12px Arial, sans-serif; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
   .genie-dismiss:focus-visible, .genie-replay:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+  .playing .genie-spotlight { animation: genie-spotlight 10s linear both; }
   .playing .genie-flight { animation: genie-arrive 1.6s cubic-bezier(.16,.7,.23,1) both; }
   .playing .genie-brow { transform-origin: 365px 225px; animation: genie-brow .65s 1.7s ease-in-out both; }
   .playing .genie-open-eye { animation: genie-eye .55s 2.25s linear both; }
@@ -91,6 +109,7 @@
   .playing .genie-smoke { transform-origin: 400px 390px; animation: genie-poof 1.1s 6.15s ease-out both; }
   .playing .genie-character { animation: genie-vanish .4s 6.3s ease both; }
   .playing .genie-announcement { transform-origin: 458px 300px; animation: genie-reveal 3.1s 6.65s ease both; }
+  @keyframes genie-spotlight { 0% { opacity: 0; } 12%, 94% { opacity: 1; } 100% { opacity: 0; } }
   @keyframes genie-arrive { from { transform: translate(calc(-50vw + 24px), calc(50vh - 110px)) scale(.12); opacity: 0; } 12% { opacity: 1; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
   @keyframes genie-brow { 0%, 100% { transform: translateY(0) rotate(0); } 40%, 70% { transform: translateY(-8px) rotate(-12deg); } }
   @keyframes genie-eye { 0%, 100% { opacity: 1; } 15%, 85% { opacity: 0; } }
@@ -115,6 +134,7 @@
     clearTimeout(startTimer);
     if (!overlay) return;
     const hadFocus = overlay.contains(document.activeElement);
+    document.documentElement.classList.remove('genie-performing');
     overlay.hidden = true;
     overlay.classList.remove('playing');
     if (hadFocus && eligible.matches) replay?.focus({ preventScroll: true });
@@ -122,6 +142,7 @@
   function play() {
     stop();
     if (!eligible.matches || !overlay) return;
+    document.documentElement.classList.add('genie-performing');
     overlay.hidden = false;
     void overlay.offsetWidth;
     overlay.classList.add('playing');

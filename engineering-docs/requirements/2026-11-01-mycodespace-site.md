@@ -71,3 +71,8 @@ requested a fresh branch/implementation, preserving the earlier attempt.
 Use transparent SVG line art, keep existing page/photo intact, support
 dismissal and click-through, suppress on mobile/touch-only and reduced motion,
 and offer local replay. Production deployment is not authorized.
+
+Genie legibility refinement (2026-11-01): owner reported line art tangled with
+underlying text. During playback, soften/fade main content and use a feathered
+translucent spotlight behind the moving art. Keep SVG/bubble interiors
+transparent, links operable, and restore page appearance on all exit paths.
