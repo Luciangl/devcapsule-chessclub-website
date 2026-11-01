@@ -38,7 +38,7 @@ a:focus-visible {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 35px 0;
+  padding: 8px 0;
   border-bottom: 1px solid var(--line);
   gap: 24px;
 }
@@ -80,22 +80,7 @@ a:focus-visible {
   margin-left: 12px;
 }
 .intro {
-  padding: 83px 0 65px;
-}
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 0 0 28px;
-}
-.small-line {
-  width: 25px;
-  height: 2px;
-  background: var(--blue);
+  padding: 32px 0 48px;
 }
 h1 {
   font-family: Georgia, "Times New Roman", serif;
@@ -292,11 +277,6 @@ footer {
 .skip-link:focus {
   top: 12px;
 }
-@media (min-width: 1500px) {
-  .intro {
-    padding-top: 100px;
-  }
-}
 @media (max-width: 950px) {
   .intro-details {
     grid-template-columns: 1fr;
@@ -308,7 +288,7 @@ footer {
     padding: 0 25px;
   }
   .site-header {
-    padding: 23px 0;
+    padding: 8px 0;
     gap: 14px;
   }
   .wordmark {
@@ -328,12 +308,7 @@ footer {
     margin-left: 3px;
   }
   .intro {
-    padding: 55px 0 37px;
-  }
-  .eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.09em;
-    gap: 8px;
+    padding: 28px 0 37px;
   }
   h1 {
     letter-spacing: -1.5px;

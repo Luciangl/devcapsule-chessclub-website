@@ -35,3 +35,7 @@ reading flow. Introduce it with “Curious? Want to find out more? Want to
 contribute?” followed by “Get in touch with Costin!” on a separate line.
 Use the owner's supplied JPG portrait, moved from the repository root into a
 descriptively named site asset. Keep mobile stacked and stop before deployment.
+
+Header refinement (2026-11-01): keep the header band close to its existing
+text/wordmark height, remove the redundant “A home for everything you build”
+intro announcement, and reduce empty space above the headline on desktop.
