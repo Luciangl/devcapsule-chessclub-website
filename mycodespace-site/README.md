@@ -82,8 +82,9 @@ existing independent GitHub Pages CNAME.
 
 ## Contact section
 
-The introduction uses two columns on wide screens, with the explanation beside
-a contact invitation; narrower screens stack them in reading order.
+The introduction places the contact invitation to the right of the lead and
+explanation on wide screens. Text can use the full width below the card;
+narrower screens stack the text and invitation in reading order.
 The contact section includes Costin’s GitHub and LinkedIn profiles and an email
 image at `public/contact-email.svg`. The SVG uses glyph outlines rather than
 text, with a spoken-form alt description for accessibility and no mailto link.

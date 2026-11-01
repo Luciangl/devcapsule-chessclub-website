@@ -39,3 +39,8 @@ descriptively named site asset. Keep mobile stacked and stop before deployment.
 Header refinement (2026-11-01): keep the header band close to its existing
 text/wordmark height, remove the redundant “A home for everything you build”
 intro announcement, and reduce empty space above the headline on desktop.
+
+Body-flow refinement (2026-11-01): keep contact as a right-hand body column,
+beginning beside the lead paragraph, so the paragraph never stretches above
+the card. Text may reclaim the full body width below the card; keep the card
+out of the header and preserve the stacked mobile reading order.
