@@ -60,3 +60,7 @@ Scene framing correction (2026-11-01): use the original full-resolution source
 from Git and retain both the player on the left and foreground chessboard in
 a wider asymmetric egg. Exclude the partner on the right. Supersedes the
 narrow headshot framing; preserve the source unchanged.
+
+Publication approval (2026-11-01): owner accepted the current contact/layout
+refinements and explicitly requested production deployment before any genie
+overlay. This supersedes the local-only restriction for these changes.
