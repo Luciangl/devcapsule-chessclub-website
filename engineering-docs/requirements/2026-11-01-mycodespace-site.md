@@ -28,3 +28,10 @@ Contact refinement (owner instruction, 2026-11-01): remove the outbound LinkedIn
 post link. Add “Get in touch with Costin”, prominent but subordinate to the
 opening paragraph, with email rendered as SVG outlines and links to GitHub and
 LinkedIn profiles. This slice must stop before production deployment.
+
+Contact review refinement (2026-11-01): on wide screens, place the contact
+invitation beside the explanation in two columns so it does not interrupt the
+reading flow. Introduce it with “Curious? Want to find out more? Want to
+contribute?” followed by “Get in touch with Costin!” on a separate line.
+Use the owner's supplied JPG portrait, moved from the repository root into a
+descriptively named site asset. Keep mobile stacked and stop before deployment.
