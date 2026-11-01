@@ -82,3 +82,11 @@ soft focus to the character silhouette and visible bubbles, leaving the rest
 of the page sharp. Use 4px backdrop blur, feathered masks, and 56% paper tint
 (increased transparency from 86%). Remove page-wide blur/fading. Owner called
 this version perfect; deployment has not been authorized.
+
+Mobile and replay-lamp amendment (2026-11-01): owner superseded desktop-only
+eligibility. Make the same joke available on phones/touch tablets, rising from
+the bottom and bounded by both screen dimensions. After the announcement the
+genie folds into a persistent, touch/keyboard-accessible lamp replay button.
+Preserve desktop composition and accepted localized 4px/56% softening. Keep
+reduced-motion autoplay disabled; explicit lamp activation shows a static joke.
+The amended work order remains local-preview-only; no deployment authorized.

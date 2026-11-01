@@ -1,14 +1,14 @@
-# Work Order: MyCodeSpace Desktop Genie Joke Overlay
+# Work Order: MyCodeSpace Genie Joke and Replay Lamp
 
 Date: 2026-11-01
-Status: fresh local implementation on ws-mycodespace-genie/fresh-start; awaiting owner review
+Status: mobile/replay-lamp amendment implemented locally; awaiting owner review
 Requested by: Costin Cozianu
 Scope: `mycodespace-site/`; local preview first; no production deployment authorized
 
 ## Outcome
 
-Create a playful SVG animation over the MyCodeSpace landing page, on desktop
-browsers only. A transparent overlay contains an Aladdin-style lamp character
+Create a playful SVG animation over the MyCodeSpace landing page, on desktop and mobile
+browsers. A transparent overlay contains an Aladdin-style lamp character
 rendered in thin wireframe/outline strokes, with outlined speech bubbles and
 smoke. The page remains visible behind the performance.
 
@@ -18,13 +18,18 @@ any implementation already underway in the main conversation.
 
 ## Owner-requested sequence
 
-1. The character starts small at the bottom-left of the viewport.
+1. On desktop the character starts small at the bottom-left of the viewport.
+   On mobile he rises from below; the character, smoke, and readable bubbles
+   must fit strictly within the visible screen, including safe-area insets.
 2. He grows larger as he moves toward the center.
 3. He performs an expressive eyebrow gesture and wink.
 4. An outlined speech bubble says: **“Because myspace.com flopped”**.
 5. He rubs his lamp.
 6. A comic “poof” smoke explosion reveals the final announcement:
    **“!!! We now have MyCodeSpace.AI !!!”**
+
+7. After the joke, the genie folds/shrinks into a persistent lamp button.
+   Clicking, tapping, or keyboard-activating it replays the whole sequence.
 
 Keep the character, bubbles, and smoke as line art, with transparent interiors
 rather than opaque panels. Preserve the humorous timing and clear readability.
@@ -45,7 +50,7 @@ during local visual review; do not silently replace the first joke.
 
 These were assistant recommendations, not separately accepted owner requirements:
 
-- A short cameo of about 7–9 seconds, then fade away completely.
+- A short cameo of about 10 seconds, then fold into the replay lamp.
 - Play once per visit; define the visit/session behavior when implementing.
 - Include a small accessible dismiss control.
 - Allow clicks through the overlay apart from its controls.
@@ -54,20 +59,31 @@ These were assistant recommendations, not separately accepted owner requirements
 - Use native SVG with CSS and only the JavaScript needed for sequencing,
   dismissal, and replay policy. Keep the static site lightweight.
 
-Desktop-only eligibility needs a concrete breakpoint and input policy. Choose
-and document a sensible default consistent with the existing responsive site;
-verify that phones and touch-only small screens never start the overlay.
+## Mobile and replay amendment (owner request, 2026-11-01)
+
+Supersede the desktop-only eligibility and text-only replay control. Support
+phones and touch tablets with a bottom-up entrance and responsive composition.
+Fit within both viewport dimensions, account for device safe areas, and keep
+all joke text readable. Maintain the accepted 4px silhouette/bubble-only blur
+and increased transparency; no page-wide blur. After the scene ends, fold the
+genie into a fixed lamp button. Keep this lamp available on subsequent visits
+within the tab session, and allow repeated playback without reloading. Pause
+or dismiss animations without trapping focus or blocking links/scrolling.
+Respect reduced motion: suppress automatic motion and use a short static joke
+on explicit lamp activation, with an accessible close control.
 
 ## Acceptance and evidence
 
 - Local preview demonstrates every beat in order, including the eyebrow/wink,
   exact first joke, lamp rubbing, and smoke reveal.
-- Character, bubbles, and smoke remain legible at representative desktop sizes.
+- Character, bubbles, and smoke remain legible at representative desktop and phone sizes, including short/rotated screens.
 - Animation ends cleanly; no invisible layer blocks page links or scrolling.
 - Dismissal works by keyboard and pointer; reduced-motion and repeat-visit
   behavior match the documented choices.
 - Mobile layout, contact card, owner photo framing, and existing page copy
-  remain intact. Check desktop resizing and narrow-screen suppression.
+  remain intact. Check viewport resizing/orientation changes and ensure the full art stays in bounds.
+- Lamp remains usable after automatic completion and dismissal; verify pointer,
+  touch and keyboard replay, session reload, and reduced-motion behavior.
 - Run `npm run build` in `mycodespace-site/`, inspect browser errors, and record
   responsive visual checks and any unfinished animation details.
 - Present the local preview for owner review before any live deployment.
@@ -83,4 +99,4 @@ The contact refinements currently have their own
 [delivery record](../archive/2026-11-01-mycodespace-contact/CURRENT-STATUS.md).
 Use the [site guide](../../mycodespace-site/README.md) for local commands
 (port 4329) and hosting context. Production deployment remains a separate owner
-authorization. This side-conversation capture changes documentation only.
+authorization. The mobile/lamp amendment authorizes implementation and local preview only.

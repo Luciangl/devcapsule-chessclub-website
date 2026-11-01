@@ -23,7 +23,7 @@ npm run dev
 Open http://localhost:4329. `npm run build` produces static files in `dist/`;
 `npm run preview` serves the build on the same port. Stop dev before preview.
 There is no backend, analytics, remote font, or account setup. A small browser
-script controls the optional desktop genie animation.
+script controls the optional genie animation.
 
 Edit `src/pages/index.astro` for copy and `src/styles/global.css` for appearance.
 The short page deliberately keeps content in one file rather than adding a CMS.
@@ -109,14 +109,22 @@ with matching local masks behind visible speech bubbles. The blur is 4px and
 the paper-coloured tint is 56% opaque, leaving the rest of the page sharp.
 The SVG interiors remain transparent; dismissing or finishing removes all masks.
 
-Eligibility: at least 951px wide, primary fine pointer with hover, and no
-reduced-motion preference. Phones, touch-only tablets and reduced-motion users
-see no cameo or replay control. Playback begins after 600ms and lasts 10 seconds;
-the final announcement holds long enough to read. The overlay allows page
-clicks and scrolling. “Skip magic” or Escape dismisses it; the footer’s
-“Replay the genie” button plays it again. `/?genie=1` forces a replay on load.
-Session storage is optional; when unavailable, playback may repeat on reload.
-Shrinking the viewport or enabling reduced motion stops playback.
+Phones and touch tablets now share the joke. Portrait screens use a vertical
+composition with the bubble above the character; landscape phones use larger
+bubbles beside the character. Mobile entrance rises from the bottom. Both
+viewport dimensions constrain the scene; safe-area-aware controls remain in
+bounds. Desktop keeps the bottom-left entrance and original composition.
+
+Playback starts after 600ms, once per tab session. At 9.75s, the genie folds
+into the fixed bottom-right “Rub the lamp” button over 700ms. That button
+remains available for unlimited pointer, touch or keyboard replay, including
+after reload or dismissal. “Skip magic” or Escape dismisses immediately.
+The overlay allows page clicks and scrolling; resizing/orientation changes
+safely dismiss the performance. `/?genie=1` forces a replay on load.
+Session storage is optional; unavailable storage may repeat playback on reload.
+
+Reduced motion disables autoplay and folding. Activating the lamp explicitly
+shows a stationary genie and joke, until dismissed. The lamp is still usable.
 
 Run `npm run dev` and open http://localhost:4329/?genie=1. The previous attempt
 is preserved on `ws-mycodespace-genie/overlay`. This fresh implementation is
