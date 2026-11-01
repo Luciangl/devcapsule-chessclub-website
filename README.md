@@ -35,4 +35,5 @@ project setup, billing checks, static deployment, and verification.
 
 [`mycodespace-site/`](mycodespace-site/README.md) is the small English landing page for
 mycodespace.ai, introducing DevCapsule as its first product. Local port: 4329.
-Deployment tooling reuses the shared GCS suite with explicit cloud targets.
+Live at https://mycodespace.ai/ and https://www.mycodespace.ai/.
+Deployment tooling reuses the shared GCS upload suite and the original load balancer.

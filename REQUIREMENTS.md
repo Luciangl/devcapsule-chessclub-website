@@ -164,3 +164,7 @@ ambition from the supplied LinkedIn post, using plain, human English. Reuse the
 static-site structure and deployment approach from the chess candidates.
 
 Detailed contract: [MyCodeSpace requirements](engineering-docs/requirements/2026-11-01-mycodespace-site.md).
+
+Hosting authorization (2026-11-01): owner accepted the page and requested live
+deployment for apex and www, with an apex A record, www CNAME, and valid HTTPS
+for both. Existing club sites and DevCapsule DNS must remain functional.
