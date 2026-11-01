@@ -82,7 +82,7 @@ existing independent GitHub Pages CNAME.
 
 ## Contact section
 
-The introduction places the contact invitation to the right of the lead and
+The introduction places the contact invitation to the right of the headline, lead and
 explanation on wide screens. Text can use the full width below the card;
 narrower screens stack the text and invitation in reading order.
 The contact section includes Costin’s GitHub and LinkedIn profiles and an email

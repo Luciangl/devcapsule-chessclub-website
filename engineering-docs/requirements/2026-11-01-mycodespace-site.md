@@ -44,3 +44,6 @@ Body-flow refinement (2026-11-01): keep contact as a right-hand body column,
 beginning beside the lead paragraph, so the paragraph never stretches above
 the card. Text may reclaim the full body width below the card; keep the card
 out of the header and preserve the stacked mobile reading order.
+
+Alignment refinement (2026-11-01): align the desktop contact card's top edge
+with the headline's top, retaining body placement and stacked mobile order.
