@@ -1,13 +1,16 @@
-devcapsule-schema-version = 1
-
-[capabilities]
-need = ["antigravity-agent", "claude-code-agent", "codex-agent", "frontend-ide", "node"]
+devcapsule-schema-version = 2
 
 [project]
 name = "chessclub-website"
 slug = "chessclub-website"
 creator = "https://github.com/ccozianu"
 mount = "/workspace/chessclub-website"
+
+[capabilities]
+required = ["antigravity-agent", "claude-code-agent", "codex-agent", "node"]
+
+[recommendations]
+ide = "frontend-ide"
 
 [host.docker.mode.recommended]
 value = "host-socket"
@@ -20,6 +23,8 @@ justification = "easier this way"
 [host.browser.host-open.recommended]
 value = true
 justification = "ease of use"
+
+# The project's workflow choice.
 
 [workflow]
 definition = "devcapsule"
