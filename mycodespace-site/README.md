@@ -4,7 +4,7 @@ Small English landing page for https://mycodespace.ai. DevCapsule is the first
 product; the broader aim is a personal home for code, projects, tools, and
 project knowledge, for students, hobbyists and professionals.
 
-Copy draws on [Costin's LinkedIn post](https://lnkd.in/p/dJNtaetF) and the
+Copy draws on the owner’s original post and the
 [DevCapsule website](https://devcapsule.mycodespace.ai/). It describes the broader
 aim as an ambition. The owner approved the personal google3 analogy on
 2026-11-01. Google’s shared-codebase background is documented in
@@ -79,3 +79,12 @@ applies. Existing targets can be overridden with environment variables.
 Certificate activation and routing propagation may take time. Verify both HTTPS
 hosts and the original chess site after provisioning. DevCapsule remains on its
 existing independent GitHub Pages CNAME.
+
+## Contact section
+
+The introduction includes Costin’s GitHub and LinkedIn profiles and an email
+image at `public/contact-email.svg`. The SVG uses glyph outlines rather than
+text, with a spoken-form alt description for accessibility and no mailto link.
+This reduces trivial address scraping; it does not prevent OCR. To change the
+address, regenerate the outlines and update the alt description together.
+The 2026-11-01 contact update is prepared for local review only.

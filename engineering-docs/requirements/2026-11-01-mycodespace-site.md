@@ -23,3 +23,8 @@ Accepted: 2026-11-01, by owner instruction in chat.
 
 Validation: static build, browser checks on mobile and desktop, accessibility
 scan, primary link verification, and deployment wrapper plan/failure checks.
+
+Contact refinement (owner instruction, 2026-11-01): remove the outbound LinkedIn
+post link. Add “Get in touch with Costin”, prominent but subordinate to the
+opening paragraph, with email rendered as SVG outlines and links to GitHub and
+LinkedIn profiles. This slice must stop before production deployment.
