@@ -15,8 +15,9 @@ Accepted: 2026-11-01, by owner instruction in chat.
   release dates, or permanent compatibility with all historical programs.
 - Follow the existing Astro static build and shared GCS deployment approach.
 - Provide a readable responsive page, keyboard focus and a custom 404 page.
-- Prepare deployment tooling; live apex DNS changes are not required by this
-  implementation request and have not been performed.
+- Owner authorized live deployment on 2026-11-01 after accepting the page.
+  Serve both apex and www over valid HTTPS, using an apex A record and a www
+  CNAME. Preserve existing chess websites and DevCapsule DNS.
 
 Validation: static build, browser checks on mobile and desktop, accessibility
 scan, primary link verification, and deployment wrapper plan/failure checks.

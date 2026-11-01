@@ -22,17 +22,9 @@ fi
 printf 'Site: %s\nDomain: %s\nProject: %s\nBucket: gs://%s\nMode: %s\n' "$SITE_DIR" "$DOMAIN" "$PROJECT_ID" "$BUCKET_NAME" "$mode"
 cd "$REPO_ROOT"
 case "$mode" in
-  plan) echo 'No cloud changes. update uploads dist; provision also creates hosting resources and changes apex DNS.' ;;
+  plan) echo 'No cloud changes. update uploads dist; provision configures HTTPS for apex and www, apex A and www CNAME.' ;;
   update) bash scripts/gcs/03-deploy-site.sh ;;
   provision)
-    bash scripts/gcs/01-create-bucket.sh
-    bash scripts/gcs/02-configure-website.sh
-    bash scripts/gcs/03-deploy-site.sh
-    bash scripts/gcs/04b-add-to-existing-loadbalancer.sh
-    # Pass the address explicitly: shared DNS helper otherwise derives a new-LB prefix.
-    source scripts/gcs/common.sh
-    lb_address="$(gcloud compute forwarding-rules describe "${EXISTING_LB_NAME}-https-rule" --project="$LB_PROJECT_ID" --global --format='value(IPAddress)')"
-    [[ -n "$lb_address" ]] || { echo 'No load balancer address found' >&2; exit 1; }
-    bash scripts/gcs/05-configure-dns.sh "$DOMAIN" "$DNS_PROJECT_ID" "$DNS_ZONE" "$lb_address"
+    node "${SCRIPT_DIR}/provision.mjs"
     ;;
 esac
