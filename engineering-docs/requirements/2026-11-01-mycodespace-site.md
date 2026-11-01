@@ -64,3 +64,10 @@ narrow headshot framing; preserve the source unchanged.
 Publication approval (2026-11-01): owner accepted the current contact/layout
 refinements and explicitly requested production deployment before any genie
 overlay. This supersedes the local-only restriction for these changes.
+
+Desktop genie preview (2026-11-01): implement the six beats and exact copy in
+the [work order](../work-orders/2026-11-01-mycodespace-genie-overlay.md). Owner
+requested a fresh branch/implementation, preserving the earlier attempt.
+Use transparent SVG line art, keep existing page/photo intact, support
+dismissal and click-through, suppress on mobile/touch-only and reduced motion,
+and offer local replay. Production deployment is not authorized.

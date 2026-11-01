@@ -1,7 +1,7 @@
 # Work Order: MyCodeSpace Desktop Genie Joke Overlay
 
 Date: 2026-11-01
-Status: captured for later pickup; implementation progress must be checked in the main conversation/checkout
+Status: fresh local implementation on ws-mycodespace-genie/fresh-start; awaiting owner review
 Requested by: Costin Cozianu
 Scope: `mycodespace-site/`; local preview first; no production deployment authorized
 
@@ -80,7 +80,7 @@ or overwrite work done after this discussion. Follow the repository workstream
 routing for the actual implementation.
 
 The contact refinements currently have their own
-[status file](../wip/2026-11-01-mycodespace-contact/CURRENT-STATUS.md).
+[delivery record](../archive/2026-11-01-mycodespace-contact/CURRENT-STATUS.md).
 Use the [site guide](../../mycodespace-site/README.md) for local commands
 (port 4329) and hosting context. Production deployment remains a separate owner
 authorization. This side-conversation capture changes documentation only.

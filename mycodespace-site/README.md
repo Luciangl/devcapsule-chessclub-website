@@ -22,7 +22,8 @@ npm run dev
 
 Open http://localhost:4329. `npm run build` produces static files in `dist/`;
 `npm run preview` serves the build on the same port. Stop dev before preview.
-There is no backend, browser JavaScript, analytics, remote font, or account setup.
+There is no backend, analytics, remote font, or account setup. A small browser
+script controls the optional desktop genie animation.
 
 Edit `src/pages/index.astro` for copy and `src/styles/global.css` for appearance.
 The short page deliberately keeps content in one file rather than adding a CMS.
@@ -96,3 +97,24 @@ The owner-supplied chess photo lives at `src/assets/costin-cozianu-chess.jpg`
 (originally `maxresdefault.jpg`). Astro generates cropped 320/640px WebP variants retaining Costin on the left and the
 foreground chessboard; an asymmetric egg-shaped CSS mask frames the scene. The chess partner on the right is excluded
 from the generated images. The original source remains in src/assets for editing.
+
+## Genie overlay: fresh local preview
+
+On `ws-mycodespace-genie/fresh-start`, an original inline SVG cameo plays once
+per tab session. It rises from the bottom left, grows, lifts an eyebrow, winks,
+says “Because myspace.com flopped”, rubs a lamp, and reveals
+“!!! We now have MyCodeSpace.AI !!!” in a smoke burst. All artwork and bubble
+interiors are transparent; light stroke halos keep them legible over page text.
+
+Eligibility: at least 951px wide, primary fine pointer with hover, and no
+reduced-motion preference. Phones, touch-only tablets and reduced-motion users
+see no cameo or replay control. Playback begins after 600ms and lasts 10 seconds;
+the final announcement holds long enough to read. The overlay allows page
+clicks and scrolling. “Skip magic” or Escape dismisses it; the footer’s
+“Replay the genie” button plays it again. `/?genie=1` forces a replay on load.
+Session storage is optional; when unavailable, playback may repeat on reload.
+Shrinking the viewport or enabling reduced motion stops playback.
+
+Run `npm run dev` and open http://localhost:4329/?genie=1. The previous attempt
+is preserved on `ws-mycodespace-genie/overlay`. This fresh implementation is
+for local review only; production deployment requires separate authorization.
