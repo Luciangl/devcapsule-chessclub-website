@@ -101,6 +101,6 @@
 
 ## MyCodeSpace
 
-- [MyCodeSpace workstream](engineering-docs/wip/2026-11-01-mycodespace-site/CURRENT-STATUS.md)
+- [MyCodeSpace delivery](engineering-docs/archive/2026-11-01-mycodespace-site/CURRENT-STATUS.md)
 - [MyCodeSpace site and deployment guide](mycodespace-site/README.md)
 - [MyCodeSpace requirements](engineering-docs/requirements/2026-11-01-mycodespace-site.md)
