@@ -47,3 +47,7 @@ out of the header and preserve the stacked mobile reading order.
 
 Alignment refinement (2026-11-01): align the desktop contact card's top edge
 with the headline's top, retaining body placement and stacked mobile order.
+
+Portrait refinement (2026-11-01): owner identifies himself as the player on the
+left. Crop around him in an oval, preserving sharpness and excluding the partner
+on the right from generated public images. This supersedes the full-scene crop.

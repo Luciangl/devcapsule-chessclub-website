@@ -93,5 +93,6 @@ address, regenerate the outlines and update the alt description together.
 The 2026-11-01 contact update is prepared for local review only.
 
 The owner-supplied chess photo lives at `src/assets/costin-cozianu-chess.jpg`
-(originally `maxresdefault.jpg`). Astro generates responsive WebP variants;
-the full scene is preserved without cropping.
+(originally `maxresdefault.jpg`). Astro generates cropped 160/320px WebP variants focused on Costin on the left;
+an oval CSS mask frames the portrait. The chess partner on the right is excluded
+from the generated images. The original source remains in src/assets for editing.
