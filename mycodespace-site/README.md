@@ -104,10 +104,10 @@ On `ws-mycodespace-genie/fresh-start`, an original inline SVG cameo plays once
 per tab session. It rises from the bottom left, grows, lifts an eyebrow, winks,
 says “Because myspace.com flopped”, rubs a lamp, and reveals
 “!!! We now have MyCodeSpace.AI !!!” in a smoke burst. All artwork and bubble
-interiors are transparent. During playback, the main page softens out of focus
-and fades while a feathered paper-coloured spotlight follows the performance.
-This separates the line art from page text without filling the speech bubbles.
-Dismissal, completion, or loss of desktop eligibility restores the page.
+interiors are transparent. During playback, a feathered soft-focus mask follows the genie’s silhouette,
+with matching local masks behind visible speech bubbles. The blur is 4px and
+the paper-coloured tint is 56% opaque, leaving the rest of the page sharp.
+The SVG interiors remain transparent; dismissing or finishing removes all masks.
 
 Eligibility: at least 951px wide, primary fine pointer with hover, and no
 reduced-motion preference. Phones, touch-only tablets and reduced-motion users

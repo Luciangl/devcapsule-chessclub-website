@@ -76,3 +76,9 @@ Genie legibility refinement (2026-11-01): owner reported line art tangled with
 underlying text. During playback, soften/fade main content and use a feathered
 translucent spotlight behind the moving art. Keep SVG/bubble interiors
 transparent, links operable, and restore page appearance on all exit paths.
+
+Accepted local legibility refinement (2026-11-01): owner approved limiting
+soft focus to the character silhouette and visible bubbles, leaving the rest
+of the page sharp. Use 4px backdrop blur, feathered masks, and 56% paper tint
+(increased transparency from 86%). Remove page-wide blur/fading. Owner called
+this version perfect; deployment has not been authorized.
