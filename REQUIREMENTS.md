@@ -154,6 +154,17 @@ static assets, accept quota-driven downtime, and document setup and verification
 in the [deployment guide](docs/firebase-spark-deployment.md). Delivering scripts
 and local evidence does not require live cloud provisioning or a domain cutover.
 
+### R-SITE-007 amendment: GitHub Pages deployment (2026-11-09)
+
+The owner asked for a version of `claude-rocada-site` (test4) that deploys to
+GitHub Pages beside the GCS scripts. This authorizes a third hosting path: a
+GitHub Actions workflow publishing the repository's Pages site, with the site
+made base-path aware so it serves both at `https://<owner>.github.io/<repo>/`
+and on a custom domain. The GCS route and the Firebase path are unchanged.
+Enabling Pages in repository settings and plan eligibility for a private
+repository remain owner steps and are not acceptance gates; local evidence under
+the Pages base path is. Guide: [GitHub Pages deployment](docs/github-pages-deployment.md).
+
 ## R-MYCODESPACE-001: MyCodeSpace landing page (2026-11-01)
 
 Status: accepted. Priority: gating for this standalone site.

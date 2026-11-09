@@ -31,6 +31,15 @@ Deploy the Rocada/test4 static site to a separate unbilled Firebase project usin
 [the Spark deployment guide](docs/firebase-spark-deployment.md). Scripts include
 project setup, billing checks, static deployment, and verification.
 
+## GitHub Pages
+
+[`.github/workflows/claude-rocada-pages.yml`](.github/workflows/claude-rocada-pages.yml)
+publishes the Rocada/test4 site to this repository's GitHub Pages site at
+`https://ccozianu.github.io/devcapsule-chessclub-website/` on every `main` change
+under `claude-rocada-site/`. Enabling Pages (Source: GitHub Actions) and plan
+eligibility for a private repository are owner steps; see
+[the GitHub Pages deployment guide](docs/github-pages-deployment.md).
+
 ## MyCodeSpace
 
 [`mycodespace-site/`](mycodespace-site/README.md) is the small English landing page for

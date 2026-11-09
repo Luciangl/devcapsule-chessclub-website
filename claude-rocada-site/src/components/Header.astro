@@ -1,9 +1,10 @@
 ---
+import { withBase, stripBase } from '../lib/url';
 import PaletteSwitcher from './PaletteSwitcher.astro';
 import { site } from '../config/site';
 import { t } from '../i18n';
 const s = t();
-const path = Astro.url.pathname;
+const path = stripBase(Astro.url.pathname);
 const active = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 const club = [
   { href: '/despre-noi/', label: s.nav.about },
@@ -35,7 +36,7 @@ const clubActive = club.some((l) => active(l.href));
   </div>
   <div class="bar">
     <div class="wrap bar__inner">
-      <a class="brand" href="/" aria-label={`${site.name} — ${s.nav.home}`}>
+      <a class="brand" href={withBase('/')} aria-label={`${site.name} — ${s.nav.home}`}>
         <span class="brand__mark" aria-hidden="true">♜</span>
         <span class="brand__text"><span class="brand__acs">ACS</span> Smart Galați</span>
       </a>
@@ -54,13 +55,13 @@ const clubActive = club.some((l) => active(l.href));
             </button>
             <ul class="dropdown" id="menu-club" data-dropdown-menu>
               {club.map((l) => (
-                <li><a href={l.href} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a></li>
+                <li><a href={withBase(l.href)} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a></li>
               ))}
             </ul>
           </li>
           {primary.map((l) => (
             <li class="nav__item">
-              <a class:list={['nav__link', { 'is-active': active(l.href) }]} href={l.href} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a>
+              <a class:list={['nav__link', { 'is-active': active(l.href) }]} href={withBase(l.href)} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a>
             </li>
           ))}
         </ul>
@@ -76,10 +77,10 @@ const clubActive = club.some((l) => active(l.href));
     <nav class="wrap" aria-label="Meniu mobil">
       <p class="mobile__group">{s.nav.club}</p>
       <ul class="mobile__list">
-        {club.map((l) => <li><a href={l.href} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a></li>)}
+        {club.map((l) => <li><a href={withBase(l.href)} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a></li>)}
       </ul>
       <ul class="mobile__list">
-        {primary.map((l) => <li><a href={l.href} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a></li>)}
+        {primary.map((l) => <li><a href={withBase(l.href)} aria-current={active(l.href) ? 'page' : undefined}>{l.label}</a></li>)}
       </ul>
       <div class="mobile__tools">
         <a class="btn btn--accent" href={site.enrollmentUrl} rel="noopener">{s.nav.enroll}</a>

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../lib/url';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
@@ -16,7 +17,7 @@ const albums = (await getCollection('galleries')).sort((a, b) => b.data.year - a
       <div class="grid grid--wide">
         {albums.map((g) => {
           const external = !g.data.photos.length && g.data.album_url;
-          const href = external ? g.data.album_url! : `/galerie/${g.id}/`;
+          const href = external ? g.data.album_url! : withBase(`/galerie/${g.id}/`);
           return (
             <article class="card card--link">
               <Image src={photo(g.data.cover_image)!} alt="" width={720} height={540} loading="lazy" class="cover" />

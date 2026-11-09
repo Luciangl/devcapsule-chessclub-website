@@ -1,12 +1,16 @@
 /**
  * Browser regression suite against a running site (default http://localhost:4326).
  * Usage: SITE_URL=https://smartgalati-test4.mycodespace.ai node tests/browser.mjs [screenshot-dir]
+ * For a build served under a base path (GitHub Pages project site) set BASE_PATH=/<repository>;
+ * SITE_URL stays the origin. Hand-written links in the pages then already carry the prefix.
  */
 import { chromium } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { mkdirSync } from 'node:fs';
 
-const base = (process.env.SITE_URL || 'http://localhost:4326').replace(/\/$/, '');
+const origin = (process.env.SITE_URL || 'http://localhost:4326').replace(/\/$/, '');
+const prefix = (process.env.BASE_PATH || '').replace(/\/$/, '');
+const base = origin + prefix;
 const shots = process.argv[2];
 if (shots) mkdirSync(shots, { recursive: true });
 const failures = [];
@@ -22,11 +26,13 @@ const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } })
 const page = await ctx.newPage();
 const consoleErrors = [];
 page.on('console', (m) => m.type() === 'error' && !m.text().includes('404') && consoleErrors.push(`${page.url()}: ${m.text()}`));
-page.on('pageerror', (e) => consoleErrors.push(`${page.url()}: ${e.message}`));
+// Errors thrown by lichess.org's own embed scripts inside the iframe are third-party, like its blocked requests below.
+page.on('pageerror', (e) => !(e.stack || '').includes('lichess.org') && consoleErrors.push(`${page.url()}: ${e.message}`));
 page.on('requestfailed', (r) => !r.url().includes('lichess') && consoleErrors.push(`${page.url()}: request failed ${r.url()}`));
 
 console.log('Routes and internal links');
 const internal = new Set();
+const unprefixed = new Set();
 for (const r of routes) {
   const res = await page.goto(base + r, { waitUntil: 'networkidle' });
   ok(res?.status() === 200, `${r} -> ${res?.status()}`);
@@ -34,14 +40,16 @@ for (const r of routes) {
   ok(h1 === 1, `${r} has exactly one h1 (${h1})`);
   ok((await page.getAttribute('html', 'lang')) === 'ro', `${r} lang=ro`);
   const links = await page.$$eval('a[href^="/"]', (as) => as.map((a) => a.getAttribute('href')));
+  links.forEach((l) => !l.startsWith(prefix + '/') && unprefixed.add(`${r}: ${l}`));
   links.forEach((l) => internal.add(l.split('#')[0]));
   const broken = await page.$$eval('img', (imgs) => imgs.filter((i) => i.getAttribute('src') && i.complete && i.naturalWidth === 0 && i.getAttribute('loading') !== 'lazy').map((i) => i.src));
   ok(broken.length === 0, `${r} has no broken eager images ${broken.join(' ')}`);
 }
+ok(unprefixed.size === 0, `internal links carry the base path "${prefix || '/'}" ${[...unprefixed].slice(0, 5).join(' ')}`);
 let checked = 0;
 for (const l of internal) {
-  if (l.startsWith('/licenses/')) continue;
-  const res = await page.request.get(base + l);
+  if (l.startsWith(prefix + '/licenses/')) continue;
+  const res = await page.request.get(origin + l);
   if (res.status() !== 200) failures.push(`internal link ${l} -> ${res.status()}`);
   checked++;
 }
@@ -49,7 +57,7 @@ ok(!failures.some((f) => f.startsWith('internal link')), `${checked} internal li
 
 console.log('Redirect stub for archived article at the old address');
 const stub = await page.request.get(base + '/noutati/s-a-facut-istorie-istorie/', { maxRedirects: 0 });
-ok(stub.status() === 200 && (await stub.text()).includes('http-equiv="refresh"') && (await stub.text()).includes('/arhiva/2023/s-a-facut-istorie-istorie/'), 'old news address of an archived article points to the archive');
+ok(stub.status() === 200 && (await stub.text()).includes('http-equiv="refresh"') && (await stub.text()).includes(`url=${prefix}/arhiva/2023/s-a-facut-istorie-istorie/`), 'old news address of an archived article points to the archive');
 const archived = await page.request.get(base + '/arhiva/2023/s-a-facut-istorie-istorie/');
 ok(archived.status() === 200, 'archived article renders at /arhiva/2023/...');
 
@@ -92,7 +100,7 @@ ok((await page.locator('[data-reveal-out="email"] a').getAttribute('href')) === 
 console.log('Gallery lightbox');
 await page.goto(base + '/galerie/cantonament-2024/', { waitUntil: 'networkidle' });
 const first = page.locator('[data-gallery-item]').first();
-ok((await first.getAttribute('href'))?.startsWith('/_astro/'), 'thumbnail links to a large image without JavaScript');
+ok((await first.getAttribute('href'))?.startsWith(prefix + '/_astro/'), 'thumbnail links to a large image without JavaScript');
 await first.click();
 const dialog = page.locator('[data-lightbox]');
 ok(await dialog.evaluate((d) => d.open), 'lightbox opens');

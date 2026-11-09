@@ -4,7 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { mkdirSync } from 'node:fs';
 import { palettes, STORAGE_KEY, defaultPalette } from '../src/lib/palettes.ts';
 
-const base = (process.env.SITE_URL || 'http://localhost:4326').replace(/\/$/, '');
+const base = (process.env.SITE_URL || 'http://localhost:4326').replace(/\/$/, '') + (process.env.BASE_PATH || '').replace(/\/$/, '');
 const shots = process.argv[2];
 if (shots) mkdirSync(shots, { recursive: true });
 const failures = [];

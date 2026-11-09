@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
@@ -13,7 +14,7 @@ const { Content } = await render(entry);
 const s = t();
 const cover = newsCover(entry.data.cover_image);
 const year = entry.data.date.getUTCFullYear();
-const back = archived ? { href: `/arhiva/${year}/`, label: `← ${s.archive.year(year)}` } : { href: '/noutati/', label: `← ${s.news.back}` };
+const back = archived ? { href: withBase(`/arhiva/${year}/`), label: `← ${s.archive.year(year)}` } : { href: withBase('/noutati/'), label: `← ${s.news.back}` };
 ---
 
 <article class="article">

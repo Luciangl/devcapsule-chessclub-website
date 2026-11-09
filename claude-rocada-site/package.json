@@ -16,7 +16,9 @@
     "test:contrast": "node tests/contrast.mjs",
     "test:browser": "node tests/browser.mjs",
     "test:themes": "node tests/themes.mjs",
-    "deploy": "bash scripts/deploy.sh"
+    "deploy": "bash scripts/deploy.sh",
+    "pages:build": "bash scripts/pages.sh build",
+    "pages:check": "bash scripts/pages.sh check"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../lib/url';
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
@@ -22,7 +23,7 @@ const cutoff = new Date(cutoffTimestamp(now, site.archiveYears));
         {news.map((n) => <NewsCard entry={n} now={now} heading="h2" />)}
       </div>
       <p class="note archive-note">
-        Articolele publicate înainte de {formatDate(cutoff)} se află în <a href="/arhiva/">arhivă</a>. Limita avansează la fiecare republicare a site-ului.
+        Articolele publicate înainte de {formatDate(cutoff)} se află în <a href={withBase('/arhiva/')}>arhivă</a>. Limita avansează la fiecare republicare a site-ului.
       </p>
     </div>
   </section>

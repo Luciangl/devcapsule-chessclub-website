@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../lib/url';
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHead from '../../components/PageHead.astro';
@@ -28,19 +29,19 @@ const cutoff = new Date(cutoffTimestamp(now, site.archiveYears));
       <nav class="archive__years" aria-label={s.archive.yearsLabel}>
         <ul>
           {years.map((y) => (
-            <li><a href={`/arhiva/${y}/`}>{y} <span>{s.archive.count(byYear.get(y)!.length)}</span></a></li>
+            <li><a href={withBase(`/arhiva/${y}/`)}>{y} <span>{s.archive.count(byYear.get(y)!.length)}</span></a></li>
           ))}
         </ul>
       </nav>
       <div class="archive__list">
         {years.map((y) => (
           <section class="archive__year" id={`an-${y}`}>
-            <h2><a href={`/arhiva/${y}/`}>{s.archive.year(y)}</a></h2>
+            <h2><a href={withBase(`/arhiva/${y}/`)}>{s.archive.year(y)}</a></h2>
             <ul>
               {byYear.get(y)!.map((n) => (
                 <li>
                   <time datetime={n.data.date.toISOString().slice(0, 10)}>{formatDate(n.data.date, 'ro', { day: 'numeric', month: 'short' })}</time>
-                  <a href={newsPath(n.id, n.data.date, now, site.archiveYears)}>{n.data.title}</a>
+                  <a href={withBase(newsPath(n.id, n.data.date, now, site.archiveYears))}>{n.data.title}</a>
                 </li>
               ))}
             </ul>

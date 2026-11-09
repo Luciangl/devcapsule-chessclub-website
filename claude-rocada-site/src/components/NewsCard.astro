@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { newsPath } from '../lib/archive.mjs';
@@ -11,7 +12,7 @@ interface Props {
 }
 const { entry, now, heading = 'h3' } = Astro.props;
 const s = t();
-const href = newsPath(entry.id, entry.data.date, now);
+const href = withBase(newsPath(entry.id, entry.data.date, now));
 const cover = newsCover(entry.data.cover_image);
 const H = heading;
 ---

@@ -6,6 +6,8 @@ Start date: `2026-11-09`
 
 State: active
 
+Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@f38ceada0768
+
 Branch association: `ws-github-pages/deployment`
 
 Target branch: `main`. Integration branch: `ws-github-pages/deployment`.

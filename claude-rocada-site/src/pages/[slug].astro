@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHead from '../components/PageHead.astro';
@@ -26,13 +27,13 @@ const s = t();
       {page.id === 'inscrieri' && (
         <p class="btn-row">
           <a class="btn" href={site.enrollmentUrl} rel="noopener">{s.contact.formCta} ↗</a>
-          <a class="btn btn--ghost" href="/contact/">{s.nav.contact}</a>
+          <a class="btn btn--ghost" href={withBase('/contact/')}>{s.nav.contact}</a>
         </p>
       )}
       {page.id === 'sustine' && (
         <p class="btn-row">
           <a class="btn" href={site.redirectUrl} rel="noopener">Redirecționează 3,5% online ↗</a>
-          <a class="btn btn--ghost" href="/contact/">{s.home.contactCta}</a>
+          <a class="btn btn--ghost" href={withBase('/contact/')}>{s.home.contactCta}</a>
         </p>
       )}
       <SourceNote url={page.data.source_url} />

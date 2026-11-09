@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import Base from '../layouts/Base.astro';
 import { t } from '../i18n';
 const s = t();
@@ -11,9 +12,9 @@ const s = t();
       <h1>{s.notFound.title}</h1>
       <p class="lead">{s.notFound.text}</p>
       <p class="btn-row">
-        <a class="btn" href="/">{s.notFound.home}</a>
-        <a class="btn btn--ghost" href="/arhiva/">{s.nav.archive}</a>
-        <a class="btn btn--ghost" href="/noutati/">{s.nav.news}</a>
+        <a class="btn" href={withBase('/')}>{s.notFound.home}</a>
+        <a class="btn btn--ghost" href={withBase('/arhiva/')}>{s.nav.archive}</a>
+        <a class="btn btn--ghost" href={withBase('/noutati/')}>{s.nav.news}</a>
       </p>
     </div>
   </section>

@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { site } from '../config/site';
 import { t } from '../i18n';
 const s = t();
@@ -17,23 +18,23 @@ const year = new Date().getUTCFullYear();
     <div>
       <p class="footer__title">{s.footer.quickLinks}</p>
       <ul class="footer__list">
-        <li><a href="/despre-noi/">{s.nav.about}</a></li>
-        <li><a href="/antrenori/">{s.nav.coaches}</a></li>
-        <li><a href="/echipe/">{s.nav.teams}</a></li>
-        <li><a href="/performante/">{s.nav.performances}</a></li>
-        <li><a href="/noutati/">{s.nav.news}</a></li>
-        <li><a href="/arhiva/">{s.nav.archive}</a></li>
-        <li><a href="/galerie/">{s.nav.gallery}</a></li>
+        <li><a href={withBase('/despre-noi/')}>{s.nav.about}</a></li>
+        <li><a href={withBase('/antrenori/')}>{s.nav.coaches}</a></li>
+        <li><a href={withBase('/echipe/')}>{s.nav.teams}</a></li>
+        <li><a href={withBase('/performante/')}>{s.nav.performances}</a></li>
+        <li><a href={withBase('/noutati/')}>{s.nav.news}</a></li>
+        <li><a href={withBase('/arhiva/')}>{s.nav.archive}</a></li>
+        <li><a href={withBase('/galerie/')}>{s.nav.gallery}</a></li>
       </ul>
     </div>
     <div>
       <p class="footer__title">{s.footer.legal}</p>
       <ul class="footer__list">
-        <li><a href="/inscrieri/">{s.nav.enroll}</a></li>
-        <li><a href="/sustine/">{s.nav.support}</a></li>
-        <li><a href="/contact/">{s.nav.contact}</a></li>
-        <li><a href="/sah-online/">{s.nav.chess}</a></li>
-        <li><a href="/licenses/palettes.txt">{s.footer.licenses}</a></li>
+        <li><a href={withBase('/inscrieri/')}>{s.nav.enroll}</a></li>
+        <li><a href={withBase('/sustine/')}>{s.nav.support}</a></li>
+        <li><a href={withBase('/contact/')}>{s.nav.contact}</a></li>
+        <li><a href={withBase('/sah-online/')}>{s.nav.chess}</a></li>
+        <li><a href={withBase('/licenses/palettes.txt')}>{s.footer.licenses}</a></li>
       </ul>
     </div>
   </div>

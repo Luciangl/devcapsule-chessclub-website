@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { coachPhoto } from '../lib/images';
@@ -10,7 +11,7 @@ interface Props {
 const { coach, compact = false } = Astro.props;
 const s = t();
 const photo = coachPhoto(coach.data.photo);
-const href = `/antrenori/#${coach.id}`;
+const href = withBase(`/antrenori/#${coach.id}`);
 ---
 
 <article class="coach card">

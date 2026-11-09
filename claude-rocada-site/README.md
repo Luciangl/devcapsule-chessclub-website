@@ -46,6 +46,8 @@ Playwright's Chromium is installed with `npx playwright install chromium` when m
 | `src/pages/` | Routes: `/`, `/despre-noi/`, `/antrenori/`, `/echipe/`, `/sportivi/`, `/performante/`, `/inscrieri/`, `/sustine/`, `/contact/`, `/noutati/`, `/noutati/[slug]/`, `/arhiva/`, `/arhiva/[year]/`, `/arhiva/[year]/[slug]/`, `/galerie/`, `/galerie/[album]/`, `/sah-online/`, `404` |
 | `public/licenses/palettes.txt` | Upstream palette and font license notices (served at `/licenses/palettes.txt`) |
 | `scripts/deploy.sh`, `scripts/deployment.env` | GCS deployment wrapper and test4 parameters |
+| `scripts/pages.sh` | GitHub Pages build (`pages:build`) and base-path check (`pages:check`) |
+| `src/lib/url.ts` | `withBase()` / `stripBase()`: every internal link honours Astro's `base` (GitHub Pages project path) |
 | `tests/` | Unit, contrast and browser suites |
 
 ## Content model
@@ -147,7 +149,8 @@ HTML for up to five minutes; invalidate with
 
 CI (`.github/workflows/claude-rocada-site.yml`) installs, tests, builds and runs the
 browser suites on every change; the deploy job is manual and optional (Workload
-Identity variables), local authenticated deployment is the supported path.
+Identity variables), local authenticated deployment is the supported path. A second
+workflow publishes to GitHub Pages (see below).
 
 ## Known limitations
 
@@ -156,6 +159,17 @@ Identity variables), local authenticated deployment is the supported path.
 - Article photos beyond the 2024–2025 covers are not copied locally; each article links to the original post (`source_url`) where its photos remain.
 - The Lichess iframe is third-party content; its internal contrast/labels cannot be fixed here.
 - Facts to confirm with the club before production are listed in the [content guide](content/README.md#de-verificat-cu-clubul).
+
+## Optional GitHub Pages deployment
+
+`.github/workflows/claude-rocada-pages.yml` builds this site for the repository's
+Pages address (`https://<owner>.github.io/<repository>/`, or a custom domain set in
+the Pages settings) and publishes it on every `main` change under this directory.
+`npm run pages:build` and `npm run pages:check` reproduce the build and the browser
+suites under that base path locally. Internal links in components go through
+`withBase()` (`src/lib/url.ts`), Markdown links are prefixed by a rehype plugin in
+`astro.config.mjs`, and the browser suite fails on any link without the prefix. Setup,
+eligibility and limits: [GitHub Pages deployment guide](../docs/github-pages-deployment.md).
 
 ## Optional Firebase Spark deployment
 

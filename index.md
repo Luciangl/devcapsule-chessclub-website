@@ -12,6 +12,7 @@
 ## Deployment Guides
 
 - [Firebase Spark static deployment](docs/firebase-spark-deployment.md)
+- [GitHub Pages deployment of the Rocada site](docs/github-pages-deployment.md)
 
 ## Engineering Records
 
@@ -53,6 +54,7 @@
 - `claude-rocada-site/content/` — home, pages, coaches, performances, galleries and 134 news articles (templates `_template.md` in each directory)
 - [Rocada implementation and deployment evidence](engineering-docs/implementation-notes/website/2026-09-27-claude-rocada-site.md)
 - [Rocada delivery archive](engineering-docs/archive/2026-09-27-claude-rocada-site/CURRENT-STATUS.md)
+- [GitHub Pages workstream state](engineering-docs/wip/2026-11-09-github-pages/CURRENT-STATUS.md)
 
 - [Codex Astra delivery archive](engineering-docs/archive/2026-09-27-codex-astra-site/CURRENT-STATUS.md)
 
