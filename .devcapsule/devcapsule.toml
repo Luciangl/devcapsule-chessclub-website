@@ -28,5 +28,5 @@ justification = "ease of use"
 
 [workflow]
 definition = "devcapsule"
-version = "0.2.14"
+version = "0.3.1"
 mode = "multiple-streams"
