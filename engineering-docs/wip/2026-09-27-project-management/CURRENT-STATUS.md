@@ -6,7 +6,7 @@ Start date: `2026-09-27`
 
 State: active; permanent coordination
 
-Definition read: WORKFLOW.md@eabe23ed644a, WORKFLOW-LOCAL.md@f38ceada0768
+Definition read: WORKFLOW.md@02914b52c231, WORKFLOW-LOCAL.md@23bcc833e641
 
 Branch association: `ws-project-management/coordination`
 
