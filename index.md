@@ -6,6 +6,8 @@
 - [Documentation index](index.md)
 - [Agent instructions](AGENTS.md)
 - [Reusable human/agent workflow](WORKFLOW.md)
+- [Workflow preamble, for humans](PREAMBLE.md)
+- [Workflow information model, for humans](INFORMATION-MODEL.md)
 - [Current status and status file](CURRENT-STATUS.md)
 - [Requirements register](REQUIREMENTS.md)
 
@@ -25,6 +27,7 @@
 - `engineering-docs/bugs/` — reproducible defects and close criteria
   - [Bug: Missing Photo Gallery (/galerie-foto)](engineering-docs/bugs/website/2026-09-27-missing-photo-gallery.md)
   - [Bug: Flaky Desktop Dropdown Menu ("Clubul Nostru")](engineering-docs/bugs/website/2026-09-27-flaky-dropdown-menu.md)
+  - [Bug: Pages publish fails because the Lichess embed answers 403](engineering-docs/bugs/website/2026-11-20-pages-check-fails-on-lichess-403.md)
 - `engineering-docs/wip/` — active multiple-stream workstream state
 - `engineering-docs/archive/` — concluded multiple-stream workstream state
 - `engineering-docs/session-records/` — explicitly requested session records

@@ -25,8 +25,14 @@ const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
 const page = await ctx.newPage();
 const consoleErrors = [];
-page.on('console', (m) => m.type() === 'error' && !m.text().includes('404') && consoleErrors.push(`${page.url()}: ${m.text()}`));
-// Errors thrown by lichess.org's own embed scripts inside the iframe are third-party, like its blocked requests below.
+// The Lichess board is an optional third-party iframe: whatever lichess.org answers (a Cloudflare challenge
+// with 403 and X-Frame-Options, as it does for automated browsers since 2026-11) must not fail this site's checks.
+// Chromium reports a refused frame against our page from chrome-error://, naming lichess.org only in some messages,
+// so count Lichess's refused responses here and forgive that many matching "Failed to load resource" lines at the end.
+const lichessRefusals = [];
+page.on('response', (r) => r.url().includes('lichess.org') && r.status() >= 400 && lichessRefusals.push(r.status()));
+page.on('console', (m) => m.type() === 'error' && !m.text().includes('404') && !m.text().includes('lichess.org') && consoleErrors.push(`${page.url()}: ${m.text()}`));
+// Errors thrown by lichess.org's own embed scripts inside the iframe are third-party too, like its blocked requests below.
 page.on('pageerror', (e) => !(e.stack || '').includes('lichess.org') && consoleErrors.push(`${page.url()}: ${e.message}`));
 page.on('requestfailed', (r) => !r.url().includes('lichess') && consoleErrors.push(`${page.url()}: request failed ${r.url()}`));
 
@@ -165,6 +171,10 @@ for (const r of ['/', '/noutati/', '/contact/', '/galerie/cantonament-2024/', '/
   ok(own.length === 0, `${r} axe violations: ${own.map((v) => `${v.id}(${v.nodes.length})`).join(', ') || 'none'}`);
 }
 
+for (const status of lichessRefusals) {
+  const i = consoleErrors.findIndex((e) => e.includes(`Failed to load resource: the server responded with a status of ${status}`));
+  if (i >= 0) consoleErrors.splice(i, 1);
+}
 ok(consoleErrors.length === 0, `no console/page errors (${consoleErrors.slice(0, 5).join(' | ')})`);
 await browser.close();
 console.log(failures.length ? `\n${failures.length} failure(s):\n- ${failures.join('\n- ')}` : '\nAll browser checks passed.');
