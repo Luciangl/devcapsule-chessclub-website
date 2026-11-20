@@ -6,6 +6,8 @@
 - [Documentation index](index.md)
 - [Agent instructions](AGENTS.md)
 - [Reusable human/agent workflow](WORKFLOW.md)
+- [Workflow preamble, for humans](PREAMBLE.md)
+- [Workflow information model, for humans](INFORMATION-MODEL.md)
 - [Current status and status file](CURRENT-STATUS.md)
 - [Requirements register](REQUIREMENTS.md)
 

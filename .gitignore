@@ -17,3 +17,6 @@ dist/
 .astro/
 .vscode/
 *.tar.gz
+
+# Python / DevCapsule defaults
+.idea/
