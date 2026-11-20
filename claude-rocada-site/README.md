@@ -2,7 +2,7 @@
 
 Independent static website candidate for **ACS Smart Galați**, commissioned by the
 [test4 work order](../engineering-docs/work-orders/2026-09-27-smartgalati-test4-prototype.md).
-Preview: **https://smartgalati-test4.mycodespace.ai**. The design ("Rocada" — castling:
+Published at **https://webtest.smartgalati.ro/** through GitHub Pages. The design ("Rocada" — castling:
 safety first, then development) is navy ink and amber on warm paper, with a Fraunces
 display face and the Atkinson Hyperlegible body face, six selectable palettes, and
 content taken only from the club's own website.
@@ -45,7 +45,6 @@ Playwright's Chromium is installed with `npx playwright install chromium` when m
 | `src/components/` | Header (hover-safe/keyboard dropdown, mobile menu), palette switcher, contact reveal, gallery lightbox, Lichess embed, cards |
 | `src/pages/` | Routes: `/`, `/despre-noi/`, `/antrenori/`, `/echipe/`, `/sportivi/`, `/performante/`, `/inscrieri/`, `/sustine/`, `/contact/`, `/noutati/`, `/noutati/[slug]/`, `/arhiva/`, `/arhiva/[year]/`, `/arhiva/[year]/[slug]/`, `/galerie/`, `/galerie/[album]/`, `/sah-online/`, `404` |
 | `public/licenses/palettes.txt` | Upstream palette and font license notices (served at `/licenses/palettes.txt`) |
-| `scripts/deploy.sh`, `scripts/deployment.env` | GCS deployment wrapper and test4 parameters |
 | `scripts/pages.sh` | GitHub Pages build (`pages:build`) and base-path check (`pages:check`) |
 | `src/lib/url.ts` | `withBase()` / `stripBase()`: every internal link honours Astro's `base` (GitHub Pages project path) |
 | `tests/` | Unit, contrast and browser suites |
@@ -124,33 +123,13 @@ Romanian is the default and only locale (`astro.config.mjs` → `i18n.defaultLoc
 `src/i18n/index.ts` documents how to add English: copy `ro.ts`, register the
 locale, add localized content and pages under `src/pages/en/`.
 
-## Deployment (Google Cloud Storage, shared load balancer)
+## Continuous integration
 
-Parameters live in `scripts/deployment.env`; the shared scripts in
-`../scripts/gcs/` keep their test2 defaults. Needs an authenticated `gcloud`.
-
-```bash
-npm run deploy -- provision   # once: bucket, website config, upload, host rule on chessclub-test2, DNS
-npm run deploy -- update      # content updates: build + rsync (deletes obsolete objects in the test4 bucket only)
-npm run deploy -- status      # DNS / certificate / HTTPS diagnostics
-```
-
-| Parameter | Value |
-|---|---|
-| Bucket | `gs://test4-smartgalati-mycodespace` (`mycodespace3p`, `europe-north1`, STANDARD) |
-| Domain | `smartgalati-test4.mycodespace.ai` (zone `mycodespace`, project `central-trees-497510-h7`) |
-| Load balancer | existing `chessclub-test2` (URL map `chessclub-test2-url-map`, proxy `chessclub-test2-https-proxy`) |
-| Derived | backend `chessclub-test2-test4-smartgalati-mycodespace-backend`, certificate `chessclub-test2-smartgalati-test4-mycodespace-ai-cert`, matcher `smartgalati-test4-mycodespace-ai-matcher` |
-
-Hashed assets under `/_astro/` get one-year immutable caching and HTML five minutes
-(set by `03-deploy-site.sh`). After a content update, CDN caches may serve the old
-HTML for up to five minutes; invalidate with
-`gcloud compute url-maps invalidate-cdn-cache chessclub-test2-url-map --host smartgalati-test4.mycodespace.ai --path "/*" --project mycodespace3p` if needed.
-
-CI (`.github/workflows/claude-rocada-site.yml`) installs, tests, builds and runs the
-browser suites on every change; the deploy job is manual and optional (Workload
-Identity variables), local authenticated deployment is the supported path. A second
-workflow publishes to GitHub Pages (see below).
+`.github/workflows/claude-rocada-site.yml` installs, tests, builds and runs the
+browser suites on every change. A second workflow publishes to GitHub Pages
+(see below). The Google Cloud Storage deployment scripts this candidate was
+first previewed with were removed on 2026-11-20; GitHub Pages is the hosting
+path.
 
 ## Known limitations
 
@@ -160,7 +139,7 @@ workflow publishes to GitHub Pages (see below).
 - The Lichess iframe is third-party content; its internal contrast/labels cannot be fixed here.
 - Facts to confirm with the club before production are listed in the [content guide](content/README.md#de-verificat-cu-clubul).
 
-## Optional GitHub Pages deployment
+## GitHub Pages deployment
 
 `.github/workflows/claude-rocada-pages.yml` builds this site for the repository's
 Pages address (`https://<owner>.github.io/<repository>/`, or a custom domain set in
@@ -175,4 +154,4 @@ eligibility and limits: [GitHub Pages deployment guide](../docs/github-pages-dep
 
 Use the [Spark deployment guide](../docs/firebase-spark-deployment.md) to publish
 this candidate at `PROJECT_ID.web.app` with billing checks. The Firebase build
-overrides the canonical site URL; the default GCS build URL remains unchanged.
+overrides the canonical site URL.

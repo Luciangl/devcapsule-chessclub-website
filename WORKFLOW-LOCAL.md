@@ -31,51 +31,38 @@ where the acceptance record lives.
 
 ## Validation Commands
 
-Each site directory is an independent Astro project with its own
-`package-lock.json`. Every command below runs from the named site directory.
+The site is `claude-rocada-site/`, an Astro project. Every command below runs
+from that directory.
 
-**Environment.** Node.js 22 (`node --version` prints `v22.x`; the capsule's
-`node` capability provides it) and npm. In the site directory being changed:
+**Environment.** Node.js 22 (`node --version` prints `v22.x`) and npm; then
 `npm ci`. The browser suites additionally need Playwright's Chromium:
 `npx playwright install chromium`.
 
-**Unit tests.**
+**Unit tests.** `npm test && npm run test:contrast`
 
-- `claude-rocada-site/`: `npm test && npm run test:contrast`
-- `codex-astra-site/`: `npm test`
-- `ag-flash3.8-site/`, `smartgalati-test5-site/`, `mycodespace-site/`: none;
-  these prototypes carry no test suite.
+**Integration tests.** The static build: `npm run build`. It includes
+`astro check` and must finish with zero errors.
 
-**Integration tests.** The static build, in any site directory:
-`npm run build`. It must finish with zero errors (it includes `astro check`
-in `claude-rocada-site/`, `codex-astra-site/` and `ag-flash3.8-site/`).
+**End-to-end tests.** Playwright against a running site, opt-in: start
+`npm run preview` (port 4326), then `npm run test:browser && npm run
+test:themes`. For the published address, which is what the Pages workflow
+runs: `PAGES_SITE_URL=http://webtest.smartgalati.ro PAGES_BASE_PATH= npm run
+pages:build`, then the same variables with `npm run pages:check`. The site's
+`README.md` holds the full description.
 
-**End-to-end tests.** Playwright against a running site, opt-in:
+**Smoke test.** `npm run preview`, then
+`curl --fail --silent http://localhost:4326/` returns the home page. After a
+deployment: `curl --fail --silent --location https://webtest.smartgalati.ro/`.
 
-- `claude-rocada-site/`: start `npm run preview` (port 4326), then
-  `npm run test:browser && npm run test:themes`. For the GitHub Pages base
-  path: `npm run pages:build && npm run pages:check`.
-- `codex-astra-site/`: start `npm run preview`, then
-  `npm run test:browser && npm run test:themes`.
-- The other sites: none.
+**Gate.** Before a checkpoint and before integration, for a change under
+`claude-rocada-site/`: the unit tests, then `npm run build`. A change to
+documentation or workflow files only has no runtime gate; check the Markdown
+links it adds and `git diff --check`.
 
-Each site's `README.md` holds the full description, including `SITE_URL=`
-for running the browser suites against a deployed host.
-
-**Smoke test.** `npm run preview` in the site directory, then
-`curl --fail --silent http://localhost:<port>/` returns the home page (the
-port is in that site's `package.json`). After a deployment, the same `curl`
-against the deployed URL.
-
-**Gate.** Before a checkpoint and before integration, for every site
-directory the change touches: its unit tests, then `npm run build`. A change
-to documentation or workflow files only has no runtime gate; check the
-Markdown links it adds and `git diff --check`.
-
-**Candidate gate and acceptance evidence.** None: the project is in its
-prototype phase and cuts no releases. A deployment is verified by the smoke
-test and, where the site has them, the end-to-end suites against the deployed
-URL; the evidence goes in the delivering workstream's status file.
+**Candidate gate and acceptance evidence.** None: the project cuts no
+releases. Every push to `main` under `claude-rocada-site/` is published by
+the Pages workflow only after its unit, browser and palette checks pass; the
+workflow run is the evidence.
 
 ## Host Capabilities
 

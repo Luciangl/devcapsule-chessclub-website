@@ -129,7 +129,7 @@ For this candidate R-SITE-007 is narrowed to the existing `scripts/gcs` deployme
 
 The enrollment link remains `https://forms.gle/smartgalati-inscriere` by explicit owner instruction despite its known non-working state. Its external availability is not an acceptance gate for this experiment. Production cutover is outside scope.
 
-Implementation and validation: [candidate guide](codex-astra-site/README.md), [authoring guide](codex-astra-site/content/README.md), and [delivery evidence](engineering-docs/implementation-notes/website/2026-09-27-codex-astra-site.md).
+Implementation and validation: the candidate and authoring guides in `codex-astra-site/` (removed 2026-11-20, in git history), and [delivery evidence](engineering-docs/implementation-notes/website/2026-09-27-codex-astra-site.md).
 
 ### Astra design refinement: readability and selectable palettes (2026-09-27)
 
@@ -165,21 +165,13 @@ Enabling Pages in repository settings and plan eligibility for a private
 repository remain owner steps and are not acceptance gates; local evidence under
 the Pages base path is. Guide: [GitHub Pages deployment](docs/github-pages-deployment.md).
 
-## R-MYCODESPACE-001: MyCodeSpace landing page (2026-11-01)
+### R-SITE-007 amendment: GitHub Pages is the only hosting path kept (2026-11-20)
 
-Status: accepted. Priority: gating for this standalone site.
-
-Owner requested a simpler English website in `mycodespace-site/`, introducing
-DevCapsule as the first product with more to follow. Briefly explain the larger
-ambition from the supplied LinkedIn post, using plain, human English. Reuse the
-static-site structure and deployment approach from the chess candidates.
-
-Detailed contract: [MyCodeSpace requirements](engineering-docs/requirements/2026-11-01-mycodespace-site.md).
-
-Hosting authorization (2026-11-01): owner accepted the page and requested live
-deployment for apex and www, with an apex A record, www CNAME, and valid HTTPS
-for both. Existing club sites and DevCapsule DNS must remain functional.
-
-Copy refinement (2026-11-01): owner approved a broader personal google3-like
-codespace message for students, hobbyists and professionals. Lead with "Your
-code. Your projects. Your own space."; preservation is a supporting benefit.
+The owner chose `claude-rocada-site/` as the club's site, published from this
+repository through GitHub Pages at `https://webtest.smartgalati.ro/`, and asked
+for a cleanup: the other prototypes (`ag-flash3.8-site/`, `codex-astra-site/`,
+`smartgalati-test5-site/`), the unrelated `mycodespace-site/` with its records,
+and the Google Cloud Storage deployment scripts (`scripts/gcs/`, the Rocada
+`deploy` wrapper and the CI deploy job) were removed. Earlier sections that
+name them are history; the files remain in the git history. The Firebase Spark
+scripts were not part of the request and are kept.

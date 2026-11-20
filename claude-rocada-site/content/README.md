@@ -28,8 +28,9 @@ Fișierele `_template.md` din fiecare director sunt modele de copiat; nu se publ
    `cover_image`. Folosește fotografii pentru care clubul are drept de publicare.
 4. Scrie textul sub a doua linie `---`: `##` pentru subtitluri, `**îngroșat**`,
    `[text](https://...)` pentru linkuri, `-` pentru liste.
-5. Verifică local cu `npm run dev` (http://localhost:4325), apoi salvează și publică
-   (`npm run deploy -- update`).
+5. Verifică local cu `npm run dev` (http://localhost:4325), apoi salvează. Publicarea
+   este automată: orice modificare ajunsă pe ramura `main` din GitHub este verificată
+   și publicată pe site în câteva minute.
 
 Adresa articolului se formează din numele fișierului fără dată. Nu redenumi articole
 publicate: adresa se schimbă.

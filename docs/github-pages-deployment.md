@@ -1,11 +1,10 @@
 # Deploy Rocada/test4 to GitHub Pages
 
 `.github/workflows/claude-rocada-pages.yml` builds `claude-rocada-site` and
-publishes it to this repository's GitHub Pages site, beside the existing
-Google Cloud Storage scripts and the optional Firebase Spark path. Nothing in
-those two paths changes: the GCS preview at `smartgalati-test4.mycodespace.ai`
-keeps its root-path build, and the Pages build only differs by the address
-compiled into it.
+publishes it to this repository's GitHub Pages site, beside the optional
+Firebase Spark path. The Pages build only differs from the plain root-path
+build by the address compiled into it. (The Google Cloud Storage scripts that
+served the earlier previews were removed on 2026-11-20.)
 
 Address: **`https://ccozianu.github.io/devcapsule-chessclub-website/`** for the
 repository as it is named today. The owner and repository name are read at
@@ -49,7 +48,7 @@ build time, so a rename or a fork changes the address without a code change.
   Concurrency is one deployment at a time without cancelling a running one.
 
 The existing CI workflow (`claude-rocada-site.yml`) still builds and tests the
-root-path version on every change and keeps its manual GCS deploy job.
+root-path version on every change.
 
 ## How the site stays base-path aware
 
@@ -80,7 +79,7 @@ npm run pages:check [screenshot-dir]     # preview on 127.0.0.1:4336 + browser a
 PAGES_SITE_URL=https://smartgalati-pages.mycodespace.ai PAGES_BASE_PATH= npm run pages:build   # custom-domain build
 ```
 
-`npm run build` and `npm run preview` remain the root-path build used by GCS.
+`npm run build` and `npm run preview` remain the plain root-path build.
 Playwright's Chromium is installed with `npx playwright install chromium` when
 missing. `scripts/pages.sh` derives the address from the `origin` remote when
 `PAGES_SITE_URL` is unset and refuses to guess for a non-GitHub remote.
@@ -94,7 +93,6 @@ project `central-trees-497510-h7`, zone `mycodespace`). GitHub verifies the
 record, provisions HTTPS, and `configure-pages` then reports the domain as the
 origin with an empty base path on the next run, so the site rebuilds at the
 root automatically. No `CNAME` file is needed when publishing from Actions.
-This does not touch the GCS load balancer or the test2–test5 host rules.
 
 ## Limits and behaviour to know
 
