@@ -24,14 +24,8 @@ Modern, fast static website for **ACS Smart Galați** ([smartgalati.ro](https://
 content taken only from the club's original site including all 134 historical
 articles. Local development on port 4325. It is the only site in this
 repository; the other prototypes it was chosen from, and the Google Cloud
-Storage scripts that served their previews, were removed on 2026-11-20 and
-remain in the git history.
-
-## Firebase Spark Preview
-
-Deploy the Rocada/test4 static site to a separate unbilled Firebase project using
-[the Spark deployment guide](docs/firebase-spark-deployment.md). Scripts include
-project setup, billing checks, static deployment, and verification.
+Storage and Firebase deployment scripts used for earlier previews, were
+removed on 2026-11-20 and remain in the git history.
 
 ## GitHub Pages
 

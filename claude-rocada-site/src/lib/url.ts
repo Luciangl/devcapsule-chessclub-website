@@ -1,6 +1,6 @@
 /**
  * Build-time binding of the base-path helpers to Astro's `base` setting.
- * `import.meta.env.BASE_URL` is `/` for the GCS and Firebase builds and
+ * `import.meta.env.BASE_URL` is `/` for a root-path or custom-domain build and
  * `/<repository>/` for a GitHub Pages project site (see astro.config.mjs).
  */
 import { joinBase, stripBase as strip } from './base-path.mjs';

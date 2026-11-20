@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
-// Static output only. The public address defaults to the GCS preview; the Firebase
-// scripts override it with `astro build --site`, and the GitHub Pages build sets
+// Static output only. The public address defaults to the original preview address;
+// the GitHub Pages build sets
 // ROCADA_SITE (origin) and ROCADA_BASE (project path such as /devcapsule-chessclub-website)
 // through scripts/pages.sh. Internal links read the base via src/lib/url.ts.
 const site = process.env.ROCADA_SITE || 'https://smartgalati-test4.mycodespace.ai';
