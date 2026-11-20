@@ -1,15 +1,10 @@
-name: Rocada site (test4)
+name: Rocada site (build and tests)
 on:
   push:
-    paths: ['claude-rocada-site/**', 'scripts/gcs/**', '.github/workflows/claude-rocada-site.yml']
+    paths: ['claude-rocada-site/**', '.github/workflows/claude-rocada-site.yml']
   pull_request:
-    paths: ['claude-rocada-site/**', 'scripts/gcs/**', '.github/workflows/claude-rocada-site.yml']
+    paths: ['claude-rocada-site/**', '.github/workflows/claude-rocada-site.yml']
   workflow_dispatch:
-    inputs:
-      deploy:
-        description: Publish the selected revision to smartgalati-test4
-        type: boolean
-        default: false
 permissions:
   contents: read
 concurrency:
@@ -44,29 +39,3 @@ jobs:
         with:
           name: rocada-static-site
           path: claude-rocada-site/dist
-  deploy:
-    # Optional: needs the repository variables GCP_WORKLOAD_IDENTITY_PROVIDER and
-    # GCP_DEPLOY_SERVICE_ACCOUNT. Local authenticated deployment does not need this job.
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy
-    needs: build
-    runs-on: ubuntu-latest
-    concurrency:
-      group: rocada-test4-deploy
-      cancel-in-progress: false
-    permissions:
-      contents: read
-      id-token: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: npm
-          cache-dependency-path: claude-rocada-site/package-lock.json
-      - uses: google-github-actions/auth@v2
-        with:
-          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ vars.GCP_DEPLOY_SERVICE_ACCOUNT }}
-      - uses: google-github-actions/setup-gcloud@v2
-      - run: npm ci --prefix claude-rocada-site
-      - run: npm run deploy --prefix claude-rocada-site -- update

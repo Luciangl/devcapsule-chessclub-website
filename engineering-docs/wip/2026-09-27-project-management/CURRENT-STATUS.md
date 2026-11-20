@@ -26,9 +26,33 @@ The reserved workstream was initialized. Transitioned from single-stream mode on
 
 ## Planned Next Step
 
-The next coding agent should pick up the [smartgalati-test5 work order](../../work-orders/2026-09-27-smartgalati-test5-prototype.md), register a fresh delivery workstream and implement the independent candidate.
+None recorded. The prototype comparison is over: `claude-rocada-site/` is the club's site, published through GitHub Pages at https://webtest.smartgalati.ro/. The next step is whatever the club asks for next (content updates go through `claude-rocada-site/content/`).
 
-## Latest Delivered Slice (2026-11-19): workflow definition refresh to 0.3.1
+## Latest Delivered Slice (2026-11-20): repository reduced to the Rocada site
+
+- This repository (`Luciangl/devcapsule-chessclub-website`) is the club's own
+  and from this slice on is maintained separately from the
+  `ccozianu/devcapsule-chessclub-website` repository it was forked from; the
+  two are no longer merged into each other.
+- At the owner's request, removed the other prototypes (`ag-flash3.8-site/`,
+  `codex-astra-site/`, `smartgalati-test5-site/`), the unrelated
+  `mycodespace-site/` with its requirement, work order and archives, and the
+  Google Cloud Storage deployment: `scripts/gcs/`, the Rocada `deploy`
+  wrapper and its parameters, the Astra CI workflow and the GCS deploy job of
+  the Rocada CI workflow. Everything remains in the git history.
+- Kept: `claude-rocada-site/`, the GitHub Pages workflow, the build-and-test
+  workflow, and the Firebase Spark scripts (not part of the request).
+- Updated README, index, REQUIREMENTS (R-SITE-007 amendment), the validation
+  commands in `WORKFLOW-LOCAL.md`, the site README, the Romanian content
+  guide (publishing is now automatic on `main`) and the Pages guide. Dated
+  historical records (work orders, archives, design and implementation
+  notes, old bug records) still name the removed paths and were left as
+  written.
+- Validation in `claude-rocada-site/`: unit tests, contrast check, build and
+  the Pages check with the published address; see the Pages workflow run for
+  this commit.
+
+## Earlier Slice (2026-11-19): workflow definition refresh to 0.3.1
 
 - At the owner's explicit request, refreshed the reusable definition from
   0.2.14 to DevCapsule 0.3.1 with `devcapsule bootstrap project
@@ -95,8 +119,11 @@ The next coding agent should pick up the [smartgalati-test5 work order](../../wo
 - Owner step: set the GitHub repository's pull-request merge method to merge
   commits (definition 0.3.0 migration); the agent has no repository-settings
   access.
-- `.devcapsule/devcapsule.linux-amd64.lock` carries an uncommitted
-  re-resolution (matrix embedded-33, Claude Code 2.1.321, Codex 0.167.0) made
-  outside this slice; left uncommitted for the owner to decide.
-- The planned next step predates `smartgalati-test5-site/`, which now exists
-  on `main`; confirm or replace it at the next coordination session.
+- `claude-rocada-site` still defaults its canonical address to
+  `https://smartgalati-test4.mycodespace.ai` when built without
+  `ROCADA_SITE`/`PAGES_SITE_URL` (`astro.config.mjs`, `src/config/site.ts`);
+  the Pages workflow overrides it. Change the default when the club's final
+  domain is decided.
+- The Pages build is compiled for `http://webtest.smartgalati.ro` (what
+  GitHub reports); enabling *Enforce HTTPS* in the Pages settings would make
+  it `https://`.
