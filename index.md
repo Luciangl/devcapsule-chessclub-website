@@ -13,7 +13,6 @@
 
 ## Deployment Guides
 
-- [Firebase Spark static deployment](docs/firebase-spark-deployment.md)
 - [GitHub Pages deployment of the Rocada site](docs/github-pages-deployment.md)
 
 ## Engineering Records

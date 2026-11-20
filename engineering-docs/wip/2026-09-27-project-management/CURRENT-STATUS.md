@@ -40,8 +40,11 @@ None recorded. The prototype comparison is over: `claude-rocada-site/` is the cl
   Google Cloud Storage deployment: `scripts/gcs/`, the Rocada `deploy`
   wrapper and its parameters, the Astra CI workflow and the GCS deploy job of
   the Rocada CI workflow. Everything remains in the git history.
-- Kept: `claude-rocada-site/`, the GitHub Pages workflow, the build-and-test
-  workflow, and the Firebase Spark scripts (not part of the request).
+- In a second step the same day, at the owner's request, also removed the
+  Firebase Spark deployment: `scripts/firebase/` and
+  `docs/firebase-spark-deployment.md`. GitHub Pages is the only hosting path.
+- Kept: `claude-rocada-site/`, the GitHub Pages workflow and the
+  build-and-test workflow.
 - Updated README, index, REQUIREMENTS (R-SITE-007 amendment), the validation
   commands in `WORKFLOW-LOCAL.md`, the site README, the Romanian content
   guide (publishing is now automatic on `main`) and the Pages guide. Dated
@@ -125,5 +128,5 @@ None recorded. The prototype comparison is over: `claude-rocada-site/` is the cl
   the Pages workflow overrides it. Change the default when the club's final
   domain is decided.
 - The Pages build is compiled for `http://webtest.smartgalati.ro` (what
-  GitHub reports); enabling *Enforce HTTPS* in the Pages settings would make
-  it `https://`.
+  GitHub reports) until *Enforce HTTPS* is enabled in the Pages settings,
+  which the owner intends to do; the next publish then compiles `https://`.

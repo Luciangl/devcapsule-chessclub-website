@@ -151,7 +151,7 @@ the original GCS-only test4 acceptance scope, without retiring or changing its
 GCS route. Use a separate project with no billing account linked; fail closed
 when the target is billed or its billing state cannot be verified. Publish only
 static assets, accept quota-driven downtime, and document setup and verification
-in the [deployment guide](docs/firebase-spark-deployment.md). Delivering scripts
+in the deployment guide (`docs/firebase-spark-deployment.md`, removed 2026-11-20). Delivering scripts
 and local evidence does not require live cloud provisioning or a domain cutover.
 
 ### R-SITE-007 amendment: GitHub Pages deployment (2026-11-09)
@@ -173,5 +173,6 @@ for a cleanup: the other prototypes (`ag-flash3.8-site/`, `codex-astra-site/`,
 `smartgalati-test5-site/`), the unrelated `mycodespace-site/` with its records,
 and the Google Cloud Storage deployment scripts (`scripts/gcs/`, the Rocada
 `deploy` wrapper and the CI deploy job) were removed. Earlier sections that
-name them are history; the files remain in the git history. The Firebase Spark
-scripts were not part of the request and are kept.
+name them are history; the files remain in the git history. In a second
+step the same day the owner also had the Firebase Spark scripts
+(`scripts/firebase/`) and their guide removed.

@@ -1,9 +1,9 @@
 # Deploy Rocada/test4 to GitHub Pages
 
 `.github/workflows/claude-rocada-pages.yml` builds `claude-rocada-site` and
-publishes it to this repository's GitHub Pages site, beside the optional
-Firebase Spark path. The Pages build only differs from the plain root-path
-build by the address compiled into it. (The Google Cloud Storage scripts that
+publishes it to this repository's GitHub Pages site, the only hosting path
+kept. The Pages build only differs from the plain root-path build by the
+address compiled into it. (The Google Cloud Storage and Firebase scripts that
 served the earlier previews were removed on 2026-11-20.)
 
 Address: **`https://ccozianu.github.io/devcapsule-chessclub-website/`** for the

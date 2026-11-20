@@ -127,9 +127,9 @@ locale, add localized content and pages under `src/pages/en/`.
 
 `.github/workflows/claude-rocada-site.yml` installs, tests, builds and runs the
 browser suites on every change. A second workflow publishes to GitHub Pages
-(see below). The Google Cloud Storage deployment scripts this candidate was
-first previewed with were removed on 2026-11-20; GitHub Pages is the hosting
-path.
+(see below). The Google Cloud Storage and Firebase deployment scripts this
+candidate was first previewed with were removed on 2026-11-20; GitHub Pages
+is the hosting path.
 
 ## Known limitations
 
@@ -149,9 +149,3 @@ suites under that base path locally. Internal links in components go through
 `withBase()` (`src/lib/url.ts`), Markdown links are prefixed by a rehype plugin in
 `astro.config.mjs`, and the browser suite fails on any link without the prefix. Setup,
 eligibility and limits: [GitHub Pages deployment guide](../docs/github-pages-deployment.md).
-
-## Optional Firebase Spark deployment
-
-Use the [Spark deployment guide](../docs/firebase-spark-deployment.md) to publish
-this candidate at `PROJECT_ID.web.app` with billing checks. The Firebase build
-overrides the canonical site URL.
